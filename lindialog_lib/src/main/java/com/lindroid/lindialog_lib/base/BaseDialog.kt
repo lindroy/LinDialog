@@ -12,10 +12,7 @@ import android.support.annotation.LayoutRes
 import android.support.annotation.StyleRes
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
 
 /**
  * @author Lin
@@ -42,6 +39,8 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
     private var animStyle = 0
 
     private var widthScale = 0F
+
+    private var gravity: Int = Gravity.CENTER
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return when {
@@ -75,10 +74,11 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
                 true -> wm.defaultDisplay.getRealSize(point)
                 false -> wm.defaultDisplay.getSize(point)
             }
-            return point.y
+            return point.x
         }
         dialog.window?.apply {
             val params = attributes
+            params.gravity = gravity
             //去除白色的背景
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             //设置窗体动画
@@ -111,6 +111,8 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
     fun setAnimStyle(@StyleRes style: Int) = this.apply { this.animStyle = style } as T
 
     fun setWidthScale(@FloatRange(from = 0.0, to = 1.0) scale: Float) = this.apply { widthScale = scale } as T
+
+    fun setGravity(gravity: Int) = this.apply { this.gravity = gravity } as T
 
     fun setViewHandler(viewHandler: (holder: ViewHolder, dialog: DialogInterface) -> Unit) =
             this.apply { this.viewHandler = viewHandler } as T

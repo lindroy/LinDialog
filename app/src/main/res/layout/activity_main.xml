@@ -8,8 +8,14 @@
     tools:context=".MainActivity">
 
     <Button
-        android:text="提示对话框"
+        android:text="提示对话框（HintDialog）"
         android:id="@+id/btnHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="仿iOS对话框（CustomDialog）"
+        android:id="@+id/btnIOS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

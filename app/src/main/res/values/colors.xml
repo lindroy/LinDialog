@@ -3,4 +3,15 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--文字颜色-->
+    <color name="text_black">#303030</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="text_gray">#999999</color>
+    <color name="text_hint">#dedede</color>
+    <color name="text_blue">#087bf6</color>
+    <color name="text_red">#FD0C50</color>
+
+    <!--通用分割线颜色-->
+    <color name="divider_color">#f1f1f1</color>
 </resources>
