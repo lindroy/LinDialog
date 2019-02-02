@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LinDialog</string>
+    <string name="dialog_close">对话框关闭</string>
 </resources>

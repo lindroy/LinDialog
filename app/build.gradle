@@ -32,4 +32,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 //    implementation 'com.github.Lindroy:LinDialog:V0.2.0-beta'
     implementation project(':lindialog_lib')
+    implementation 'com.github.Lindroy:AndroidUtilsKt:V1.1.0-beta'
 }

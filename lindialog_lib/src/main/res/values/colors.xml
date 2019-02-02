@@ -2,5 +2,6 @@
 <resources>
     <color name="hint_dialog_positive_text_color">@android:color/holo_blue_dark</color>
     <color name="hint_dialog_negative_text_color">@android:color/holo_red_light</color>
+    <color name="hint_dialog_neutral_text_color">@android:color/darker_gray</color>
 
 </resources>
