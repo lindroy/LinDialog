@@ -1,27 +1,29 @@
 package com.lindroid.lindialog_lib.base
 
-import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
-import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.support.annotation.FloatRange
 import android.support.annotation.LayoutRes
-import android.support.annotation.StyleRes
-import android.support.v4.app.DialogFragment
+import android.support.design.widget.BottomSheetDialogFragment
 import android.support.v4.app.FragmentManager
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.lindroid.lindialog_lib.R
 
 /**
  * @author Lin
- * @date 2019/2/2
- * @function
+ * @date 2019/2/13
+ * @function 底部对话框基类
  * @Description
  */
 @Suppress("UNCHECKED_CAST")
-abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
+abstract class BaseBottomDialog<T : BaseBottomDialog<T>> : BottomSheetDialogFragment() {
+    /**
+     * 子类继承BaseBottomDialog后需要创建的布局Id
+     */
     abstract var childLayoutId: Int
 
     private var layoutId: Int = 0
@@ -36,11 +38,9 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
 
     private var contentView: View? = null
 
-    private var animStyle = 0
+    private var background: Drawable? = null
 
-    private var widthScale = 0F
-
-    private var gravity: Int = Gravity.CENTER
+    private var backgroundColorId: Int = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return when {
@@ -67,27 +67,8 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        fun getScreenWidth(): Int {
-            val wm = context!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-            val point = Point()
-            when (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                true -> wm.defaultDisplay.getRealSize(point)
-                false -> wm.defaultDisplay.getSize(point)
-            }
-            return point.x
-        }
-        dialog.window?.apply {
-            val params = attributes
-            params.gravity = gravity
-            //去除白色的背景
-            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            //设置窗体动画
-            setWindowAnimations(animStyle)
-            if (widthScale > 0) {
-                params.width = (getScreenWidth() * widthScale).toInt()
-            }
-            attributes = params
-        }
+        //去除白色的背景
+        dialog.window?.findViewById<View>(R.id.design_bottom_sheet)?.background = ColorDrawable(Color.TRANSPARENT)
     }
 
     override fun onDismiss(dialog: DialogInterface?) {
@@ -108,11 +89,9 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
 
     fun setTag(tag: String) = this.apply { dialogTag = tag } as T
 
-    fun setAnimStyle(@StyleRes style: Int) = this.apply { this.animStyle = style } as T
+//    fun setBackground(background: Drawable) = this.apply { this.background = background } as T
 
-    fun setWidthScale(@FloatRange(from = 0.0, to = 1.0) scale: Float) = this.apply { widthScale = scale } as T
-
-    fun setGravity(gravity: Int) = this.apply { this.gravity = gravity } as T
+//    fun setBackgroundColor(@ColorRes colorId: Int) = this.apply { backgroundColorId = colorId } as T
 
     fun setViewHandler(viewHandler: (holder: ViewHolder, dialog: DialogInterface) -> Unit) =
             this.apply { this.viewHandler = viewHandler } as T
@@ -126,7 +105,7 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        viewHandler = null
         dismissListener = null
+        viewHandler = null
     }
 }

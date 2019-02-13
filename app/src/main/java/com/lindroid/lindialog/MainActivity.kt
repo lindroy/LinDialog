@@ -2,12 +2,15 @@ package com.lindroid.lindialog
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
+import com.lindroid.lindialog_lib.BottomDialog
 import com.lindroid.lindialog_lib.CustomDialog
 import com.lindroid.lindialog_lib.HintDialog
 import com.lindroid.utils.shortToast
 import kotlinx.android.synthetic.main.activity_main.*
 
+private const val TAG = "LinDialog"
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,6 +18,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         btnHint.setOnClickListener(this)
         btnIOS.setOnClickListener(this)
+        btnBottom.setOnClickListener(this)
+        btnPay.setOnClickListener(this)
     }
 
     /**
@@ -27,6 +32,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         //提示对话框
             R.id.btnHint -> showHintDialog()
             R.id.btnIOS -> showCustomDialog()
+            R.id.btnBottom -> showBottomDialog()
+            R.id.btnPay -> showPayDialog()
         }
     }
 
@@ -70,6 +77,39 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         shortToast(R.string.confirm)
                         dialog.dismiss()
                     })
+                }
+                .show()
+    }
+
+    private fun showBottomDialog() {
+        BottomDialog.build(supportFragmentManager)
+                .setContentView(R.layout.dialog_choose_gender)
+                .setViewHandler { holder, dialog ->
+                    holder.setOnClickListener(R.id.tvMale, View.OnClickListener {
+                        shortToast("男")
+                        dialog.dismiss()
+                    })
+                    holder.setOnClickListener(R.id.tvFemale, View.OnClickListener {
+                        shortToast("女")
+                        dialog.dismiss()
+                    })
+                }
+                .setDismissListener {
+                    Log.d(TAG, "BottomDialog关闭")
+                }
+                .show()
+    }
+
+    private fun showPayDialog() {
+        PayDialog.build(supportFragmentManager)
+                .setAliPayListener {
+                    shortToast("支付宝")
+                    it.dismiss()
+                }
+                .setWeChatListener {
+                    shortToast("微信")
+                    it.dismiss()
+
                 }
                 .show()
     }
