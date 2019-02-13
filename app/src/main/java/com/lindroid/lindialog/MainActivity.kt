@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 .setMessage("这是一个提示对话框")
                 .setShowNeuButton(true)
                 .setNeutralText("不确定")
-                .setCanCancel(true)
+                .setCancelOutSide(true)
                 .setCanDismiss(false)
                 .setPosClickListener {
                     shortToast("确定")

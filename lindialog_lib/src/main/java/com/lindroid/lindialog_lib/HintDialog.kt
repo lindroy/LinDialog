@@ -181,6 +181,6 @@ class HintDialog : DialogFragment() {
     /**
      * 点击对话框外部关闭对话框
      */
-    fun setCanCancel(isCancelable: Boolean) = this.apply { this.isCancelable = isCancelable }
+    fun setCancelOutSide(isCancelable: Boolean) = this.apply { this.isCancelable = isCancelable }
 
 }

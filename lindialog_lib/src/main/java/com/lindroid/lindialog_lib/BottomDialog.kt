@@ -15,7 +15,7 @@ class BottomDialog : BaseBottomDialog<BottomDialog>() {
     /**
      * 子类继承BaseBottomDialog后需要创建的布局Id
      */
-    override var childLayoutId: Int = 0
+    override var customViewId: Int = 0
 
     /**
      * 返回true表示子类自己处理布局，setViewHandler方法无效

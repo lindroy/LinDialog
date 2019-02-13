@@ -11,7 +11,7 @@ import com.lindroid.lindialog_lib.base.BaseDialog
  * @Description
  */
 class CustomDialog : BaseDialog<CustomDialog>() {
-    override var childLayoutId: Int = 0
+    override var customViewId: Int = 0
 
     /**
      * 返回true表示子类自己处理布局，setViewHandler方法无效

@@ -24,7 +24,7 @@ abstract class BaseBottomDialog<T : BaseBottomDialog<T>> : BottomSheetDialogFrag
     /**
      * 子类继承BaseBottomDialog后需要创建的布局Id
      */
-    abstract var childLayoutId: Int
+    abstract var customViewId: Int
 
     private var layoutId: Int = 0
 
@@ -42,9 +42,10 @@ abstract class BaseBottomDialog<T : BaseBottomDialog<T>> : BottomSheetDialogFrag
 
     private var backgroundColorId: Int = 0
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return when {
-            childLayoutId > 0 -> inflater.inflate(childLayoutId, container, false)
+            customViewId > 0 -> inflater.inflate(customViewId, container, false)
             layoutId > 0 -> inflater.inflate(layoutId, container, false)
             contentView != null -> contentView
             else -> {
@@ -59,6 +60,7 @@ abstract class BaseBottomDialog<T : BaseBottomDialog<T>> : BottomSheetDialogFrag
             viewHandler?.invoke(ViewHolder(view), dialog)
         }
     }
+
 
     /**
      * 返回true表示子类自己处理布局，setViewHandler方法无效
@@ -101,7 +103,7 @@ abstract class BaseBottomDialog<T : BaseBottomDialog<T>> : BottomSheetDialogFrag
     /**
      * 点击对话框外部关闭对话框
      */
-    fun setCanCancel(isCancelable: Boolean) = this.apply { this.isCancelable = isCancelable } as T
+    fun setCancelOutSide(isCancelable: Boolean) = this.apply { this.isCancelable = isCancelable } as T
 
     override fun onDestroy() {
         super.onDestroy()

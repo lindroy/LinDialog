@@ -29,7 +29,7 @@ class PayDialog : BaseBottomDialog<PayDialog>() {
     /**
      * 子类继承BaseBottomDialog后需要创建的布局Id
      */
-    override var childLayoutId: Int = R.layout.dialog_pay
+    override var customViewId: Int = R.layout.dialog_pay
 
 
     /**

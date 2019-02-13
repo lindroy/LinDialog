@@ -17,12 +17,15 @@ import android.view.*
 /**
  * @author Lin
  * @date 2019/2/2
- * @function
+ * @function 常规对话框基类
  * @Description
  */
 @Suppress("UNCHECKED_CAST")
 abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
-    abstract var childLayoutId: Int
+    /**
+     * 子类继承BaseBottomDialog后需要创建的布局Id
+     */
+    abstract var customViewId: Int
 
     private var layoutId: Int = 0
 
@@ -44,7 +47,7 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return when {
-            childLayoutId > 0 -> inflater.inflate(childLayoutId, container, false)
+            customViewId > 0 -> inflater.inflate(customViewId, container, false)
             layoutId > 0 -> inflater.inflate(layoutId, container, false)
             contentView != null -> contentView
             else -> {
@@ -122,7 +125,7 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
     /**
      * 点击对话框外部关闭对话框
      */
-    fun setCanCancel(isCancelable: Boolean) = this.apply { this.isCancelable = isCancelable } as T
+    fun setCancelOutSide(isCancelable: Boolean) = this.apply { this.isCancelable = isCancelable } as T
 
     override fun onDestroy() {
         super.onDestroy()
