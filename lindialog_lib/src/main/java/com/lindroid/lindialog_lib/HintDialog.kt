@@ -12,7 +12,6 @@ import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
-import com.lindroid.lindialog_lib.app.LinDialogApp
 
 /**
  * @author Lin
@@ -93,7 +92,7 @@ class HintDialog : DialogFragment() {
         fun build(fm: FragmentManager) =
                 HintDialog().apply {
                     this.fm = fm
-                    mContext = LinDialogApp.instance
+                    mContext = LinDialog.context
                     posText = mContext.getString(R.string.hint_dialog_positive_text)
                     negText = mContext.getString(R.string.hint_dialog_negative_text)
                     neuText = mContext.getString(R.string.hint_dialog_neutral_text)
@@ -120,19 +119,19 @@ class HintDialog : DialogFragment() {
 
     fun setMessage(msg: String) = this.apply { message = msg }
 
-    fun setMessage(@StringRes id: Int) = setMessage(mContext.getString(id))
+    fun setMessage(@StringRes id: Int) = setMessage(getString(id))
 
     fun setPositiveText(text: String) = this.apply { posText = text }
 
-    fun setPositiveText(@StringRes id: Int) = setPositiveText(getString(id))
+    fun setPositiveText(@StringRes id: Int) = setPositiveText(mContext.getString(id))
 
     fun setNegativeText(text: String) = this.apply { negText = text }
 
-    fun setNegativeText(@StringRes id: Int) = setNegativeText(getString(id))
+    fun setNegativeText(@StringRes id: Int) = setNegativeText(mContext.getString(id))
 
     fun setNeutralText(text: String) = this.apply { neuText = text }
 
-    fun setNeutralText(@StringRes id: Int) = setNeutralText(getString(id))
+    fun setNeutralText(@StringRes id: Int) = setNeutralText(mContext.getString(id))
 
     fun setShowNeuButton(showNeuBtn: Boolean) = this.apply { showNeuButton = showNeuBtn }
 
