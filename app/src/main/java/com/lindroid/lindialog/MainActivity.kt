@@ -3,10 +3,13 @@ package com.lindroid.lindialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import com.lindroid.lindialog_lib.BottomDialog
+import com.lindroid.lindialog_lib.BottomListDialog
 import com.lindroid.lindialog_lib.CustomDialog
 import com.lindroid.lindialog_lib.HintDialog
+import com.lindroid.utils.dp2px
 import com.lindroid.utils.shortToast
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -21,6 +24,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btnEdit.setOnClickListener(this)
         btnBottom.setOnClickListener(this)
         btnPay.setOnClickListener(this)
+        btnBottomList.setOnClickListener(this)
     }
 
     /**
@@ -36,6 +40,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btnBottom -> showBottomDialog()
             R.id.btnPay -> showPayDialog()
             R.id.btnEdit -> showEditDialog()
+            R.id.btnBottomList -> showBottomListDialog()
         }
     }
 
@@ -130,5 +135,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     Log.d(TAG, "输入对话框关闭")
                 }
                 .show()
+    }
+
+    private fun showBottomListDialog() {
+        BottomListDialog.build(supportFragmentManager)
+                .setBackgroundResource(R.drawable.shape_bottom_dialog)
+                .setItemHeight(dp2px(50))
+                .addItems(resources.getStringArray(R.array.Cities))
+                .setItemTextGravity(Gravity.CENTER)
+                .setOnItemClickListener { position, name, itemView, dialog ->
+                    shortToast("你点击了第${position}个：$name")
+                    dialog.dismiss()
+                }
+                .show()
+
     }
 }

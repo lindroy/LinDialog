@@ -13,6 +13,7 @@ import android.support.annotation.StyleRes
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
 import android.view.*
+import com.lindroid.lindialog_lib.LinDialog
 
 /**
  * @author Lin
@@ -26,6 +27,8 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
      * 子类继承BaseBottomDialog后需要创建的布局Id
      */
     abstract var customViewId: Int
+
+    protected val mContext = LinDialog.context
 
     private var layoutId: Int = 0
 

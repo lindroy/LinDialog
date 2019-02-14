@@ -3,7 +3,6 @@ package com.lindroid.lindialog_lib.base
 import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.design.widget.BottomSheetDialogFragment
@@ -11,6 +10,7 @@ import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.lindroid.lindialog_lib.LinDialog
 import com.lindroid.lindialog_lib.R
 
 /**
@@ -26,6 +26,8 @@ abstract class BaseBottomDialog<T : BaseBottomDialog<T>> : BottomSheetDialogFrag
      */
     abstract var customViewId: Int
 
+    protected val mContext = LinDialog.context
+
     private var layoutId: Int = 0
 
     lateinit var fm: FragmentManager
@@ -38,9 +40,9 @@ abstract class BaseBottomDialog<T : BaseBottomDialog<T>> : BottomSheetDialogFrag
 
     private var contentView: View? = null
 
-    private var background: Drawable? = null
+//    private var background: Drawable? = null
 
-    private var backgroundColorId: Int = 0
+//    private var backgroundColorId: Int = 0
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
