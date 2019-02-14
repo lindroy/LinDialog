@@ -16,7 +16,7 @@ import android.support.v7.app.AlertDialog
 /**
  * @author Lin
  * @date 2019/2/2
- * @function Material提示对话框
+ * @function Material风格提示对话框
  * @Description
  */
 class HintDialog : DialogFragment() {

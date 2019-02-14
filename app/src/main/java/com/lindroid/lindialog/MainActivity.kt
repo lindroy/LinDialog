@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         btnHint.setOnClickListener(this)
         btnIOS.setOnClickListener(this)
+        btnEdit.setOnClickListener(this)
         btnBottom.setOnClickListener(this)
         btnPay.setOnClickListener(this)
     }
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btnIOS -> showCustomDialog()
             R.id.btnBottom -> showBottomDialog()
             R.id.btnPay -> showPayDialog()
+            R.id.btnEdit -> showEditDialog()
         }
     }
 
@@ -110,6 +112,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     shortToast("微信")
                     it.dismiss()
 
+                }
+                .show()
+    }
+
+    private fun showEditDialog() {
+        EditDialog.build(supportFragmentManager)
+                .setMinLength(5)
+                .setMaxLength(15)
+                .setTextChangeListener { content, length ->
+                    Log.d(TAG, "content:$content")
+                }
+                .setFinishListener { content, dialog ->
+                    shortToast("提交成功")
+                }
+                .setDismissListener {
+                    Log.d(TAG, "输入对话框关闭")
                 }
                 .show()
     }

@@ -23,6 +23,13 @@
 
     <Button
         android:textAllCaps="false"
+        android:text="带输入框的对话框（EditDialog）"
+        android:id="@+id/btnEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:textAllCaps="false"
         android:text="底部对话框（BottomDialog）"
         android:id="@+id/btnBottom"
         android:layout_width="match_parent"
