@@ -140,7 +140,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun showBottomListDialog() {
         BottomListDialog.build(supportFragmentManager)
                 .setBackgroundResource(R.drawable.shape_bottom_dialog)
+                .setDivider(R.drawable.shape_divider)
+                .setDividerPadding(dp2px(20))
                 .setItemHeight(dp2px(50))
+                .setItemTextColorId(R.color.text_gray)
+                .setItemTextSize(16F)
                 .addItems(resources.getStringArray(R.array.Cities))
                 .setItemTextGravity(Gravity.CENTER)
                 .setOnItemClickListener { position, name, itemView, dialog ->
