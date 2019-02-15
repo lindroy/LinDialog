@@ -3,12 +3,11 @@ package com.lindroid.lindialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.Gravity
 import android.view.View
 import com.lindroid.lindialog_lib.BottomDialog
 import com.lindroid.lindialog_lib.BottomListDialog
 import com.lindroid.lindialog_lib.CustomDialog
-import com.lindroid.lindialog_lib.HintDialog
+import com.lindroid.lindialog_lib.MaterialDialog
 import com.lindroid.utils.dp2px
 import com.lindroid.utils.shortToast
 import kotlinx.android.synthetic.main.activity_main.*
@@ -35,7 +34,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
         //提示对话框
-            R.id.btnHint -> showHintDialog()
+            R.id.btnHint -> showMaterialDialog()
             R.id.btnIOS -> showCustomDialog()
             R.id.btnBottom -> showBottomDialog()
             R.id.btnPay -> showPayDialog()
@@ -44,9 +43,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun showHintDialog() {
-        HintDialog.build(supportFragmentManager)
-//                .setThemeStyle(R.style.HintDialogStyle)
+    private fun showMaterialDialog() {
+        MaterialDialog.build(supportFragmentManager)
+//                .setThemeStyle(R.style.MaterialDialogStyle)
                 .setTitle(R.string.app_name)
                 .setMessage("这是一个提示对话框")
                 .setShowNeuButton(true)
@@ -146,12 +145,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 .setItemTextColorId(R.color.text_gray)
                 .setItemTextSize(16F)
                 .addItems(resources.getStringArray(R.array.Cities))
-                .setItemTextGravity(Gravity.CENTER)
+                .setItemTextCenter()
                 .setOnItemClickListener { position, name, itemView, dialog ->
                     shortToast("你点击了第${position}个：$name")
                     dialog.dismiss()
                 }
                 .show()
+
 
     }
 }

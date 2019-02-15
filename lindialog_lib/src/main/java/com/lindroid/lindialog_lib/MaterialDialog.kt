@@ -19,7 +19,7 @@ import android.support.v7.app.AlertDialog
  * @function Material风格提示对话框
  * @Description
  */
-class HintDialog : DialogFragment() {
+class MaterialDialog : DialogFragment() {
     private lateinit var fm: FragmentManager
     private lateinit var mContext: Context
     private var title = ""
@@ -33,7 +33,7 @@ class HintDialog : DialogFragment() {
     private var showNeuButton = false
     private var showNegButton = true
     private var dismissible = true
-    private var dialogTag = "HintDialog"
+    private var dialogTag = "MaterialDialog"
     private var themeStyle = 0
     private var animStyle = 0
     private var posListener: ((DialogInterface) -> Unit)? = null
@@ -90,7 +90,7 @@ class HintDialog : DialogFragment() {
     companion object {
         @JvmStatic
         fun build(fm: FragmentManager) =
-                HintDialog().apply {
+                MaterialDialog().apply {
                     this.fm = fm
                     mContext = LinDialog.context
                     posText = mContext.getString(R.string.hint_dialog_positive_text)
@@ -101,6 +101,7 @@ class HintDialog : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
+        //设置对话框动画
         dialog.window?.setWindowAnimations(animStyle)
     }
 
@@ -109,36 +110,123 @@ class HintDialog : DialogFragment() {
         dismissListener?.invoke()
     }
 
+    /**
+     * 显示对话框
+     */
     fun show() {
-        this.show(fm, dialogTag)
+        show(fm, dialogTag)
     }
 
+    /**
+     * 设置对话框标题
+     * @param title:标题文字
+     */
     fun setTitle(title: String) = this.apply { this.title = title }
 
+    /**
+     * @see setTitle(String)
+     * @param id:标题文字Id
+     */
     fun setTitle(@StringRes id: Int) = this.apply { setTitle(mContext.getString(id)) }
 
+    /**
+     * 设置对话框上的信息文字
+     * @param msg:信息文字
+     */
     fun setMessage(msg: String) = this.apply { message = msg }
 
+    /**
+     * @see setMessage(String)
+     * @param id:信息文字Id
+     */
     fun setMessage(@StringRes id: Int) = setMessage(getString(id))
 
+    /**
+     * 设置Positive（右侧的“确认”）按钮文字
+     */
     fun setPositiveText(text: String) = this.apply { posText = text }
 
+    /**
+     * @see setPositiveText(String)
+     */
     fun setPositiveText(@StringRes id: Int) = setPositiveText(mContext.getString(id))
 
+    /**
+     * 设置Negative按钮（即中间的“取消”）文字
+     */
     fun setNegativeText(text: String) = this.apply { negText = text }
 
+    /**
+     * 设置Positive按钮（即右侧的“确认”）文字
+     */
     fun setNegativeText(@StringRes id: Int) = setNegativeText(mContext.getString(id))
 
+    /**
+     * 设置Neutral按钮（即最左侧的按钮）文字
+     */
     fun setNeutralText(text: String) = this.apply { neuText = text }
 
+    /**
+     * @see setNeutralText(String)
+     */
     fun setNeutralText(@StringRes id: Int) = setNeutralText(mContext.getString(id))
 
+    /**
+     * 设置Positive按钮的文字颜色
+     * @param color:颜色值
+     */
+    fun setPosTextColor(@ColorInt color: Int) = this.apply { posColor = color }
+
+    /**
+     * 设置Positive按钮的文字颜色
+     * @param colorId: 颜色资源Id
+     * @see setPosTextColor(Int)
+     */
+    fun setPosTextColorId(@ColorRes colorId: Int) =
+            this.apply { setPosTextColor(ContextCompat.getColor(mContext, colorId)) }
+
+    /**
+     * 设置Negative按钮的文字颜色
+     * @param color:颜色值
+     */
+    fun setNegTextColor(@ColorInt color: Int) = this.apply { negColor = color }
+
+    /**
+     *
+     * 设置Negative按钮的文字颜色
+     * @param colorId:颜色资源Id
+     * @see setNegTextColor
+     */
+    fun setNegTextColorId(@ColorRes colorId: Int) =
+            this.apply { setNegTextColor(ContextCompat.getColor(mContext, colorId)) }
+
+    /**
+     * 设置Neutral按钮的文字颜色
+     * @param color : 颜色值
+     */
+    fun setNeuTextColor(@ColorInt color: Int) = this.apply { neuColor = color }
+
+    /**
+     * 设置Neutral按钮的文字颜色
+     * @param colorId:颜色资源Id
+     */
+    fun setNeuTextColorId(@ColorRes colorId: Int) =
+            this.apply { setNeuTextColor(ContextCompat.getColor(mContext, colorId)) }
+
+    /**
+     * 是否显示Neutral按钮，默认为false，不显示
+     */
     fun setShowNeuButton(showNeuBtn: Boolean) = this.apply { showNeuButton = showNeuBtn }
 
+    /**
+     * 是否显示Negative按钮，默认为true，显示
+     */
     fun setShowNegButton(showNegBtn: Boolean) = this.apply { showNegButton = showNegBtn }
 
+    /**
+     * 设置Dialog的Tag，默认为MaterialDialog
+     */
     fun setTag(tag: String) = this.apply { dialogTag = tag }
-
 
     /**
      * 点击对话框上的按钮是否可以关闭对话框，默认为true
@@ -155,32 +243,35 @@ class HintDialog : DialogFragment() {
      */
     fun setAnimStyle(@StyleRes styleId: Int) = this.apply { animStyle = styleId }
 
-    fun setNeuTextColor(@ColorInt color: Int) = this.apply { neuColor = color }
-
-    fun setNeuTextColorId(@ColorRes colorId: Int) =
-            this.apply { setNeuTextColor(ContextCompat.getColor(mContext, colorId)) }
-
-    fun setNegTextColor(@ColorInt color: Int) =
-            this.apply { negColor = color }
-
-    fun setNegTextColorId(@ColorRes colorId: Int) =
-            this.apply { setNegTextColor(ContextCompat.getColor(mContext, colorId)) }
-
-    fun setPosTextColor(@ColorInt color: Int) = this.apply { posColor = color }
-
-    fun setPosTextColorId(@ColorRes colorId: Int) =
-            this.apply { setPosTextColor(ContextCompat.getColor(mContext, colorId)) }
-
-    fun setPosClickListener(listener: (DialogInterface) -> Unit) = this.apply { posListener = listener }
-
-    fun setNegClickListener(listener: (DialogInterface) -> Unit) = this.apply { negListener = listener }
-
-    fun setNeuClickListener(listener: (DialogInterface) -> Unit) = this.apply { neuListener = listener }
-
-    fun setDismissListener(listener: () -> Unit) = this.apply { dismissListener = listener }
     /**
      * 点击对话框外部关闭对话框
      */
     fun setCancelOutSide(isCancelable: Boolean) = this.apply { this.isCancelable = isCancelable }
 
+    /**
+     * Positive按钮的点击监听
+     */
+    fun setPosClickListener(listener: (DialogInterface) -> Unit) = this.apply { posListener = listener }
+
+    /**
+     * Negative按钮的点击监听
+     */
+    fun setNegClickListener(listener: (DialogInterface) -> Unit) = this.apply { negListener = listener }
+
+    /**
+     * Neutral按钮的点击监听
+     */
+    fun setNeuClickListener(listener: (DialogInterface) -> Unit) = this.apply { neuListener = listener }
+
+    /**
+     * 对话框关闭的监听
+     */
+    fun setDismissListener(listener: () -> Unit) = this.apply { dismissListener = listener }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        posListener = null
+        negListener = null
+        neuListener = null
+    }
 }
