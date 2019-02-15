@@ -1,1 +1,1 @@
-include ':app', ':lindialog_lib'
+include ':app', ':lindialog'

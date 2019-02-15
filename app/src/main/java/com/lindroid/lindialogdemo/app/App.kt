@@ -1,7 +1,7 @@
 package com.lindroid.lindialog.app
 
 import android.app.Application
-import com.lindroid.lindialog_lib.LinDialog
+import com.lindroid.lindialog.LinDialog
 import com.squareup.leakcanary.LeakCanary
 
 /**

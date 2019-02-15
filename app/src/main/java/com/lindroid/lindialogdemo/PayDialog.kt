@@ -1,9 +1,10 @@
-package com.lindroid.lindialog
+package com.lindroid.lindialogdemo
 
 import android.content.DialogInterface
 import android.support.v4.app.FragmentManager
 import android.view.View
-import com.lindroid.lindialog_lib.base.BaseBottomDialog
+import com.lindroid.lindialog.R
+import com.lindroid.lindialog.base.BaseBottomDialog
 import kotlinx.android.synthetic.main.dialog_pay.*
 
 /**

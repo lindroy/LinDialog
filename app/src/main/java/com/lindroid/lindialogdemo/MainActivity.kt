@@ -1,18 +1,16 @@
-package com.lindroid.lindialog
+package com.lindroid.lindialogdemo
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import com.lindroid.lindialog_lib.BottomDialog
-import com.lindroid.lindialog_lib.BottomListDialog
-import com.lindroid.lindialog_lib.CustomDialog
-import com.lindroid.lindialog_lib.MaterialDialog
+import com.lindroid.lindialog.*
 import com.lindroid.utils.dp2px
 import com.lindroid.utils.shortToast
 import kotlinx.android.synthetic.main.activity_main.*
 
 private const val TAG = "LinDialog"
+
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
