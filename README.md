@@ -1,4 +1,6 @@
 # LinDialog
+[![](https://jitpack.io/v/Lindroy/LinDialog.svg)](https://jitpack.io/#Lindroy/LinDialog)
+
 
 使用Kotlin语言编写的的对话框。
 
@@ -19,7 +21,7 @@
 
 ```
 	dependencies {
-	        implementation 'com.github.Lindroy:LinDialog:1.0.0'
+	        implementation 'com.github.Lindroy:LinDialog:1.0.1'
 	}
 ```
 
