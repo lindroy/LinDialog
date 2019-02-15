@@ -39,8 +39,6 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
 
     private var background: Drawable? = null
 
-//    private var backgroundResId: Int = 0
-
     private var backgroundColorId: Int = 0
 
     private var divider: Drawable? = null
@@ -95,16 +93,35 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
         return true
     }
 
+    /**
+     * 在对话框中添加Item
+     * @param name : item的文字
+     */
     fun addItem(name: String) = this.apply { items.add(name) }
 
+    /**
+     * 在对话框中添加一组Item
+     * @param items : item的文字数组
+     */
     fun addItems(items: Array<String>) = this.apply { this.items.addAll(items.toList()) }
 
+    /**
+     * 设置对话框背景
+     */
     fun setBackground(background: Drawable) = this.apply { this.background = background }
 
+    /**
+     * 设置对话框背景
+     * @param resId:背景资源Id
+     */
     fun setBackgroundResource(@DrawableRes resId: Int) = this.apply {
         ContextCompat.getDrawable(mContext, resId)?.let { setBackground(it) }
     }
 
+    /**
+     * 设置对话框背景颜色
+     * @param colorId:颜色Id
+     */
     fun setBackgroundColorId(@ColorRes colorId: Int) = this.apply { backgroundColorId = colorId }
 
     /**
@@ -127,7 +144,15 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
      */
     fun setItemTextColorId(@ColorRes colorId: Int) = this.apply { setItemTextColor(ContextCompat.getColor(mContext, colorId)) }
 
+    /**
+     * item文字的位置
+     */
     fun setItemTextGravity(gravity: Int) = this.apply { itemTextGravity = gravity }
+
+    /**
+     * item文字是否居中
+     */
+    fun setItemTextCenter() = this.apply { setItemTextGravity(Gravity.CENTER) }
 
     /**
      * 设置Item的padding值
@@ -136,14 +161,22 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
             this.apply { itemPadding = kotlin.arrayOf(left, top, right, bottom) }
 
     /**
-     * 设置分割线左右的padding
+     * 设置分割线
+     * 可以创建一个shape文件，然后在里面设置分割线的颜色和高度
      */
     fun setDivider(divider: Drawable) = this.apply { this.divider = divider }
 
+    /**
+     * 设置分割线
+     * 可以创建一个shape文件，然后在里面设置分割线的颜色和高度
+     */
     fun setDivider(@DrawableRes resId: Int) = this.apply {
         ContextCompat.getDrawable(mContext, resId)?.let { setDivider(it) }
     }
 
+    /**
+     * 设置分割线左右的padding
+     */
     fun setDividerPadding(padding: Int) = this.apply { dividerPadding = padding }
 
     /**
