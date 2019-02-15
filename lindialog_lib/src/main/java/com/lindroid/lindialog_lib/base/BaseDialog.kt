@@ -38,7 +38,7 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
 
     private var dismissListener: (() -> Unit)? = null
 
-    private var dialogTag = "BottomDialog"
+    private var dialogTag = "BaseDialog"
 
     private var contentView: View? = null
 
@@ -108,21 +108,46 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
         this.show(fm, dialogTag)
     }
 
+    /**
+     * 设置自定义的布局
+     */
     fun setContentView(contentView: View) = this.apply { this.contentView = contentView } as T
 
+    /**
+     * 设置自定义的布局Id
+     */
     fun setContentView(@LayoutRes layoutId: Int) = this.apply { this.layoutId = layoutId } as T
 
+    /**
+     * 设置DialogFragment的Tag，默认为“BaseDialog”
+     */
     fun setTag(tag: String) = this.apply { dialogTag = tag } as T
 
+    /**
+     * 设置动画
+     */
     fun setAnimStyle(@StyleRes style: Int) = this.apply { this.animStyle = style } as T
 
+    /**
+     * 设置宽度与屏幕宽度比例
+     * @param scale : 范围为0~1.0，为1时占满宽度
+     */
     fun setWidthScale(@FloatRange(from = 0.0, to = 1.0) scale: Float) = this.apply { widthScale = scale } as T
 
+    /**
+     * 设置对话框中屏幕中的位置
+     */
     fun setGravity(gravity: Int) = this.apply { this.gravity = gravity } as T
 
+    /**
+     * 处理对话框中的View
+     */
     fun setViewHandler(viewHandler: (holder: ViewHolder, dialog: DialogInterface) -> Unit) =
             this.apply { this.viewHandler = viewHandler } as T
 
+    /**
+     * 对话框消失监听
+     */
     fun setDismissListener(listener: () -> Unit) = this.apply { dismissListener = listener } as T
 
     /**

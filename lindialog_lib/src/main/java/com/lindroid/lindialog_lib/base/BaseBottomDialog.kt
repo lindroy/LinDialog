@@ -36,14 +36,9 @@ abstract class BaseBottomDialog<T : BaseBottomDialog<T>> : BottomSheetDialogFrag
 
     private var dismissListener: (() -> Unit)? = null
 
-    private var dialogTag = "BottomDialog"
+    private var dialogTag = "BaseBottomDialog"
 
     private var contentView: View? = null
-
-//    private var background: Drawable? = null
-
-//    private var backgroundColorId: Int = 0
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return when {
@@ -87,25 +82,36 @@ abstract class BaseBottomDialog<T : BaseBottomDialog<T>> : BottomSheetDialogFrag
         this.show(fm, dialogTag)
     }
 
+    /**
+     * 设置自定义的布局
+     */
     fun setContentView(contentView: View) = this.apply { this.contentView = contentView } as T
 
+    /**
+     * 设置自定义的布局Id
+     */
     fun setContentView(@LayoutRes layoutId: Int) = this.apply { this.layoutId = layoutId } as T
 
+    /**
+     * 设置DialogFragment的Tag，默认为“BaseBottomDialog”
+     */
     fun setTag(tag: String) = this.apply { dialogTag = tag } as T
 
-//    fun setBackground(background: Drawable) = this.apply { this.background = background } as T
-
-//    fun setBackgroundColor(@ColorRes colorId: Int) = this.apply { backgroundColorId = colorId } as T
-
+    /**
+     * 处理对话框中的View
+     */
     fun setViewHandler(viewHandler: (holder: ViewHolder, dialog: DialogInterface) -> Unit) =
             this.apply { this.viewHandler = viewHandler } as T
-
-    fun setDismissListener(listener: () -> Unit) = this.apply { dismissListener = listener } as T
 
     /**
      * 点击对话框外部关闭对话框
      */
     fun setCancelOutSide(isCancelable: Boolean) = this.apply { this.isCancelable = isCancelable } as T
+
+    /**
+     * 对话框消失监听
+     */
+    fun setDismissListener(listener: () -> Unit) = this.apply { dismissListener = listener } as T
 
     override fun onDestroy() {
         super.onDestroy()

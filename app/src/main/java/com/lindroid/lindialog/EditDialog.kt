@@ -152,4 +152,10 @@ class EditDialog : BaseDialog<EditDialog>() {
      * 输入字符改变的监听事件
      */
     fun setTextChangeListener(listener: (content: String, length: Int) -> Unit) = this.apply { changeListener = listener }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        finishListener = null
+        changeListener = null
+    }
 }
