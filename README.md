@@ -1,4 +1,6 @@
 # LinDialog
+[![](https://jitpack.io/v/Lindroy/LinDialog.svg)](https://jitpack.io/#Lindroy/LinDialog)
+
 
 使用Kotlin语言编写的的对话框。
 
@@ -19,13 +21,21 @@
 
 ```
 	dependencies {
-	        implementation 'com.github.Lindroy:LinDialog:1.0.0'
+	        implementation 'com.github.Lindroy:LinDialog:1.0.1'
 	}
 ```
 
 3、在你的Application的onCreate()方法中初始化
 
 ```kotlin
-        LinDialog.init(instance)
+	LinDialog.init(instance)
 ```
 
+## 使用方法
+请参考代码中的例子和阅读[wiki](https://github.com/Lindroy/LinDialog/wiki "wiki")。
+
+## 待优化
+屏幕旋转后由于状态没有保存，会导致对话框布局异常或页面闪退，目前可在清单文件中给对话框所在的Activity添加：
+```
+	android:configChanges="orientation|screenSize"
+```
