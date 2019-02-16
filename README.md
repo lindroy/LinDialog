@@ -39,3 +39,8 @@
 ```
 	android:configChanges="orientation|screenSize"
 ```
+
+## 特别鸣谢
+[LDialog](https://github.com/limuyang2/LDialog "LDialog")
+
+
