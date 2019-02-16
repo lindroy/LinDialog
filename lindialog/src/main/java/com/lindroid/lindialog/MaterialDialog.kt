@@ -24,8 +24,8 @@ class MaterialDialog : DialogFragment() {
     private lateinit var mContext: Context
     private var title = ""
     private var message = ""
-    private var posText = ""
-    private var negText = ""
+    private var posText = "确定"
+    private var negText = "取消"
     private var neuText = ""
     private var neuColor = 0
     private var negColor = 0
@@ -142,7 +142,7 @@ class MaterialDialog : DialogFragment() {
     fun setMessage(@StringRes id: Int) = setMessage(getString(id))
 
     /**
-     * 设置Positive（右侧的“确认”）按钮文字
+     * 设置Positive按钮（即右侧的“确认”）文字
      */
     fun setPositiveText(text: String) = this.apply { posText = text }
 
