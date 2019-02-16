@@ -57,7 +57,7 @@ class MaterialDialog : DialogFragment() {
         return builder!!.create().apply {
             show()
             getButton(AlertDialog.BUTTON_POSITIVE).apply {
-                setTextColor(if (posColor != 0) posColor else ContextCompat.getColor(context, R.color.hint_dialog_positive_text_color))
+                setTextColor(if (posColor != 0) posColor else ContextCompat.getColor(context, R.color.material_dialog_positive_text_color))
                 setOnClickListener {
                     posListener?.invoke(dialog)
                     if (dismissible) {
@@ -66,7 +66,7 @@ class MaterialDialog : DialogFragment() {
                 }
             }
             getButton(AlertDialog.BUTTON_NEGATIVE).apply {
-                setTextColor(if (negColor != 0) negColor else ContextCompat.getColor(context, R.color.hint_dialog_negative_text_color))
+                setTextColor(if (negColor != 0) negColor else ContextCompat.getColor(context, R.color.material_dialog_negative_text_color))
                 setOnClickListener {
                     negListener?.invoke(dialog)
                     if (dismissible) {
@@ -75,7 +75,7 @@ class MaterialDialog : DialogFragment() {
                 }
             }
             getButton(AlertDialog.BUTTON_NEUTRAL).apply {
-                setTextColor(if (neuColor != 0) neuColor else ContextCompat.getColor(context, R.color.hint_dialog_neutral_text_color))
+                setTextColor(if (neuColor != 0) neuColor else ContextCompat.getColor(context, R.color.material_dialog_neutral_text_color))
                 setOnClickListener {
                     neuListener?.invoke(dialog)
                     if (dismissible) {
@@ -93,9 +93,9 @@ class MaterialDialog : DialogFragment() {
                 MaterialDialog().apply {
                     this.fm = fm
                     mContext = LinDialog.context
-                    posText = mContext.getString(R.string.hint_dialog_positive_text)
-                    negText = mContext.getString(R.string.hint_dialog_negative_text)
-                    neuText = mContext.getString(R.string.hint_dialog_neutral_text)
+                    posText = mContext.getString(R.string.material_dialog_positive_text)
+                    negText = mContext.getString(R.string.material_dialog_negative_text)
+                    neuText = mContext.getString(R.string.material_dialog_neutral_text)
                 }
     }
 
@@ -270,6 +270,7 @@ class MaterialDialog : DialogFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        dismissListener = null
         posListener = null
         negListener = null
         neuListener = null
