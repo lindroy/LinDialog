@@ -55,11 +55,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     it.dismiss()
                 }
                 .setNegClickListener {
-                    shortToast("取消")
+                    this.shortToast("取消")
                     it.dismiss()
                 }
                 .setNeuClickListener {
-                    shortToast("不确定")
+                    this.shortToast("不确定")
                     it.dismiss()
                 }
                 .show()

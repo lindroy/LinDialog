@@ -70,7 +70,8 @@ class ViewHolder constructor(private val convertView: View) {
     /**
      * 点击监听
      */
-    fun setOnClickListener(@IdRes viewId: Int, clickListener: View.OnClickListener) = this.apply { getView<View>(viewId).setOnClickListener(clickListener) }
+    fun setOnClickListener(@IdRes viewId: Int, clickListener: View.OnClickListener) =
+            this.apply { getView<View>(viewId).setOnClickListener(clickListener) }
 
     /**
      * 点击监听

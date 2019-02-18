@@ -8,9 +8,8 @@ import android.text.TextWatcher
 import android.view.Gravity
 import android.view.View
 import android.view.ViewTreeObserver
-import com.lindroid.lindialog.R
-import com.lindroid.lindialog.app.App
 import com.lindroid.lindialog.base.BaseDialog
+import com.lindroid.lindialogdemo.app.App
 import com.lindroid.utils.hideKeyboard
 import com.lindroid.utils.shortToast
 import com.lindroid.utils.showKeyboard

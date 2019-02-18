@@ -1,4 +1,4 @@
-package com.lindroid.lindialog.app
+package com.lindroid.lindialogdemo.app
 
 import android.app.Application
 import com.lindroid.lindialog.LinDialog
