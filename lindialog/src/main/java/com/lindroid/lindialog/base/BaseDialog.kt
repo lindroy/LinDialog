@@ -7,7 +7,7 @@ import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.FloatRange
+import android.support.annotation.FontRes
 import android.support.annotation.LayoutRes
 import android.support.annotation.StyleRes
 import android.support.v4.app.DialogFragment
@@ -49,6 +49,7 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
     private var gravity: Int = Gravity.CENTER
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return when {
             customViewId > 0 -> inflater.inflate(customViewId, container, false)
             layoutId > 0 -> inflater.inflate(layoutId, container, false)
@@ -131,8 +132,9 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
     /**
      * 设置宽度与屏幕宽度比例
      * @param scale : 范围为0~1.0，为1时占满宽度
+     *
      */
-    fun setWidthScale(@FloatRange(from = 0.0, to = 1.0) scale: Float) = this.apply { widthScale = scale } as T
+    fun setWidthScale(scale: Float) = this.apply { widthScale = scale } as T
 
     /**
      * 设置对话框中屏幕中的位置
