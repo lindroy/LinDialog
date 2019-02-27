@@ -139,7 +139,7 @@ class MaterialDialog : DialogFragment() {
      * @see setMessage(String)
      * @param id:信息文字Id
      */
-    fun setMessage(@StringRes id: Int) = setMessage(getString(id))
+    fun setMessage(@StringRes id: Int) = setMessage(mContext.getString(id))
 
     /**
      * 设置Positive按钮（即右侧的“确认”）文字

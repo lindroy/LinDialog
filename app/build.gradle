@@ -33,7 +33,7 @@ dependencies {
     testImplementation 'com.android.support:multidex:1.0.3'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-//    implementation 'com.github.Lindroy:LinDialog:V0.2.0-beta'
+    //    implementation 'com.github.Lindroy:LinDialog:V0.2.0-beta'
     implementation project(':lindialog')
     implementation 'com.github.Lindroy:AndroidUtilsKt:V1.1.0-beta'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
