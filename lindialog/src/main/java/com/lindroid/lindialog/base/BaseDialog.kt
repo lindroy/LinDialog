@@ -1,5 +1,6 @@
 package com.lindroid.lindialog.base
 
+
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
@@ -7,7 +8,6 @@ import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.FontRes
 import android.support.annotation.LayoutRes
 import android.support.annotation.StyleRes
 import android.support.v4.app.DialogFragment
@@ -49,6 +49,7 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
     private var gravity: Int = Gravity.CENTER
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        //去除4.4以下系统中出现的标题栏
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return when {
             customViewId > 0 -> inflater.inflate(customViewId, container, false)

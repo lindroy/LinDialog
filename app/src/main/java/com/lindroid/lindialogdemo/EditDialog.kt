@@ -8,11 +8,11 @@ import android.text.TextWatcher
 import android.view.Gravity
 import android.view.View
 import android.view.ViewTreeObserver
+import com.lindroid.androidutilskt.extension.hideKeyboard
+import com.lindroid.androidutilskt.extension.shortToast
+import com.lindroid.androidutilskt.extension.showKeyboard
 import com.lindroid.lindialog.base.BaseDialog
 import com.lindroid.lindialogdemo.app.App
-import com.lindroid.utils.hideKeyboard
-import com.lindroid.utils.shortToast
-import com.lindroid.utils.showKeyboard
 import kotlinx.android.synthetic.main.dialog_edit.*
 
 /**

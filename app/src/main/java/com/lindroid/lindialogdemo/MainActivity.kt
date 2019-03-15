@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import com.lindroid.lindialog.*
-import com.lindroid.utils.dp2px
-import com.lindroid.utils.shortToast
+import com.lindroid.androidutilskt.extension.dp2px
+import com.lindroid.androidutilskt.extension.shortToast
+import com.lindroid.lindialog.BottomDialog
+import com.lindroid.lindialog.BottomListDialog
+import com.lindroid.lindialog.CustomDialog
+import com.lindroid.lindialog.MaterialDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 private const val TAG = "LinDialog"
@@ -113,7 +116,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 .setWeChatListener {
                     shortToast("微信")
                     it.dismiss()
-
                 }
                 .show()
     }
