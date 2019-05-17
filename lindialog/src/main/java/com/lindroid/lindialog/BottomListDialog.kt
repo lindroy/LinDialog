@@ -12,6 +12,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.lindroid.lindialog.LinDialog.context
 import com.lindroid.lindialog.base.BaseBottomDialog
 import kotlinx.android.synthetic.main.dialog_bottom_list.*
 

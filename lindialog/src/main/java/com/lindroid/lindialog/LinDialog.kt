@@ -14,6 +14,7 @@ object LinDialog {
     private lateinit var application: Application
     fun init(application: Application) {
         this.application = application
+
     }
 
     val context: Context
