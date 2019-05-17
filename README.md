@@ -21,9 +21,10 @@
 
 ```
 	dependencies {
-	        implementation 'com.github.Lindroy:LinDialog:1.0.1'
+	        implementation 'com.github.Lindroy:LinDialog:latest-version'
 	}
 ```
+latest-version请参考jitpack图标后的版本号。
 
 3、在你的Application的onCreate()方法中初始化
 
