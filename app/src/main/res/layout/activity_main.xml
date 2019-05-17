@@ -8,44 +8,44 @@
     tools:context="com.lindroid.lindialogdemo.MainActivity">
 
     <Button
-        android:textAllCaps="false"
         android:text="提示对话框（MaterialDialog）"
         android:id="@+id/btnHint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
-        android:textAllCaps="false"
         android:text="仿iOS对话框（CustomDialog）"
         android:id="@+id/btnIOS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
-        android:textAllCaps="false"
         android:text="带输入框的对话框（EditDialog）"
         android:id="@+id/btnEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
-        android:textAllCaps="false"
         android:text="底部对话框（BottomDialog）"
         android:id="@+id/btnBottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
-        android:textAllCaps="false"
         android:text="支付对话框（PayDialog）"
         android:id="@+id/btnPay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
-        android:textAllCaps="false"
         android:text="底部列表对话框（BottomListDialog）"
         android:id="@+id/btnBottomList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnIAlertDialog"
+        android:text="IAlertDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

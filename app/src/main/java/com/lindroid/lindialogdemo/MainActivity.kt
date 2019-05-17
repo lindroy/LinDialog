@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import com.lindroid.androidutilskt.extension.dp2px
 import com.lindroid.androidutilskt.extension.shortToast
+import com.lindroid.iosdialog.IAlertDialog
 import com.lindroid.lindialog.BottomDialog
 import com.lindroid.lindialog.BottomListDialog
 import com.lindroid.lindialog.CustomDialog
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btnBottom.setOnClickListener(this)
         btnPay.setOnClickListener(this)
         btnBottomList.setOnClickListener(this)
+        btnIAlertDialog.setOnClickListener(this)
     }
 
     /**
@@ -34,13 +36,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      */
     override fun onClick(v: View?) {
         when (v?.id) {
-        //提示对话框
+            //提示对话框
             R.id.btnHint -> showMaterialDialog()
             R.id.btnIOS -> showCustomDialog()
             R.id.btnBottom -> showBottomDialog()
             R.id.btnPay -> showPayDialog()
             R.id.btnEdit -> showEditDialog()
             R.id.btnBottomList -> showBottomListDialog()
+            R.id.btnIAlertDialog -> {
+                IAlertDialog.build(supportFragmentManager)
+                        .setTitle("提示")
+                        .setMessage("确定要退出登录吗？")
+                        .show()
+
+            }
         }
     }
 

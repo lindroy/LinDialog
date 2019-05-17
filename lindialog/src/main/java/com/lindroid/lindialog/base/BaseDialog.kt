@@ -163,4 +163,6 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
         viewHandler = null
         dismissListener = null
     }
+
+
 }
