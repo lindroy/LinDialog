@@ -81,6 +81,12 @@ class IBottomSheetDialog : BaseBottomDialog<IBottomSheetDialog>() {
         items.add(DialogItemBean(text, textColor))
     }
 
+    fun addItems(items: Array<String>) = this.apply {
+        items.forEach {
+            addItem(it)
+        }
+    }
+
     private fun initListView() {
         lvChoices.apply {
             divider = ContextCompat.getDrawable(mContext, R.drawable.dialog_ios_divider)
@@ -90,7 +96,6 @@ class IBottomSheetDialog : BaseBottomDialog<IBottomSheetDialog>() {
                 itemClickListener?.invoke(position, items[position].text, view as TextView, dialog)
             }
         }
-
     }
 
     private fun initShapeDrawable(): ShapeDrawable {
