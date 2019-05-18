@@ -26,18 +26,19 @@ class DialogListAdapter(private val mContext: Context, @LayoutRes val layoutId: 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val vh: ViewHolder
         var itemView = convertView
-        when(itemView){
-            null->{
+        when (itemView) {
+            null -> {
                 vh = ViewHolder()
-                itemView = LayoutInflater.from(mContext).inflate(layoutId,null)
+                itemView = LayoutInflater.from(mContext).inflate(layoutId, null)
                 vh.textView = itemView.findViewById(R.id.tvChoice)
                 itemView.tag = vh
             }
-            else-> vh = itemView.tag as ViewHolder
+            else -> vh = itemView.tag as ViewHolder
         }
         val item = items[position]
         vh.textView.apply {
             text = item.text
+            setTextColor(item.textColor)
         }
 
         return itemView!!

@@ -1,6 +1,7 @@
 package com.lindroid.lindialogdemo
 
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
@@ -176,6 +177,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun showIBottomSheetDialog(){
         IBottomSheetDialog.build(supportFragmentManager)
                 .addItem("hello")
+                .addItem("hello",ContextCompat.getColor(this,android.R.color.holo_red_light))
                 .addItem("hello")
                 .addItem("hello")
                 .addItem("hello")
@@ -186,7 +188,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 .addItem("hello")
                 .addItem("hello")
                 .addItem("hello")
-                .addItem("hello")
+                .setOnItemClickListener { position, text, itemView, dialog ->
+                    itemView.text = "你点击了$position"
+                }
                 .show()
     }
 }

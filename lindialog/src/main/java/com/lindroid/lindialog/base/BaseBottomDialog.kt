@@ -48,6 +48,8 @@ abstract class BaseBottomDialog<T : BaseBottomDialog<T>> : BottomSheetDialogFrag
 
     private var widthScale = 0F
 
+    private var isDraggable = true
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return when {
             customViewId > 0 -> inflater.inflate(customViewId, container, false)
@@ -97,7 +99,21 @@ abstract class BaseBottomDialog<T : BaseBottomDialog<T>> : BottomSheetDialogFrag
             val params = (view!!.parent as View).layoutParams as CoordinatorLayout.LayoutParams
             val behavior = params.behavior
             val bottomSheetBehavior = behavior as BottomSheetBehavior
-//            bottomSheetBehavior.setBottomSheetCallback()
+            if (!isDraggable){
+                val bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
+                    override fun onSlide(p0: View, p1: Float) {
+                    }
+
+                    override fun onStateChanged(bottomSheet: View, newState: Int) {
+                        //禁止拖拽
+                        if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                        }
+                    }
+
+                }
+                bottomSheetBehavior.setBottomSheetCallback(bottomSheetCallback)
+            }
             bottomSheetBehavior.peekHeight = view!!.measuredHeight
         }
     }
@@ -146,6 +162,11 @@ abstract class BaseBottomDialog<T : BaseBottomDialog<T>> : BottomSheetDialogFrag
      *
      */
     fun setWidthScale(scale: Float) = this.apply { widthScale = scale } as T
+
+    /**
+     * 是否可以拖拽
+     */
+    fun setDraggable(isDraggable: Boolean) = this.apply { this.isDraggable = isDraggable }
 
     /**
      * 对话框消失监听
