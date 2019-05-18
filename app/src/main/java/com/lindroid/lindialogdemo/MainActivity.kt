@@ -175,6 +175,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun showIBottomSheetDialog(){
         IBottomSheetDialog.build(supportFragmentManager)
+                .addItem("hello")
+                .addItem("hello")
+                .addItem("hello")
+                .addItem("hello")
+                .addItem("hello")
+                .addItem("hello")
+                .addItem("hello")
+                .addItem("hello")
+                .addItem("hello")
+                .addItem("hello")
+                .addItem("hello")
+                .addItem("hello")
                 .show()
     }
 }

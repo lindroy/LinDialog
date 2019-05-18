@@ -3,8 +3,13 @@ package com.lindroid.iosdialog
 import android.graphics.Paint
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
+import android.support.annotation.ColorInt
 import android.support.v4.app.FragmentManager
+import android.support.v4.content.ContextCompat
 import android.view.View
+import com.lindroid.iosdialog.adapter.DialogListAdapter
+import com.lindroid.iosdialog.bean.DialogItemBean
+import com.lindroid.lindialog.LinDialog.getResColor
 import com.lindroid.lindialog.base.BaseBottomDialog
 import kotlinx.android.synthetic.main.dialog_bottom_sheet_ios.*
 
@@ -34,15 +39,9 @@ class IBottomSheetDialog : BaseBottomDialog<IBottomSheetDialog>() {
 
     private var bgAlpha = IDialog.alpha
 
-    private val bgDrawable: ShapeDrawable by lazy {
-        val roundRectShape = RoundRectShape(floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius), null, null)
-        with(ShapeDrawable(roundRectShape)) {
-            paint.color = bgColor
-            paint.style = Paint.Style.FILL
-            paint.alpha = (255 * bgAlpha).toInt()
-            this
-        }
-    }
+    private val items: MutableList<DialogItemBean> = ArrayList()
+
+
     companion object {
         @JvmStatic
         fun build(fm: FragmentManager) =
@@ -50,6 +49,7 @@ class IBottomSheetDialog : BaseBottomDialog<IBottomSheetDialog>() {
                     this.fm = fm
                 }
     }
+
     /**
      * 子类继承BaseBottomDialog后需要创建的布局Id
      */
@@ -59,16 +59,9 @@ class IBottomSheetDialog : BaseBottomDialog<IBottomSheetDialog>() {
      * 返回true表示子类自己处理布局，setViewHandler方法无效
      */
     override fun onHandleView(contentView: View): Boolean {
-        tvTitle.apply {
-//            text = title
-            setTextColor(titleColor)
-            textSize = titleSize
-        }
-        tvMessage.apply {
-//            text = message
-            setTextColor(messageColor)
-            textSize = messageSize
-        }
+//        super.onHandleView(contentView)
+        setWidthScale(0.95F)
+//        setGravity(Gravity.BOTTOM)
 //        TODO(ShapeDrawable的宽高会跟随第一个设置background的View)
         llContent.background = initShapeDrawable()
         btnCancel.apply {
@@ -77,12 +70,26 @@ class IBottomSheetDialog : BaseBottomDialog<IBottomSheetDialog>() {
             background = initShapeDrawable()
             setOnClickListener { dismiss() }
         }
+        initListView()
         return true
     }
 
-    private fun initShapeDrawable():ShapeDrawable{
+    fun addItem(text: String, @ColorInt textColor: Int = getResColor(R.color.lin_dialog_text_color_blue)) = this.apply {
+        items.add(DialogItemBean(text, textColor))
+    }
+
+    private fun initListView(){
+        lvChoices.apply {
+            divider = ContextCompat.getDrawable(mContext,R.drawable.dialog_ios_divider)
+            dividerHeight = resources.getDimensionPixelSize(R.dimen.lin_dialog_line_size)
+            adapter = DialogListAdapter(mContext,R.layout.item_dialog_list,items)
+        }
+
+    }
+
+    private fun initShapeDrawable(): ShapeDrawable {
         val roundRectShape = RoundRectShape(floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius), null, null)
-       return with(ShapeDrawable(roundRectShape)) {
+        return with(ShapeDrawable(roundRectShape)) {
             paint.color = bgColor
             paint.style = Paint.Style.FILL
             paint.alpha = (255 * bgAlpha).toInt()
@@ -91,3 +98,4 @@ class IBottomSheetDialog : BaseBottomDialog<IBottomSheetDialog>() {
     }
 
 }
+

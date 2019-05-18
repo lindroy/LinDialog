@@ -2,15 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:paddingBottom="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:background="@color/lin_dialog_text_color_red"
         android:id="@+id/llContent"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_weight="1"
+        android:layout_height="0dp">
         <TextView
             android:id="@+id/tvTitle"
             style="@style/DialogTitleStyle"
@@ -22,9 +23,11 @@
             style="@style/DialogMessageStyle"
             android:text="这是提示信息这是提示信息" />
 
-
+        <ListView
+            android:id="@+id/lvChoices"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </LinearLayout>
-
 
 
     <Button

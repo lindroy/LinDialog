@@ -1,15 +1,21 @@
 package com.lindroid.lindialog.base
 
+import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
+import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.support.annotation.LayoutRes
+import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.BottomSheetDialogFragment
+import android.support.design.widget.CoordinatorLayout
 import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import com.lindroid.lindialog.LinDialog
 import com.lindroid.lindialog.R
 
@@ -40,6 +46,8 @@ abstract class BaseBottomDialog<T : BaseBottomDialog<T>> : BottomSheetDialogFrag
 
     private var contentView: View? = null
 
+    private var widthScale = 0F
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return when {
             customViewId > 0 -> inflater.inflate(customViewId, container, false)
@@ -66,8 +74,32 @@ abstract class BaseBottomDialog<T : BaseBottomDialog<T>> : BottomSheetDialogFrag
 
     override fun onStart() {
         super.onStart()
+        fun getScreenWidth(): Int {
+            val wm = context!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            val point = Point()
+            when (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                true -> wm.defaultDisplay.getRealSize(point)
+                false -> wm.defaultDisplay.getSize(point)
+            }
+            return point.x
+        }
         //去除白色的背景
-        dialog.window?.findViewById<View>(R.id.design_bottom_sheet)?.background = ColorDrawable(Color.TRANSPARENT)
+        dialog.window?.apply {
+            findViewById<View>(R.id.design_bottom_sheet)?.background = ColorDrawable(Color.TRANSPARENT)
+            if (widthScale > 0) {
+                val params = attributes
+                params.width = (getScreenWidth() * widthScale).toInt()
+                attributes = params
+            }
+        }
+        //设置显示全部高度
+        view?.post {
+            val params = (view!!.parent as View).layoutParams as CoordinatorLayout.LayoutParams
+            val behavior = params.behavior
+            val bottomSheetBehavior = behavior as BottomSheetBehavior
+//            bottomSheetBehavior.setBottomSheetCallback()
+            bottomSheetBehavior.peekHeight = view!!.measuredHeight
+        }
     }
 
     override fun onDismiss(dialog: DialogInterface?) {
@@ -107,6 +139,13 @@ abstract class BaseBottomDialog<T : BaseBottomDialog<T>> : BottomSheetDialogFrag
      * 点击对话框外部关闭对话框
      */
     fun setCancelOutside(isCancelable: Boolean) = this.apply { this.isCancelable = isCancelable } as T
+
+    /**
+     * 设置宽度与屏幕宽度比例
+     * @param scale : 范围为0~1.0，为1时占满宽度
+     *
+     */
+    fun setWidthScale(scale: Float) = this.apply { widthScale = scale } as T
 
     /**
      * 对话框消失监听
