@@ -7,6 +7,7 @@ import android.view.View
 import com.lindroid.androidutilskt.extension.dp2px
 import com.lindroid.androidutilskt.extension.shortToast
 import com.lindroid.iosdialog.IAlertDialog
+import com.lindroid.iosdialog.IBottomSheetDialog
 import com.lindroid.lindialog.BottomDialog
 import com.lindroid.lindialog.BottomListDialog
 import com.lindroid.lindialog.CustomDialog
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btnPay.setOnClickListener(this)
         btnBottomList.setOnClickListener(this)
         btnIAlertDialog.setOnClickListener(this)
+        btnISheetDialog.setOnClickListener(this)
     }
 
     /**
@@ -44,6 +46,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btnEdit -> showEditDialog()
             R.id.btnBottomList -> showBottomListDialog()
             R.id.btnIAlertDialog -> showIAlertDialog()
+            R.id.btnISheetDialog-> showIBottomSheetDialog()
         }
     }
 
@@ -167,6 +170,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 .setNegClickListener {
                     shortToast("取消")
                 }
+                .show()
+    }
+
+    private fun showIBottomSheetDialog(){
+        IBottomSheetDialog.build(supportFragmentManager)
                 .show()
     }
 }

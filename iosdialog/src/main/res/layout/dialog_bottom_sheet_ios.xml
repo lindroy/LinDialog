@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:background="@color/lin_dialog_text_color_red"
+        android:id="@+id/llContent"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/DialogTitleStyle"
+            android:text="Prompt" />
+
+        <TextView
+            android:id="@+id/tvMessage"
+            android:paddingTop="10dp"
+            style="@style/DialogMessageStyle"
+            android:text="这是提示信息这是提示信息" />
+
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:layout_marginTop="10dp"
+        style="@style/DialogButtonStyle"
+        android:id="@+id/btnCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
