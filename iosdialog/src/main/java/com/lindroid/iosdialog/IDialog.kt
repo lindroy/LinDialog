@@ -2,6 +2,7 @@ package com.lindroid.iosdialog
 
 import android.app.Application
 import android.content.Context
+import android.content.DialogInterface
 import android.graphics.Color
 import android.support.annotation.ColorInt
 import android.support.annotation.FloatRange
@@ -32,6 +33,8 @@ object IDialog {
     internal lateinit var posButtonConfigs: TextConfigs
 
     internal lateinit var negButtonConfigs: TextConfigs
+
+    private var confirmListener: ((DialogInterface) -> Unit)? = null
 
     fun init(application: Application): Config {
         this.application = application
@@ -89,6 +92,5 @@ object IDialog {
         ) = this.apply {
             negButtonConfigs = TextConfigs(textSize, textColor, gravity, text)
         }
-
     }
 }

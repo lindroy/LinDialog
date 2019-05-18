@@ -43,13 +43,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btnPay -> showPayDialog()
             R.id.btnEdit -> showEditDialog()
             R.id.btnBottomList -> showBottomListDialog()
-            R.id.btnIAlertDialog -> {
-                IAlertDialog.build(supportFragmentManager)
-                        .setTitle("提示")
-                        .setMessage("确定要退出登录吗？")
-                        .show()
-
-            }
+            R.id.btnIAlertDialog -> showIAlertDialog()
         }
     }
 
@@ -161,6 +155,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 .show()
 
+    }
 
+    private fun showIAlertDialog() {
+        IAlertDialog.build(supportFragmentManager)
+                .setTitle("提示")
+                .setMessage("确定要退出登录吗？")
+                .setPosClickListener {
+                    shortToast("确定")
+                }
+                .setNegClickListener {
+                    shortToast("取消")
+                }
+                .show()
     }
 }
