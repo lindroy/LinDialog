@@ -2,6 +2,8 @@ package com.lindroid.lindialog
 
 import android.app.Application
 import android.content.Context
+import android.support.annotation.ColorRes
+import android.support.v4.content.ContextCompat
 
 /**
  * @author Lin
@@ -19,5 +21,9 @@ object LinDialog {
 
     val context: Context
         get() = application.applicationContext
+
+     fun getResColor(@ColorRes colorId:Int) = ContextCompat.getColor(context,colorId)
+
+
 
 }

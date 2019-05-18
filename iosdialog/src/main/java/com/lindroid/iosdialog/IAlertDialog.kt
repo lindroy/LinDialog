@@ -5,9 +5,11 @@ import android.graphics.Paint
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
 import android.support.annotation.ColorInt
+import android.support.annotation.ColorRes
 import android.support.annotation.FloatRange
 import android.support.v4.app.FragmentManager
 import android.view.View
+import com.lindroid.iosdialog.util.dp2px
 import com.lindroid.lindialog.LinDialog
 import com.lindroid.lindialog.base.BaseDialog
 import kotlinx.android.synthetic.main.dialog_alert_ios.*
@@ -22,13 +24,21 @@ class IAlertDialog : BaseDialog<IAlertDialog>() {
 
     private var title: String = ""
 
+    private var titleSize = 18F
+
+    private var titleColor = LinDialog.getResColor(R.color.lin_dialog_text_color_black)
+
     private var message: String = ""
 
-    private var radius = 50F
+    private var messageSize = 16F
+
+    private var messageColor = LinDialog.getResColor(R.color.lin_dialog_text_color_black)
+
+    private var radius = dp2px(10F)
 
     private var bgColor = Color.WHITE
 
-    private var bgAlpha = 0.8F
+    private var bgAlpha = 0.85F
 
     private var posText = LinDialog.context.getText(R.string.ios_dialog_positive_text)
 
@@ -53,27 +63,56 @@ class IAlertDialog : BaseDialog<IAlertDialog>() {
     override fun onHandleView(contentView: View): Boolean {
         setWidthScale(0.7F)
         setAnimStyle(R.style.ScaleDialogStyle)
-        tvTitle.text = title
-        tvMessage.text = message
+        tvTitle.apply {
+            text = title
+            setTextColor(titleColor)
+            textSize = titleSize
+        }
+        tvMessage.apply {
+            text = message
+            setTextColor(messageColor)
+            textSize = messageSize
+        }
+
+        initBackground()
+
+        return false
+    }
+
+    private fun initBackground() {
         val roundRectShape = RoundRectShape(floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius), null, null)
-        val shapeDrawable = with(ShapeDrawable(roundRectShape)) {
+        llRoot.background = with(ShapeDrawable(roundRectShape)) {
             paint.color = bgColor
             paint.style = Paint.Style.FILL
             paint.alpha = (255 * bgAlpha).toInt()
             this
         }
-        llRoot.background = shapeDrawable
-        return false
     }
 
     fun setTitle(title: String) = this.apply { this.title = title }
 
+    fun setTitleSize(titleSize: Float) = this.apply { this.titleSize = titleSize }
+
+    fun setTitleColor(@ColorInt color: Int) = this.apply { titleColor = color }
+
+    fun setTitleColorId(@ColorRes colorId: Int) = this.apply { setTitleColor(LinDialog.getResColor(colorId)) }
+
     fun setMessage(message: String) = this.apply { this.message = message }
 
-    fun setBackgroundColor(@ColorInt color:Int) = this.apply { bgColor = color }
+    fun setMessageSize(messageSize: Float) = this.apply { this.messageSize = messageSize }
 
-    fun setAlpha(@FloatRange(from = 0.0,to = 1.0) alpha:Float) = this.apply { bgAlpha = alpha }
+    fun setMessageColor(@ColorInt color: Int) = this.apply { messageColor = color }
 
-    fun setCornerRaius(radius:Int) = this.apply { this.radius = radius.toFloat() }
+    fun setMessageColorId(@ColorRes colorId: Int) = this.apply { setMessageColor(LinDialog.getResColor(colorId)) }
+
+    fun setBackgroundColor(@ColorInt color: Int) = this.apply { bgColor = color }
+
+    fun setAlpha(@FloatRange(from = 0.0, to = 1.0) alpha: Float) = this.apply { bgAlpha = alpha }
+
+    /**
+     * 设置背景圆角矩形的圆角半径，单位为px
+     */
+    fun setCornerRaius(radius: Int) = this.apply { this.radius = radius.toFloat() }
+
 
 }
