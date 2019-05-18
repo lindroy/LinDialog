@@ -1,7 +1,8 @@
 package com.lindroid.lindialogdemo.app
 
 import android.app.Application
-import com.lindroid.lindialog.LinDialog
+import com.lindroid.androidutilskt.extension.dp2px
+import com.lindroid.iosdialog.IDialog
 import com.squareup.leakcanary.LeakCanary
 
 /**
@@ -28,6 +29,10 @@ class App : Application() {
             return
         }
         LeakCanary.install(this)
-        LinDialog.init(instance)
+//        LinDialog.init(instance)
+        IDialog.init(instance)
+                .setCornerRadius(dp2px(12F))
+                .setPositiveButton(text = "Ok")
+                .setNegativeButton(text = "Cancel")
     }
 }

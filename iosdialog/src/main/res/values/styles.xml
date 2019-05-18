@@ -28,7 +28,6 @@
 
     <style name="DialogButtonStyle">
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:textSize">@dimen/lin_dialog_message_text_size</item>
         <item name="android:fontFamily">@string/title_font_type</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">wrap_content</item>

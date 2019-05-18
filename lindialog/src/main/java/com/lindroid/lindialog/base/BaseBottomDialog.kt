@@ -106,7 +106,7 @@ abstract class BaseBottomDialog<T : BaseBottomDialog<T>> : BottomSheetDialogFrag
     /**
      * 点击对话框外部关闭对话框
      */
-    fun setCancelOutSide(isCancelable: Boolean) = this.apply { this.isCancelable = isCancelable } as T
+    fun setCancelOutside(isCancelable: Boolean) = this.apply { this.isCancelable = isCancelable } as T
 
     /**
      * 对话框消失监听

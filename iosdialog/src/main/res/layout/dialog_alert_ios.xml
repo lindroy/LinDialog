@@ -34,14 +34,14 @@
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:id="@+id/btnCancel"
+            android:id="@+id/btnNeg"
             android:textColor="@color/lin_dialog_text_color_red"
             style="@style/DialogButtonStyle"
             android:text="取消"/>
 
         <Button
             android:textColor="@color/lin_dialog_text_color_blue"
-            android:id="@+id/btnConfirm"
+            android:id="@+id/btnPos"
             android:layout_width="0dp"
             android:layout_weight="1"
             style="@style/DialogButtonStyle"

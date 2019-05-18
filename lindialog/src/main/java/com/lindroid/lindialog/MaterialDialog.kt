@@ -246,7 +246,7 @@ class MaterialDialog : DialogFragment() {
     /**
      * 点击对话框外部关闭对话框
      */
-    fun setCancelOutSide(isCancelable: Boolean) = this.apply { this.isCancelable = isCancelable }
+    fun setCancelOutside(isCancelable: Boolean) = this.apply { this.isCancelable = isCancelable }
 
     /**
      * Positive按钮的点击监听

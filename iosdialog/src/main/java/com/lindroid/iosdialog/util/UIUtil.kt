@@ -1,6 +1,6 @@
 package com.lindroid.iosdialog.util
 
-import com.lindroid.lindialog.LinDialog
+import com.lindroid.iosdialog.IDialog
 
 /**
  * @author Lin
@@ -9,6 +9,6 @@ import com.lindroid.lindialog.LinDialog
  * @Description
  */
 internal fun dp2px(dpValue: Float): Float {
-    val scale = LinDialog.context.resources.displayMetrics.density
+    val scale = IDialog.context.resources.displayMetrics.density
     return (dpValue * scale + 0.5F)
 }

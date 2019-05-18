@@ -16,14 +16,12 @@ object LinDialog {
     private lateinit var application: Application
     fun init(application: Application) {
         this.application = application
-
     }
 
     val context: Context
         get() = application.applicationContext
 
      fun getResColor(@ColorRes colorId:Int) = ContextCompat.getColor(context,colorId)
-
 
 
 }

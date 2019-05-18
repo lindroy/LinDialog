@@ -155,8 +155,9 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
 
     /**
      * 点击对话框外部关闭对话框
+     *
      */
-    fun setCancelOutSide(isCancelable: Boolean) = this.apply { this.isCancelable = isCancelable } as T
+    fun setCancelOutside(isCancelable: Boolean) = this.apply { this.isCancelable = isCancelable } as T
 
     override fun onDestroy() {
         super.onDestroy()
