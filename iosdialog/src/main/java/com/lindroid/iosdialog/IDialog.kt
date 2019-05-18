@@ -2,13 +2,13 @@ package com.lindroid.iosdialog
 
 import android.app.Application
 import android.content.Context
-import android.content.DialogInterface
 import android.graphics.Color
 import android.support.annotation.ColorInt
 import android.support.annotation.FloatRange
 import android.view.Gravity
 import com.lindroid.iosdialog.bean.TextConfigs
 import com.lindroid.iosdialog.util.dp2px
+import com.lindroid.iosdialog.util.px2sp
 import com.lindroid.lindialog.LinDialog
 
 /**
@@ -34,8 +34,6 @@ object IDialog {
 
     internal lateinit var negButtonConfigs: TextConfigs
 
-    private var confirmListener: ((DialogInterface) -> Unit)? = null
-
     fun init(application: Application): Config {
         this.application = application
         LinDialog.init(application)
@@ -52,6 +50,7 @@ object IDialog {
 
     class Config {
         companion object {
+            @JvmStatic
             fun build() = Config()
         }
 
@@ -64,14 +63,14 @@ object IDialog {
         fun setBackgroudColor(@ColorInt color: Int) = this.apply { bgColor = color }
 
         @JvmOverloads
-        fun setTitle(textSize: Float = 18F,
+        fun setTitle(textSize: Float = px2sp(context.resources.getDimensionPixelSize(R.dimen.lin_dialog_title_text_size).toFloat()),
                      @ColorInt textColor: Int = LinDialog.getResColor(R.color.lin_dialog_text_color_black),
                      gravity: Int = Gravity.CENTER
         ) = this.apply {
             titleConfigs = TextConfigs(textSize, textColor, gravity)
         }
 
-        fun setMessage(textSize: Float = 16F,
+        fun setMessage(textSize: Float = px2sp(context.resources.getDimensionPixelSize(R.dimen.lin_dialog_message_text_size).toFloat()),
                        @ColorInt textColor: Int = LinDialog.getResColor(R.color.lin_dialog_text_color_black),
                        gravity: Int = Gravity.CENTER) = this.apply {
             msgConfigs = TextConfigs(textSize, textColor, gravity)
@@ -86,7 +85,7 @@ object IDialog {
         }
 
         fun setNegativeButton(text: String = context.getString(R.string.ios_dialog_negative_text),
-                              textSize: Float = 16F,
+                              textSize: Float = px2sp(context.resources.getDimensionPixelSize(R.dimen.lin_dialog_button_text_size).toFloat()),
                               @ColorInt textColor: Int = LinDialog.getResColor(R.color.lin_dialog_text_color_red),
                               gravity: Int = Gravity.CENTER
         ) = this.apply {
