@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.graphics.Color
 import android.support.annotation.ColorInt
-import android.support.annotation.FloatRange
 import android.view.Gravity
 import com.lindroid.iosdialog.bean.TextConfigs
 import com.lindroid.iosdialog.util.dp2px
@@ -19,6 +18,8 @@ import com.lindroid.lindialog.LinDialog
  */
 object IDialog {
     private lateinit var application: Application
+
+    internal var alertWidthScale = 0.7F
 
     internal var cornerRadius = 0F
 
@@ -54,11 +55,13 @@ object IDialog {
             fun build() = Config()
         }
 
+        fun setAlertWidthScale(widthScale:Float) = this.apply { alertWidthScale = widthScale }
+
         fun setCornerRadius(cornerRadius: Float) = this.apply {
             IDialog.cornerRadius = cornerRadius
         }
-
-        fun setAlpha(@FloatRange(from = 0.0, to = 1.0) alpha: Float) = this.apply { IDialog.alpha = alpha }
+//        @FloatRange(from = 0.0, to = 1.0)
+        fun setAlpha( alpha: Float) = this.apply { IDialog.alpha = alpha }
 
         fun setBackgroudColor(@ColorInt color: Int) = this.apply { bgColor = color }
 

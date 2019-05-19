@@ -109,7 +109,7 @@ class IBottomSheetDialog : BaseBottomDialog<IBottomSheetDialog>() {
     }
 
     /**
-     * item的点击监听事件
+     * item的点击事件
      */
     fun setOnItemClickListener(listener: (position: Int, text: String, itemView: TextView, dialog: DialogInterface) -> Unit) =
             this.apply { itemClickListener = listener }

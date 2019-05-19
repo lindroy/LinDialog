@@ -9,7 +9,7 @@ import android.view.View
 import com.lindroid.iosdialog.IDialog
 import com.lindroid.lindialog.LinDialog
 import com.lindroid.lindialog.base.BaseDialog
-import kotlinx.android.synthetic.main.dialog_alert_ios.*
+import kotlinx.android.synthetic.main.layout_alert_dialog_title.*
 
 /**
  * @author Lin
@@ -41,6 +41,7 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
     protected var isShowNegButton = true
 
     override fun onHandleView(contentView: View): Boolean {
+        setWidthScale(IDialog.alertWidthScale)
         tvTitle.apply {
             visibility = when (title.isNotEmpty()) {
                 true -> {
@@ -106,6 +107,6 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
 
     fun setMessageColorId(@ColorRes colorId: Int) = this.apply { setMessageColor(LinDialog.getResColor(colorId)) } as T
 
-    fun setShowNegButton(isShowNegButton:Boolean) = this.apply { this.isShowNegButton = isShowNegButton }
+    fun setShowNegButton(isShowNegButton:Boolean) = this.apply { this.isShowNegButton = isShowNegButton } as T
 
 }

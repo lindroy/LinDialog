@@ -7,17 +7,7 @@
     android:id="@+id/llRoot"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        style="@style/DialogTitleStyle"
-        tools:text="Prompt" />
-
-    <TextView
-        android:id="@+id/tvMessage"
-        android:paddingTop="10dp"
-        android:paddingBottom="15dp"
-        style="@style/DialogMessageStyle"
-        tools:text="这是提示信息这是提示信息" />
+    <include layout="@layout/layout_alert_dialog_title"/>
 
     <View
         android:background="@drawable/dialog_ios_divider"
