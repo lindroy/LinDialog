@@ -12,16 +12,10 @@
         android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="0dp">
-        <TextView
-            android:id="@+id/tvTitle"
-            style="@style/DialogTitleStyle"
-            android:text="Prompt" />
 
-        <TextView
-            android:id="@+id/tvMessage"
-            android:paddingTop="10dp"
-            style="@style/DialogMessageStyle"
-            android:text="这是提示信息这是提示信息" />
+        <include layout="@layout/layout_alert_dialog_title"/>
+
+
 
         <ListView
             android:id="@+id/lvChoices"

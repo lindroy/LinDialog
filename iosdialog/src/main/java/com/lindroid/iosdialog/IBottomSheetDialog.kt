@@ -60,11 +60,13 @@ class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
      * 返回true表示子类自己处理布局，setViewHandler方法无效
      */
     override fun onHandleView(contentView: View): Boolean {
+        super.onHandleView(contentView)
         setWidthScale(IDialog.bottomWidthScale)
         setAnimStyle(R.style.BottomDialogStyle)
 //        setDraggable(false)
 //        TODO(ShapeDrawable的宽高会跟随第一个设置background的View)
         llContent.background = initShapeDrawable()
+
         btnCancel.apply {
             text = IDialog.negButtonConfigs.text
             setTextColor(IDialog.negButtonConfigs.textColor)

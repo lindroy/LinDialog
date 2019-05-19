@@ -68,6 +68,8 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
             }
 
         }
+        //标题下方的分割线
+        viewDivider.visibility = if (title.isEmpty() && message.isEmpty()) View.GONE else View.VISIBLE
         return false
     }
 

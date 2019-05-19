@@ -9,10 +9,7 @@
 
     <include layout="@layout/layout_alert_dialog_title"/>
 
-    <View
-        android:background="@drawable/dialog_ios_divider"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/lin_dialog_line_size"/>
+
 
     <LinearLayout
         android:divider="@drawable/dialog_ios_divider"

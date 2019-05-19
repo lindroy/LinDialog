@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
        xmlns:tools="http://schemas.android.com/tools">
+
     <TextView
             android:id="@+id/tvTitle"
             style="@style/DialogTitleStyle"
-            tools:text="Prompt" />
+            tools:text="Prompt"/>
 
     <TextView
             android:id="@+id/tvMessage"
             android:paddingTop="10dp"
             android:paddingBottom="15dp"
             style="@style/DialogMessageStyle"
-            tools:text="这是提示信息这是提示信息" />
+            tools:text="这是提示信息这是提示信息"/>
+
+    <View
+            android:id="@+id/viewDivider"
+            android:background="@drawable/dialog_ios_divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/lin_dialog_line_size"/>
 
 </merge>
