@@ -5,7 +5,6 @@ import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
-import android.support.annotation.FloatRange
 import android.view.View
 import com.lindroid.iosdialog.IDialog
 import com.lindroid.lindialog.LinDialog
@@ -19,7 +18,7 @@ import kotlinx.android.synthetic.main.dialog_alert_ios.*
  * @Description
  */
 @Suppress("UNCHECKED_CAST")
-abstract class BaseIOSDialog<T : BaseDialog<T>>: BaseDialog<T>() {
+abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
 
     protected var title: String = ""
 
@@ -39,22 +38,41 @@ abstract class BaseIOSDialog<T : BaseDialog<T>>: BaseDialog<T>() {
 
     protected var bgAlpha = IDialog.alpha
 
+    protected var isShowNegButton = true
+
     override fun onHandleView(contentView: View): Boolean {
         tvTitle.apply {
-            text = title
-            setTextColor(titleColor)
-            textSize = titleSize
+            visibility = when (title.isNotEmpty()) {
+                true -> {
+                    text = title
+                    setTextColor(titleColor)
+                    textSize = titleSize
+                    View.VISIBLE
+                }
+                false -> View.GONE
+
+            }
+
         }
         tvMessage.apply {
-            text = message
-            setTextColor(messageColor)
-            textSize = messageSize
+            visibility = when (title.isNotEmpty()) {
+                true -> {
+                    text = message
+                    setTextColor(messageColor)
+                    textSize = messageSize
+                    View.VISIBLE
+                }
+                false -> View.GONE
+
+            }
+
         }
         return false
     }
 
     protected fun initShapeDrawable(): ShapeDrawable {
-        val roundRectShape = RoundRectShape(floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius), null, null)
+        val roundRectShape =
+            RoundRectShape(floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius), null, null)
         return with(ShapeDrawable(roundRectShape)) {
             paint.color = bgColor
             paint.style = Paint.Style.FILL
@@ -64,8 +82,8 @@ abstract class BaseIOSDialog<T : BaseDialog<T>>: BaseDialog<T>() {
     }
 
     fun setBackgroundColor(@ColorInt color: Int) = this.apply { bgColor = color }
-
-    fun setAlpha(@FloatRange(from = 0.0, to = 1.0) alpha: Float) = this.apply { bgAlpha = alpha }
+    //    @android.support.annotation.FloatRange(from = 0.0, to = 1.0)
+    fun setAlpha(alpha: Float) = this.apply { bgAlpha = alpha }
 
     /**
      * 设置背景圆角矩形的圆角半径，单位为px
@@ -87,5 +105,7 @@ abstract class BaseIOSDialog<T : BaseDialog<T>>: BaseDialog<T>() {
     fun setMessageColor(@ColorInt color: Int) = this.apply { messageColor = color } as T
 
     fun setMessageColorId(@ColorRes colorId: Int) = this.apply { setMessageColor(LinDialog.getResColor(colorId)) } as T
+
+    fun setShowNegButton(isShowNegButton:Boolean) = this.apply { this.isShowNegButton = isShowNegButton }
 
 }

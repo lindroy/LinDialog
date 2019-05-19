@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.dialog_alert_ios.*
  */
 class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
 
-
     private var dismissible = true
 
     private var posText = IDialog.posButtonConfigs.text
@@ -57,26 +56,32 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
             textSize = posTextSize
             setOnClickListener {
                 posListener?.invoke(dialog)
-                if (dismissible){
+                if (dismissible) {
                     dismiss()
                 }
             }
         }
         btnNeg.apply {
-            text = negText
-            setTextColor(negTextColor)
-            textSize = negTextSize
-            setOnClickListener {
-                negListener?.invoke(dialog)
-                if (dismissible){
-                    dismiss()
+            visibility = when (isShowNegButton) {
+                true -> {
+                    text = negText
+                    setTextColor(negTextColor)
+                    textSize = negTextSize
+                    setOnClickListener {
+                        negListener?.invoke(dialog)
+                        if (dismissible) {
+                            dismiss()
+                        }
+                    }
+                    View.VISIBLE
                 }
+                false -> View.GONE
             }
+
         }
         llRoot.background = initShapeDrawable()
         return false
     }
-
 
     fun setPosButtonText(text: String) = this.apply { posText = text }
 
