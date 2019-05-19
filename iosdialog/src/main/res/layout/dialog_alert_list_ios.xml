@@ -7,6 +7,12 @@
 
     <include layout="@layout/layout_alert_dialog_title"/>
 
+    <View
+            android:id="@+id/viewDivider"
+            android:background="@color/lin_dialog_line_color"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/lin_dialog_line_size"/>
+
     <ListView
             android:id="@+id/lvChoices"
             android:layout_weight="1"
@@ -17,6 +23,6 @@
             style="@style/DialogButtonStyle"
             android:id="@+id/btnCancel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
 </LinearLayout>

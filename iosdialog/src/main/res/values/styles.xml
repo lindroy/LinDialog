@@ -6,6 +6,11 @@
         <item name="android:windowExitAnimation">@anim/dialog_out_anim</item>
     </style>
 
+    <!--底部对话框动画-->
+    <style name="BottomDialogStyle" parent="Animation.Design.BottomSheetDialog">
+
+    </style>
+
     <!--对话框标题样式-->
     <style name="DialogTitleStyle">
         <item name="android:gravity">center</item>

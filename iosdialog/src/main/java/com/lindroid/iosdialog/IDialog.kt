@@ -21,6 +21,8 @@ object IDialog {
 
     internal var alertWidthScale = 0.7F
 
+    internal var bottomWidthScale = 0.95F
+
     internal var cornerRadius = 0F
 
     internal var alpha = 0.85F
@@ -73,6 +75,7 @@ object IDialog {
             titleConfigs = TextConfigs(textSize, textColor, gravity)
         }
 
+        @JvmOverloads
         fun setMessage(textSize: Float = px2sp(context.resources.getDimensionPixelSize(R.dimen.lin_dialog_message_text_size).toFloat()),
                        @ColorInt textColor: Int = LinDialog.getResColor(R.color.lin_dialog_text_color_black),
                        gravity: Int = Gravity.CENTER) = this.apply {
@@ -94,5 +97,8 @@ object IDialog {
         ) = this.apply {
             negButtonConfigs = TextConfigs(textSize, textColor, gravity, text)
         }
+
+        fun setBottomWidthScale(widthScale:Float) = this.apply { bottomWidthScale = widthScale }
+
     }
 }

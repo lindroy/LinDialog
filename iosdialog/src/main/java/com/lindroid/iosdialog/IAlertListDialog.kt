@@ -38,6 +38,7 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
         super.onHandleView(contentView)
         setAnimStyle(R.style.ScaleDialogStyle)
         llRoot.background = initShapeDrawable()
+        viewDivider.visibility = if (title.isEmpty() && message.isEmpty()) View.GONE else View.VISIBLE
         initListView()
         return true
     }
