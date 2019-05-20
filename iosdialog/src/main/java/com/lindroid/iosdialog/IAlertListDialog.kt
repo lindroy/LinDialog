@@ -9,7 +9,6 @@ import android.widget.TextView
 import com.lindroid.iosdialog.adapter.DialogListAdapter
 import com.lindroid.iosdialog.base.BaseIOSDialog
 import com.lindroid.iosdialog.bean.DialogItemBean
-import com.lindroid.lindialog.LinDialog
 import kotlinx.android.synthetic.main.dialog_alert_list_ios.*
 
 /**
@@ -23,6 +22,8 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
     private val items: MutableList<DialogItemBean> = ArrayList()
 
     private var itemClickListener: ((Int, String, TextView, DialogInterface) -> Unit)? = null
+
+    private val alertBottomDialog = IDialog.alertNegBtnConfigs
 
     override var customViewId: Int = R.layout.dialog_alert_list_ios
 
@@ -41,6 +42,14 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
         setAnimStyle(R.style.ScaleDialogStyle)
         llRoot.background = initShapeDrawable()
         initListView()
+        btnAlertList.apply {
+            alertBottomDialog.let {
+                text = it.text
+                textSize = it.textSize
+                setTextColor(it.textColor)
+            }
+            setOnClickListener { dismiss() }
+        }
         return true
     }
 
@@ -55,8 +64,14 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
         }
     }
 
-    fun addItem(text: String, @ColorInt textColor: Int = LinDialog.getResColor(R.color.lin_dialog_text_color_blue)) = this.apply {
+    fun addItem(text: String, @ColorInt textColor: Int = IDialog.getResColor(R.color.ios_dialog_text_color_blue)) = this.apply {
         items.add(DialogItemBean(text, textColor))
+    }
+
+    fun addItems(items: Array<String>) = this.apply {
+        items.forEach {
+            addItem(it)
+        }
     }
 
     /**

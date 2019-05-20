@@ -15,7 +15,7 @@ import com.lindroid.lindialog.LinDialog
 /**
  * @author Lin
  * @date 2019/5/18
- * @function
+ * @function IDialog配置类
  * @Description
  */
 object IDialog {
@@ -32,27 +32,32 @@ object IDialog {
     internal var bgColor = Color.WHITE
 
     internal val alertTitleConfigs by lazy {
-        TextConfigs(getSpSize(R.dimen.ios_alert_title_size), LinDialog.getResColor(R.color.lin_dialog_text_color_black), Gravity.CENTER)
+        TextConfigs(getSpSize(R.dimen.ios_alert_title_size), LinDialog.getResColor(R.color.ios_dialog_text_color_black), Gravity.CENTER)
     }
 
     internal val alertMsgConfigs by lazy {
-        TextConfigs(getSpSize(R.dimen.ios_alert_message_size), LinDialog.getResColor(R.color.lin_dialog_text_color_black), Gravity.CENTER)
+        TextConfigs(getSpSize(R.dimen.ios_alert_message_size), LinDialog.getResColor(R.color.ios_dialog_text_color_black), Gravity.CENTER)
     }
 
     internal val alertPosBtnConfigs by lazy {
-        TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), LinDialog.getResColor(R.color.lin_dialog_text_color_blue), Gravity.CENTER)
+        TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), LinDialog.getResColor(R.color.ios_dialog_text_color_blue), Gravity.CENTER)
     }
 
     internal val alertNegBtnConfigs by lazy {
-        TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), LinDialog.getResColor(R.color.lin_dialog_text_color_red), Gravity.CENTER)
+        TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), LinDialog.getResColor(R.color.ios_dialog_text_color_red), Gravity.CENTER)
     }
 
     internal val bottomTitleConfigs by lazy {
-        TextConfigs(getSpSize(R.dimen.ios_bottom_title_size), getResColor(R.color.lin_dialog_text_color_black), Gravity.CENTER)
+        TextConfigs(getSpSize(R.dimen.ios_bottom_title_size), getResColor(R.color.ios_dialog_text_color_black), Gravity.CENTER)
     }
 
     internal val bottomMsgConfigs by lazy {
-        TextConfigs(getSpSize(R.dimen.ios_bottom_message_size), getResColor(R.color.lin_dialog_text_color_black), Gravity.CENTER)
+        TextConfigs(getSpSize(R.dimen.ios_bottom_message_size), getResColor(R.color.ios_dialog_text_color_black), Gravity.CENTER)
+    }
+
+    internal val bottomBtnConfigs by lazy {
+        TextConfigs(getSpSize(R.dimen.ios_bottom_message_size), getResColor(R.color.ios_dialog_text_color_blue), Gravity.CENTER,
+                context.getString(R.string.ios_dialog_negative_text))
     }
 
     val context: Context
@@ -114,7 +119,7 @@ object IDialog {
 
         fun setAlertPosButton(text: String = context.getString(R.string.ios_dialog_positive_text),
                               textSize: Float = 16F,
-                              @ColorInt textColor: Int = LinDialog.getResColor(R.color.lin_dialog_text_color_blue),
+                              @ColorInt textColor: Int = LinDialog.getResColor(R.color.ios_dialog_text_color_blue),
                               gravity: Int = Gravity.CENTER
         ) = this.apply {
             alertPosBtnConfigs.let {
@@ -127,7 +132,7 @@ object IDialog {
 
         fun setAlertNegButton(text: String = context.getString(R.string.ios_dialog_negative_text),
                               textSize: Float = px2sp(context.resources.getDimensionPixelSize(R.dimen.ios_alert_button_text_size).toFloat()),
-                              @ColorInt textColor: Int = LinDialog.getResColor(R.color.lin_dialog_text_color_red),
+                              @ColorInt textColor: Int = LinDialog.getResColor(R.color.ios_dialog_text_color_red),
                               gravity: Int = Gravity.CENTER
         ) = this.apply {
             alertNegBtnConfigs.let {
@@ -161,6 +166,18 @@ object IDialog {
                 it.textSize = textSize
                 it.textColor = textColor
                 it.gravity = gravity
+            }
+        }
+
+        @JvmOverloads
+        fun setBottomButton(textSize: Float = bottomBtnConfigs.textSize,
+                            @ColorInt textColor: Int = bottomBtnConfigs.textColor,
+                            text: String = bottomBtnConfigs.text
+        ) {
+            bottomBtnConfigs.let {
+                it.text = text
+                it.textSize = textSize
+                it.textColor = textColor
             }
         }
 

@@ -17,7 +17,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/ios_alert_title_size</item>
-        <item name="android:textColor">@color/lin_dialog_text_color_black</item>
+        <item name="android:textColor">@color/ios_dialog_text_color_black</item>
         <item name="android:fontFamily">@string/title_font_type</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -28,7 +28,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/ios_alert_message_size</item>
-        <item name="android:textColor">@color/lin_dialog_text_color_black</item>
+        <item name="android:textColor">@color/ios_dialog_text_color_black</item>
     </style>
 
     <style name="DialogButtonStyle">

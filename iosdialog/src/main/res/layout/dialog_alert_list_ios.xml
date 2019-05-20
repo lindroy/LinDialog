@@ -15,9 +15,14 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"/>
 
+    <View
+        android:background="@color/ios_dialog_divider_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ios_dialog_divider_size"/>
+
     <Button
             style="@style/DialogButtonStyle"
-            android:id="@+id/btnCancel"
+            android:id="@+id/btnAlertList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

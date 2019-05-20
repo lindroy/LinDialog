@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:text="Item"
     android:textSize="16sp"
-    android:textColor="@color/lin_dialog_text_color_blue"
+    android:textColor="@color/ios_dialog_text_color_blue"
     android:minHeight="50dp"
     android:layout_height="50dp">
 

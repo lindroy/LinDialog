@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.lindroid.iosdialog.adapter.DialogListAdapter
 import com.lindroid.iosdialog.base.BaseIOSDialog
 import com.lindroid.iosdialog.bean.DialogItemBean
-import com.lindroid.lindialog.LinDialog.getResColor
+import com.lindroid.iosdialog.bean.TextConfigs
 import kotlinx.android.synthetic.main.dialog_bottom_sheet_ios.*
 
 /**
@@ -23,7 +23,13 @@ class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
 
     private val items: MutableList<DialogItemBean> = ArrayList()
 
+    private val bottomBtnConfig: TextConfigs = IDialog.bottomBtnConfigs
+
     private var itemClickListener: ((Int, String, TextView, DialogInterface) -> Unit)? = null
+
+    private var dismissible = true
+
+    private var itemDismissible = true
 
     companion object {
         @JvmStatic
@@ -52,23 +58,16 @@ class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
         llContent.background = initShapeDrawable()
 
         btnCancel.apply {
-            text = IDialog.alertNegBtnConfigs.text
-            setTextColor(IDialog.alertNegBtnConfigs.textColor)
+            text = bottomBtnConfig.text
+            textSize = bottomBtnConfig.textSize
+            setTextColor(bottomBtnConfig.textColor)
             background = initShapeDrawable()
-            setOnClickListener { dismiss() }
+            setOnClickListener {
+                dismiss()
+            }
         }
         initListView()
         return true
-    }
-
-    fun addItem(text: String, @ColorInt textColor: Int = getResColor(R.color.lin_dialog_text_color_blue)) = this.apply {
-        items.add(DialogItemBean(text, textColor))
-    }
-
-    fun addItems(items: Array<String>) = this.apply {
-        items.forEach {
-            addItem(it)
-        }
     }
 
     private fun initListView() {
@@ -78,9 +77,32 @@ class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
             adapter = DialogListAdapter(mContext, R.layout.item_dialog_list, items)
             setOnItemClickListener { parent, view, position, id ->
                 itemClickListener?.invoke(position, items[position].text, view as TextView, dialog)
+                if (itemDismissible) {
+                    dismiss()
+                }
             }
         }
     }
+
+    fun addItem(text: String, @ColorInt textColor: Int = IDialog.getResColor(R.color.ios_dialog_text_color_blue)) = this.apply {
+        items.add(DialogItemBean(text, textColor))
+    }
+
+    fun addItems(items: Array<String>) = this.apply {
+        items.forEach {
+            addItem(it)
+        }
+    }
+
+    /**
+     * 点击取消按钮是否关闭对话框
+     */
+    fun setCanCelClickedDismissible(dismissible: Boolean) = this.apply { this.dismissible = dismissible }
+
+    /**
+     * 点击列表选项后是否关闭对话框
+     */
+    fun setItemClickedDismissible(itemDismissible: Boolean) = this.apply { this.itemDismissible = itemDismissible }
 
     /**
      * item的点击事件

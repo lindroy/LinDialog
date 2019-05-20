@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     >
-    <solid android:color="@color/lin_dialog_line_color"/>
+    <solid android:color="@color/ios_dialog_divider_color"/>
     <size android:width="@dimen/ios_dialog_divider_size"/>
 </shape>
