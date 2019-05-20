@@ -8,10 +8,10 @@ import android.support.annotation.ColorInt
  * @function Dialog中的Text样式
  * @Description
  */
-data class TextConfigs(
-        val textSize: Float,
-        @ColorInt val textColor: Int,
-        val gravity: Int,
-        val text: String = "",
-        val isBold: Boolean = false
+ data class TextConfigs(
+        var textSize: Float,
+        @ColorInt var textColor: Int,
+        var gravity: Int,
+        var text: String = "",
+        var isBold: Boolean = false
 )

@@ -8,6 +8,7 @@ import android.support.annotation.ColorRes
 import android.support.annotation.StringRes
 import android.view.View
 import com.lindroid.iosdialog.IDialog
+import com.lindroid.iosdialog.bean.TextConfigs
 import com.lindroid.lindialog.LinDialog
 import com.lindroid.lindialog.base.BaseDialog
 import kotlinx.android.synthetic.main.layout_alert_dialog_title.*
@@ -21,17 +22,21 @@ import kotlinx.android.synthetic.main.layout_alert_dialog_title.*
 @Suppress("UNCHECKED_CAST")
 abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
 
-    protected var title: String = ""
+//    protected var title: String = ""
 
-    protected var titleSize = IDialog.alertTitleConfigs.textSize
+//    protected var titleSize = IDialog.alertTitleConfigs.textSize
 
-    protected var titleColor = IDialog.alertTitleConfigs.textColor
+//    protected var titleColor = IDialog.alertTitleConfigs.textColor
 
-    protected var message: String = ""
+//    private var titleGravity: Int = Gravity.CENTER
 
-    protected var messageSize = IDialog.alertMsgConfigs.textSize
+//    protected var message: String = ""
 
-    protected var messageColor = IDialog.alertMsgConfigs.textColor
+//    protected var msgSize = IDialog.alertMsgConfigs.textSize
+
+//    protected var msgColor = IDialog.alertMsgConfigs.textColor
+
+//    private var msgGravity: Int = Gravity.CENTER
 
     protected var radius = IDialog.cornerRadius
 
@@ -41,14 +46,21 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
 
     protected var isShowNegButton = true
 
+    protected lateinit var titleConfig: TextConfigs
+
+    protected lateinit var msgConfig: TextConfigs
+
+
+
     override fun onHandleView(contentView: View): Boolean {
         setWidthScale(IDialog.alertWidthScale)
         tvTitle.apply {
-            visibility = when (title.isNotEmpty()) {
+            visibility = when (titleConfig.text.isNotEmpty()) {
                 true -> {
-                    text = title
-                    setTextColor(titleColor)
-                    textSize = titleSize
+                    text = titleConfig.text
+                    setTextColor(titleConfig.textColor)
+                    textSize = titleConfig.textSize
+                    gravity = titleConfig.gravity
                     View.VISIBLE
                 }
                 false -> View.GONE
@@ -57,26 +69,25 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
 
         }
         tvMessage.apply {
-            visibility = when (message.isNotEmpty()) {
+            visibility = when (msgConfig.text.isNotEmpty()) {
                 true -> {
-                    text = message
-                    setTextColor(messageColor)
-                    textSize = messageSize
+                    text = msgConfig.text
+                    setTextColor(msgConfig.textColor)
+                    textSize = msgConfig.textSize
+                    gravity = msgConfig.gravity
                     View.VISIBLE
                 }
                 false -> View.GONE
-
             }
-
         }
         //标题下方的分割线
-        viewDivider.visibility = if (title.isEmpty() && message.isEmpty()) View.GONE else View.VISIBLE
+        viewDivider.visibility = if (titleConfig.text.isEmpty() && msgConfig.text.isEmpty()) View.GONE else View.VISIBLE
         return false
     }
 
     protected fun initShapeDrawable(): ShapeDrawable {
         val roundRectShape =
-            RoundRectShape(floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius), null, null)
+                RoundRectShape(floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius), null, null)
         return with(ShapeDrawable(roundRectShape)) {
             paint.color = bgColor
             paint.style = Paint.Style.FILL
@@ -94,26 +105,26 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
      */
     fun setCornerRadius(radius: Int) = this.apply { this.radius = radius.toFloat() } as T
 
-    fun setTitle(title: String) = this.apply { this.title = title } as T
+    fun setTitle(title: String) = this.apply { titleConfig.text = title } as T
 
-    fun setTitle(@StringRes stringId:Int) = this.apply { setTitle(LinDialog.context.getString(stringId)) } as T
+    fun setTitle(@StringRes stringId: Int) = this.apply { setTitle(LinDialog.context.getString(stringId)) } as T
 
-    fun setTitleSize(titleSize: Float) = this.apply { this.titleSize = titleSize } as T
+    fun setTitleSize(titleSize: Float) = this.apply { titleConfig.textSize = titleSize } as T
 
-    fun setTitleColor(@ColorInt color: Int) = this.apply { titleColor = color } as T
+    fun setTitleColor(@ColorInt color: Int) = this.apply { titleConfig.textColor = color } as T
 
     fun setTitleColorId(@ColorRes colorId: Int) = this.apply { setTitleColor(LinDialog.getResColor(colorId)) } as T
 
-    fun setMessage(message: String) = this.apply { this.message = message } as T
+    fun setMessage(message: String) = this.apply { msgConfig.text = message } as T
 
-    fun setMessage(@StringRes stringId:Int) = this.apply { setMessage(LinDialog.context.getString(stringId)) } as T
+    fun setMessage(@StringRes stringId: Int) = this.apply { setMessage(LinDialog.context.getString(stringId)) } as T
 
-    fun setMessageSize(messageSize: Float) = this.apply { this.messageSize = messageSize } as T
+    fun setMessageSize(messageSize: Float) = this.apply { msgConfig.textSize = messageSize } as T
 
-    fun setMessageColor(@ColorInt color: Int) = this.apply { messageColor = color } as T
+    fun setMessageColor(@ColorInt color: Int) = this.apply { msgConfig.textColor = color } as T
 
     fun setMessageColorId(@ColorRes colorId: Int) = this.apply { setMessageColor(LinDialog.getResColor(colorId)) } as T
 
-    fun setShowNegButton(isShowNegButton:Boolean) = this.apply { this.isShowNegButton = isShowNegButton } as T
+    fun setShowNegButton(isShowNegButton: Boolean) = this.apply { this.isShowNegButton = isShowNegButton } as T
 
 }

@@ -48,6 +48,11 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
 
     private var gravity: Int = Gravity.CENTER
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initConfigs()
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //去除4.4以下系统中出现的标题栏
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -101,6 +106,13 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
     override fun onDismiss(dialog: DialogInterface?) {
         super.onDismiss(dialog)
         dismissListener?.invoke()
+    }
+
+    /**
+     * 初始化一些配置信息
+     */
+    open fun initConfigs() {
+
     }
 
     /**

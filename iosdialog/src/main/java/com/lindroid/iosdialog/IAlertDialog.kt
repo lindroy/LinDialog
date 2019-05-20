@@ -40,7 +40,11 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
 
     companion object {
         @JvmStatic
-        fun build(fm: FragmentManager) = IAlertDialog().apply { this.fm = fm }
+        fun build(fm: FragmentManager) = IAlertDialog().apply {
+            this.fm = fm
+            titleConfig = IDialog.alertTitleConfigs
+            msgConfig = IDialog.alertMsgConfigs
+        }
     }
 
     /**
@@ -50,6 +54,7 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
         super.onHandleView(contentView)
 
         setAnimStyle(R.style.ScaleDialogStyle)
+
         btnPos.apply {
             text = posText
             setTextColor(posTextColor)

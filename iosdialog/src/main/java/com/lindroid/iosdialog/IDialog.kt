@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.graphics.Color
 import android.support.annotation.ColorInt
+import android.support.annotation.ColorRes
+import android.support.v4.content.ContextCompat
 import android.view.Gravity
 import com.lindroid.iosdialog.bean.TextConfigs
 import com.lindroid.iosdialog.util.dp2px
@@ -27,20 +29,31 @@ object IDialog {
 
     internal var alpha = 0.85F
 
-
     internal var bgColor = Color.WHITE
 
-    internal lateinit var alertTitleConfigs: TextConfigs
+    internal val alertTitleConfigs by lazy {
+        TextConfigs(getSpSize(R.dimen.ios_alert_title_size), LinDialog.getResColor(R.color.lin_dialog_text_color_black), Gravity.CENTER)
+    }
 
-    internal lateinit var alertMsgConfigs: TextConfigs
+    internal val alertMsgConfigs by lazy {
+        TextConfigs(getSpSize(R.dimen.ios_alert_message_size), LinDialog.getResColor(R.color.lin_dialog_text_color_black), Gravity.CENTER)
+    }
 
-    internal lateinit var alertPosBtnConfigs: TextConfigs
+    internal val alertPosBtnConfigs by lazy {
+        TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), LinDialog.getResColor(R.color.lin_dialog_text_color_blue), Gravity.CENTER)
+    }
 
-    internal lateinit var alertNegBtnConfigs: TextConfigs
+    internal val alertNegBtnConfigs by lazy {
+        TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), LinDialog.getResColor(R.color.lin_dialog_text_color_red), Gravity.CENTER)
+    }
 
-    internal lateinit var bottomTitleConfigs: TextConfigs
+    internal val bottomTitleConfigs by lazy {
+        TextConfigs(getSpSize(R.dimen.ios_bottom_title_size), getResColor(R.color.lin_dialog_text_color_black), Gravity.CENTER)
+    }
 
-    internal lateinit var bottomMsgConfigs: TextConfigs
+    internal val bottomMsgConfigs by lazy {
+        TextConfigs(getSpSize(R.dimen.ios_bottom_message_size), getResColor(R.color.lin_dialog_text_color_black), Gravity.CENTER)
+    }
 
     val context: Context
         get() = application.applicationContext
@@ -48,17 +61,13 @@ object IDialog {
     fun init(application: Application): Config {
         this.application = application
         LinDialog.init(application)
-        cornerRadius = dp2px(10F)
-        alertTitleConfigs = TextConfigs(getSpSize(R.dimen.ios_alert_title_size), LinDialog.getResColor(R.color.lin_dialog_text_color_black), Gravity.CENTER)
-        alertMsgConfigs = TextConfigs(getSpSize(R.dimen.ios_alert_message_size), LinDialog.getResColor(R.color.lin_dialog_text_color_black), Gravity.CENTER)
-        alertPosBtnConfigs = TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), LinDialog.getResColor(R.color.lin_dialog_text_color_blue), Gravity.CENTER)
-        alertNegBtnConfigs = TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), LinDialog.getResColor(R.color.lin_dialog_text_color_red), Gravity.CENTER)
-        bottomTitleConfigs = TextConfigs(getSpSize(R.dimen.ios_bottom_title_size), LinDialog.getResColor(R.color.lin_dialog_text_color_black), Gravity.CENTER)
-        bottomMsgConfigs = TextConfigs(getSpSize(R.dimen.ios_bottom_message_size), LinDialog.getResColor(R.color.lin_dialog_text_color_black), Gravity.CENTER)
+        cornerRadius = dp2px(context.resources.getDimensionPixelSize(R.dimen.ios_dialog_corner_radius).toFloat())
         return Config.build()
     }
 
     private fun getSpSize(dimenId: Int) = px2sp(context.resources.getDimensionPixelSize(dimenId).toFloat())
+
+    fun getResColor(@ColorRes colorId: Int) = ContextCompat.getColor(context, colorId)
 
 
     class Config {
@@ -81,16 +90,26 @@ object IDialog {
         @JvmOverloads
         fun setAlertTitle(textSize: Float = alertTitleConfigs.textSize,
                           @ColorInt textColor: Int = alertTitleConfigs.textColor,
+                          text: String = "",
                           gravity: Int = alertTitleConfigs.gravity
         ) = this.apply {
-            alertTitleConfigs = TextConfigs(textSize, textColor, gravity)
+            alertTitleConfigs.let {
+                it.textSize = textSize
+                it.textColor = textColor
+                it.text = text
+                it.gravity = gravity
+            }
         }
 
         @JvmOverloads
         fun setAlertMessage(textSize: Float = alertMsgConfigs.textSize,
                             @ColorInt textColor: Int = alertMsgConfigs.textColor,
                             gravity: Int = alertMsgConfigs.gravity) = this.apply {
-            alertMsgConfigs = TextConfigs(textSize, textColor, gravity)
+            alertMsgConfigs.let {
+                it.textSize = textSize
+                it.textColor = textColor
+                it.gravity = gravity
+            }
         }
 
         fun setAlertPosButton(text: String = context.getString(R.string.ios_dialog_positive_text),
@@ -98,7 +117,12 @@ object IDialog {
                               @ColorInt textColor: Int = LinDialog.getResColor(R.color.lin_dialog_text_color_blue),
                               gravity: Int = Gravity.CENTER
         ) = this.apply {
-            alertPosBtnConfigs = TextConfigs(textSize, textColor, gravity, text)
+            alertPosBtnConfigs.let {
+                it.text = text
+                it.textSize = textSize
+                it.textColor = textColor
+                it.gravity = gravity
+            }
         }
 
         fun setAlertNegButton(text: String = context.getString(R.string.ios_dialog_negative_text),
@@ -106,15 +130,26 @@ object IDialog {
                               @ColorInt textColor: Int = LinDialog.getResColor(R.color.lin_dialog_text_color_red),
                               gravity: Int = Gravity.CENTER
         ) = this.apply {
-            alertNegBtnConfigs = TextConfigs(textSize, textColor, gravity, text)
+            alertNegBtnConfigs.let {
+                it.text = text
+                it.textSize = textSize
+                it.textColor = textColor
+                it.gravity = gravity
+            }
         }
 
         @JvmOverloads
         fun setBottomTitle(textSize: Float = bottomTitleConfigs.textSize,
                            @ColorInt textColor: Int = bottomTitleConfigs.textColor,
+                           text: String = "",
                            gravity: Int = bottomTitleConfigs.gravity
         ) = this.apply {
-            bottomTitleConfigs = TextConfigs(textSize, textColor, gravity)
+            bottomTitleConfigs.let {
+                it.text = text
+                it.textSize = textSize
+                it.textColor = textColor
+                it.gravity = gravity
+            }
         }
 
         @JvmOverloads
@@ -122,7 +157,11 @@ object IDialog {
                              @ColorInt textColor: Int = bottomMsgConfigs.textColor,
                              gravity: Int = bottomMsgConfigs.gravity
         ) = this.apply {
-            bottomMsgConfigs = TextConfigs(textSize, textColor, gravity)
+            bottomMsgConfigs.let {
+                it.textSize = textSize
+                it.textColor = textColor
+                it.gravity = gravity
+            }
         }
 
         fun setBottomWidthScale(widthScale: Float) = this.apply { bottomWidthScale = widthScale }

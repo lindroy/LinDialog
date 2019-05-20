@@ -31,6 +31,8 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
         fun build(fm: FragmentManager) =
             IAlertListDialog().apply {
                 this.fm = fm
+                titleConfig = IDialog.alertTitleConfigs
+                msgConfig = IDialog.alertMsgConfigs
             }
     }
 

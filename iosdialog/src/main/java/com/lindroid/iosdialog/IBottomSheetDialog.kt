@@ -21,24 +21,6 @@ import kotlinx.android.synthetic.main.dialog_bottom_sheet_ios.*
  */
 class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
 
-//    private var title: String = ""
-//
-//    private var titleSize = IDialog.titleConfigs.textSize
-//
-//    private var titleColor = IDialog.titleConfigs.textColor
-//
-//    private var message: String = ""
-//
-//    private var messageSize = IDialog.alertMsgConfigs.textSize
-//
-//    private var messageColor = IDialog.alertMsgConfigs.textColor
-//
-//    private var radius = IDialog.cornerRadius
-//
-//    private var bgColor = IDialog.bgColor
-//
-//    private var bgAlpha = IDialog.alpha
-
     private val items: MutableList<DialogItemBean> = ArrayList()
 
     private var itemClickListener: ((Int, String, TextView, DialogInterface) -> Unit)? = null
@@ -48,6 +30,8 @@ class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
         fun build(fm: FragmentManager) =
                 IBottomSheetDialog().apply {
                     this.fm = fm
+                    titleConfig = IDialog.bottomTitleConfigs
+                    msgConfig = IDialog.bottomMsgConfigs
                 }
     }
 
@@ -97,16 +81,6 @@ class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
             }
         }
     }
-
-//    private fun initShapeDrawable(): ShapeDrawable {
-//        val roundRectShape = RoundRectShape(floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius), null, null)
-//        return with(ShapeDrawable(roundRectShape)) {
-//            paint.color = bgColor
-//            paint.style = Paint.Style.FILL
-//            paint.alpha = (255 * bgAlpha).toInt()
-//            this
-//        }
-//    }
 
     /**
      * item的点击事件
