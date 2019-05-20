@@ -3,16 +3,16 @@ package com.lindroid.iosdialog.view
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.ListView
-import com.lindroid.iosdialog.util.dp2px
 
 /**
  * @author Lin
  * @date 2019/5/19
- * @function
+ * @function 具有回弹效果的ListView
  * @description
  */
+private const val MAX_Y_OVERSCROLL_DISTANCE = 100
 class ElasticListView : ListView {
-    private var maxOverDistance = dp2px(100F).toInt()
+    private var maxOverDistance = 0
 
     constructor(context: Context) : this(context, null)
 
@@ -25,7 +25,7 @@ class ElasticListView : ListView {
     private fun initView(context: Context) {
         val metrics = context.resources.displayMetrics
         val density: Float = metrics.density
-        maxOverDistance = (density * maxOverDistance).toInt()
+        maxOverDistance = (density * MAX_Y_OVERSCROLL_DISTANCE).toInt()
     }
 
     override fun overScrollBy(
