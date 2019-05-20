@@ -5,6 +5,7 @@ import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
+import android.support.annotation.StringRes
 import android.view.View
 import com.lindroid.iosdialog.IDialog
 import com.lindroid.lindialog.LinDialog
@@ -22,15 +23,15 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
 
     protected var title: String = ""
 
-    protected var titleSize = IDialog.titleConfigs.textSize
+    protected var titleSize = IDialog.alertTitleConfigs.textSize
 
-    protected var titleColor = IDialog.titleConfigs.textColor
+    protected var titleColor = IDialog.alertTitleConfigs.textColor
 
     protected var message: String = ""
 
-    protected var messageSize = IDialog.msgConfigs.textSize
+    protected var messageSize = IDialog.alertMsgConfigs.textSize
 
-    protected var messageColor = IDialog.msgConfigs.textColor
+    protected var messageColor = IDialog.alertMsgConfigs.textColor
 
     protected var radius = IDialog.cornerRadius
 
@@ -56,7 +57,7 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
 
         }
         tvMessage.apply {
-            visibility = when (title.isNotEmpty()) {
+            visibility = when (message.isNotEmpty()) {
                 true -> {
                     text = message
                     setTextColor(messageColor)
@@ -95,6 +96,8 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
 
     fun setTitle(title: String) = this.apply { this.title = title } as T
 
+    fun setTitle(@StringRes stringId:Int) = this.apply { setTitle(LinDialog.context.getString(stringId)) } as T
+
     fun setTitleSize(titleSize: Float) = this.apply { this.titleSize = titleSize } as T
 
     fun setTitleColor(@ColorInt color: Int) = this.apply { titleColor = color } as T
@@ -102,6 +105,8 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
     fun setTitleColorId(@ColorRes colorId: Int) = this.apply { setTitleColor(LinDialog.getResColor(colorId)) } as T
 
     fun setMessage(message: String) = this.apply { this.message = message } as T
+
+    fun setMessage(@StringRes stringId:Int) = this.apply { setMessage(LinDialog.context.getString(stringId)) } as T
 
     fun setMessageSize(messageSize: Float) = this.apply { this.messageSize = messageSize } as T
 

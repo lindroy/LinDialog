@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.support.annotation.ColorInt
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
+import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import com.lindroid.iosdialog.adapter.DialogListAdapter
@@ -28,9 +29,9 @@ class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
 //
 //    private var message: String = ""
 //
-//    private var messageSize = IDialog.msgConfigs.textSize
+//    private var messageSize = IDialog.alertMsgConfigs.textSize
 //
-//    private var messageColor = IDialog.msgConfigs.textColor
+//    private var messageColor = IDialog.alertMsgConfigs.textColor
 //
 //    private var radius = IDialog.cornerRadius
 //
@@ -41,7 +42,6 @@ class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
     private val items: MutableList<DialogItemBean> = ArrayList()
 
     private var itemClickListener: ((Int, String, TextView, DialogInterface) -> Unit)? = null
-
 
     companion object {
         @JvmStatic
@@ -61,15 +61,15 @@ class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
      */
     override fun onHandleView(contentView: View): Boolean {
         super.onHandleView(contentView)
+        setGravity(Gravity.BOTTOM)
         setWidthScale(IDialog.bottomWidthScale)
         setAnimStyle(R.style.BottomDialogStyle)
-//        setDraggable(false)
 //        TODO(ShapeDrawable的宽高会跟随第一个设置background的View)
         llContent.background = initShapeDrawable()
 
         btnCancel.apply {
-            text = IDialog.negButtonConfigs.text
-            setTextColor(IDialog.negButtonConfigs.textColor)
+            text = IDialog.alertNegBtnConfigs.text
+            setTextColor(IDialog.alertNegBtnConfigs.textColor)
             background = initShapeDrawable()
             setOnClickListener { dismiss() }
         }
@@ -90,7 +90,7 @@ class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
     private fun initListView() {
         lvChoices.apply {
             divider = ContextCompat.getDrawable(mContext, R.drawable.dialog_ios_divider)
-            dividerHeight = resources.getDimensionPixelSize(R.dimen.lin_dialog_line_size)
+            dividerHeight = resources.getDimensionPixelSize(R.dimen.ios_dialog_divider_size)
             adapter = DialogListAdapter(mContext, R.layout.item_dialog_list, items)
             setOnItemClickListener { parent, view, position, id ->
                 itemClickListener?.invoke(position, items[position].text, view as TextView, dialog)

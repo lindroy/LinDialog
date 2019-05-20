@@ -11,6 +11,7 @@ import android.support.annotation.ColorInt
 data class TextConfigs(
         val textSize: Float,
         @ColorInt val textColor: Int,
-        val  gravity: Int,
-        val text:String = ""
+        val gravity: Int,
+        val text: String = "",
+        val isBold: Boolean = false
 )

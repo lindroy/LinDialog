@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".app.ListViewActivity"></activity>
+        <activity android:name=".IOSDialogActivity"></activity>
+        <activity android:name=".app.ListViewActivity" />
         <activity android:name=".CategoryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

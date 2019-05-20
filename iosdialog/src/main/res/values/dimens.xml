@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="lin_dialog_title_text_size">18sp</dimen>
-    <dimen name="lin_dialog_message_text_size">16sp</dimen>
-    <dimen name="lin_dialog_button_text_size">16sp</dimen>
-    <dimen name="lin_dialog_line_size">0.5dp</dimen>
-    <dimen name="lin_dialog_button_height">50dp</dimen>
+    <dimen name="ios_dialog_divider_size">0.5dp</dimen>
+    <dimen name="ios_dialog_alert_bottom_height">50dp</dimen>
+    <!--提示对话框-->
+    <dimen name="ios_alert_title_size">16sp</dimen>
+    <dimen name="ios_alert_message_size">14sp</dimen>
+    <dimen name="ios_alert_button_text_size">14sp</dimen>
+    <dimen name="ios_dialog_bottom_button_text_size">14sp</dimen>
+    <!--底部对话框-->
+    <dimen name="ios_bottom_title_size">16sp</dimen>
+    <dimen name="ios_bottom_message_size">14sp</dimen>
 </resources>

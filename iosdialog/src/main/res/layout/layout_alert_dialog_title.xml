@@ -9,15 +9,13 @@
 
     <TextView
             android:id="@+id/tvMessage"
-            android:paddingTop="10dp"
-            android:paddingBottom="15dp"
             style="@style/DialogMessageStyle"
-            tools:text="这是提示信息这是提示信息"/>
+            tools:text="这是一段很长的说明文字这是一段很长的说明文字这是一段很长的说明文字这是一段很长的说明文字这是一段很长的说明文字"/>
 
     <View
             android:id="@+id/viewDivider"
             android:background="@drawable/dialog_ios_divider"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/lin_dialog_line_size"/>
+            android:layout_height="@dimen/ios_dialog_divider_size"/>
 
 </merge>

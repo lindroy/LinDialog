@@ -2,27 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".CategoryActivity">
+    tools:context=".IOSDialogActivity">
 
     <Button
-        android:text="iOS风格对话框"
-        android:id="@+id/btnIOS"
+        android:id="@+id/btnIAlert"
+        android:text="IAlertDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
-        android:text="Main"
-        android:id="@+id/btnMain"
+        android:id="@+id/btnIAlertList"
+        android:text="IAlertListDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
-        android:text="List"
-        android:id="@+id/btnList"
+        android:id="@+id/btnIBottom"
+        android:text="IBottomSheetDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
 </LinearLayout>

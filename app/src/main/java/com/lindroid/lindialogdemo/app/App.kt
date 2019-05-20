@@ -32,7 +32,7 @@ class App : Application() {
 //        LinDialog.init(instance)
         IDialog.init(instance)
                 .setCornerRadius(dp2px(12F))
-                .setPositiveButton(text = "Ok")
-                .setNegativeButton(text = "Cancel")
+                .setAlertPosButton(text = "Ok")
+                .setAlertNegButton(text = "Cancel")
     }
 }

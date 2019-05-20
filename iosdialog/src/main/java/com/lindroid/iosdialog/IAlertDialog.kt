@@ -17,19 +17,19 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
 
     private var dismissible = true
 
-    private var posText = IDialog.posButtonConfigs.text
+    private var posText = IDialog.alertPosBtnConfigs.text
 
-    private var posTextSize = IDialog.posButtonConfigs.textSize
+    private var posTextSize = IDialog.alertPosBtnConfigs.textSize
 
-    private var posTextColor = IDialog.posButtonConfigs.textColor
+    private var posTextColor = IDialog.alertPosBtnConfigs.textColor
 
     private var posListener: ((DialogInterface) -> Unit)? = null
 
-    private var negText = IDialog.negButtonConfigs.text
+    private var negText = IDialog.alertNegBtnConfigs.text
 
-    private var negTextSize = IDialog.posButtonConfigs.textSize
+    private var negTextSize = IDialog.alertPosBtnConfigs.textSize
 
-    private var negTextColor = IDialog.negButtonConfigs.textColor
+    private var negTextColor = IDialog.alertNegBtnConfigs.textColor
 
     private var negListener: ((DialogInterface) -> Unit)? = null
 
