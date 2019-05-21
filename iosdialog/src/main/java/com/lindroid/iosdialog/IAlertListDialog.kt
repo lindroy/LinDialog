@@ -27,9 +27,9 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
 
     private var itemClickListener: ((Int, String, TextView, DialogInterface) -> Unit)? = null
 
-    private val alertListBtnConfigs = IDialog.alertNegBtnConfigs
+    private val alertListBtnConfigs = IDialog.alertNegBtnConfigs.copy()
 
-    private val alertListItemConfigs = IDialog.alertListItemConfigs
+    private val alertListItemConfigs = IDialog.alertListItemConfigs.copy()
 
     override var customViewId: Int = R.layout.dialog_alert_list_ios
 
@@ -44,8 +44,8 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
         fun build(fm: FragmentManager) =
                 IAlertListDialog().apply {
                     this.fm = fm
-                    titleConfig = IDialog.alertTitleConfigs
-                    msgConfig = IDialog.alertMsgConfigs
+                    titleConfig = IDialog.alertTitleConfigs.copy()
+                    msgConfig = IDialog.alertMsgConfigs.copy()
                 }
     }
 

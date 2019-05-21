@@ -23,9 +23,9 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
 
     private var negListener: ((DialogInterface) -> Unit)? = null
 
-    private var posBtnConfig = IDialog.alertPosBtnConfigs
+    private var posBtnConfig = IDialog.alertPosBtnConfigs.copy()
 
-    private var negBtnConfig = IDialog.alertNegBtnConfigs
+    private var negBtnConfig = IDialog.alertNegBtnConfigs.copy()
 
     /**
      * 子类继承BaseBottomDialog后需要创建的布局Id
@@ -36,8 +36,8 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
         @JvmStatic
         fun build(fm: FragmentManager) = IAlertDialog().apply {
             this.fm = fm
-            titleConfig = IDialog.alertTitleConfigs
-            msgConfig = IDialog.alertMsgConfigs
+            titleConfig = IDialog.alertTitleConfigs.copy()
+            msgConfig = IDialog.alertMsgConfigs.copy()
         }
     }
 

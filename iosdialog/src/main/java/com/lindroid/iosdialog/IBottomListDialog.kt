@@ -27,9 +27,9 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
 
     private val items: MutableList<DialogItemBean> = ArrayList()
 
-    private val bottomBtnConfigs: TextConfigs = IDialog.bottomBtnConfigs
+    private val bottomBtnConfigs: TextConfigs = IDialog.bottomBtnConfigs.copy()
 
-    private val bottomItemConfigs: TextConfigs = IDialog.bottomListItemConfigs
+    private val bottomItemConfigs: TextConfigs = IDialog.bottomListItemConfigs.copy()
 
     private var itemClickListener: ((Int, String, TextView, DialogInterface) -> Unit)? = null
 
@@ -44,8 +44,8 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
         fun build(fm: FragmentManager) =
                 IBottomListDialog().apply {
                     this.fm = fm
-                    titleConfig = IDialog.bottomTitleConfigs
-                    msgConfig = IDialog.bottomMsgConfigs
+                    titleConfig = IDialog.bottomTitleConfigs.copy()
+                    msgConfig = IDialog.bottomMsgConfigs.copy()
                 }
     }
 

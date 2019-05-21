@@ -3,7 +3,6 @@ package com.lindroid.lindialogdemo
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.lindroid.androidutilskt.extension.dp2px
 import com.lindroid.androidutilskt.extension.shortToast
 import com.lindroid.iosdialog.IAlertDialog
 import com.lindroid.iosdialog.IAlertListDialog
@@ -73,7 +72,6 @@ class IOSDialogActivity : AppCompatActivity() {
                     .addItem("黄色", Color.YELLOW)
                     .addItem("蓝色", Color.BLUE)
                     .addItem("绿色", Color.GREEN)
-                    .setCancelButtonHeight(dp2px(100))
                     .setOnItemClickListener { position, text, itemView, dialog ->
                         shortToast("你选择了${itemView.text}")
                     }
@@ -85,7 +83,7 @@ class IOSDialogActivity : AppCompatActivity() {
                     .setMessage("这是一个具有大量选项的底部列表对话框这是一个具有大量选项的底部列表对话框")
                     .addItem("长文字选项长文字选项长文字选项长文字选项长文字选项长文字选项长文字选项")
                     .addItems((1..30).map { "按钮$it" })
-                    .setCancelButton(getString(R.string.ios_dialog_negative_text),Color.BLUE,16F){
+                    .setCancelButton(textColor = Color.BLUE){
                         shortToast("关闭对话框")
                     }
                     .setOnItemClickListener { position, text, itemView, dialog ->

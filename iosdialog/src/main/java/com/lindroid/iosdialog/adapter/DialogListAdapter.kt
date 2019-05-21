@@ -45,9 +45,9 @@ class DialogListAdapter(private val mContext: Context, @DialogType val dialogTyp
             it.textSize = item.textSize
             it.setTextColor(item.textColor)
             when (dialogType) {
-                DIALOG_ALERT_LIST -> IDialog.alertListItemConfigs
-                DIALOG_BOTTOM_LIST -> IDialog.bottomListItemConfigs
-                else -> IDialog.alertListItemConfigs
+                DIALOG_ALERT_LIST -> IDialog.alertListItemConfigs.copy()
+                DIALOG_BOTTOM_LIST -> IDialog.bottomListItemConfigs.copy()
+                else -> IDialog.alertListItemConfigs.copy()
             }.apply {
                 if (paddingLeft > 0) {
                     it.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
