@@ -14,4 +14,5 @@
     <dimen name="ios_bottom_title_size">16sp</dimen>
     <dimen name="ios_bottom_message_size">14sp</dimen>
     <dimen name="ios_bottom_button_text_size">14sp</dimen>
+    <dimen name="ios_bottom_list_item_text_size">14sp</dimen>
 </resources>

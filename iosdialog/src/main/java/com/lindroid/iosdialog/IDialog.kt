@@ -65,6 +65,10 @@ object IDialog {
                 text = context.getString(R.string.ios_dialog_negative_text))
     }
 
+    internal val bottomListItemConfigs by lazy {
+        TextConfigs(getSpSize(R.dimen.ios_bottom_list_item_text_size), textColorBlue)
+    }
+
     private lateinit var application: Application
 
     private val textColorBlue by lazy {
@@ -88,7 +92,7 @@ object IDialog {
 
     fun getSpSize(dimenId: Int) = px2sp(context.resources.getDimensionPixelSize(dimenId).toFloat())
 
-    fun getPxSize(dimenId:Int) = context.resources.getDimensionPixelSize(dimenId)
+    fun getPxSize(dimenId: Int) = context.resources.getDimensionPixelSize(dimenId)
 
     fun getResColor(@ColorRes colorId: Int) = ContextCompat.getColor(context, colorId)
 
@@ -167,7 +171,7 @@ object IDialog {
         @JvmOverloads
         fun setAlertListItem(textSize: Float = alertListItemConfigs.textSize,
                              @ColorInt textColor: Int = alertListItemConfigs.textColor,
-                             height:Int = alertListItemConfigs.height
+                             height: Int = alertListItemConfigs.height
         ) = this.apply {
             alertListItemConfigs.let {
                 it.textSize = textSize
@@ -206,11 +210,22 @@ object IDialog {
         fun setBottomListButton(textSize: Float = bottomBtnConfigs.textSize,
                                 @ColorInt textColor: Int = bottomBtnConfigs.textColor,
                                 text: String = bottomBtnConfigs.text
-        ) {
+        ) = this.apply {
             bottomBtnConfigs.let {
                 it.text = text
                 it.textSize = textSize
                 it.textColor = textColor
+            }
+        }
+
+        fun setBottomListItem(textSize: Float = bottomListItemConfigs.textSize,
+                              @ColorInt textColor: Int = bottomListItemConfigs.textColor,
+                              height: Int = bottomListItemConfigs.height
+        ) = this.apply {
+            bottomListItemConfigs.let {
+                it.textSize = textSize
+                it.textColor = textColor
+                it.height = height
             }
         }
 

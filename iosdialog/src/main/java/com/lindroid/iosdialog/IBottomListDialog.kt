@@ -26,11 +26,13 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
 
     private val items: MutableList<DialogItemBean> = ArrayList()
 
-    private val bottomBtnConfig: TextConfigs = IDialog.bottomBtnConfigs
+    private val bottomBtnConfigs: TextConfigs = IDialog.bottomBtnConfigs
+
+    private val bottomItemConfigs: TextConfigs = IDialog.bottomListItemConfigs
 
     private var itemClickListener: ((Int, String, TextView, DialogInterface) -> Unit)? = null
 
-    private var cancelClickListener:((DialogInterface) -> Unit)? = null
+    private var cancelClickListener: ((DialogInterface) -> Unit)? = null
 
     private var dismissible = true
 
@@ -63,9 +65,9 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
         llContent.background = initShapeDrawable()
 
         btnCancel.apply {
-            text = bottomBtnConfig.text
-            textSize = bottomBtnConfig.textSize
-            setTextColor(bottomBtnConfig.textColor)
+            text = bottomBtnConfigs.text
+            textSize = bottomBtnConfigs.textSize
+            setTextColor(bottomBtnConfigs.textColor)
             background = initShapeDrawable()
             setOnClickListener {
                 cancelClickListener?.invoke(dialog)
@@ -92,19 +94,19 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
         }
     }
 
-    fun addItem(text: String, @ColorInt textColor: Int = IDialog.getResColor(R.color.ios_dialog_text_color_blue)) = this.apply {
-        items.add(DialogItemBean(text, textColor))
-    }
+    fun addItem(text: String, @ColorInt textColor: Int = bottomItemConfigs.textColor, textSize: Float = bottomItemConfigs.textSize) =
+            this.apply {
+                items.add(DialogItemBean(text, textColor, textSize, bottomItemConfigs.height))
+            }
 
     fun addItems(items: List<String>) = this.apply {
-        items.forEach {
-            addItem(it)
-        }
+        items.forEach { addItem(it) }
     }
+
     /**
      * 设置取消按钮文字
      */
-    fun setCancelText(text: String) = this.apply { bottomBtnConfig.text = text }
+    fun setCancelText(text: String) = this.apply { bottomBtnConfigs.text = text }
 
     /**
      * 设置取消按钮文字Id
@@ -114,7 +116,7 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
     /**
      * 设置取消按钮文字颜色
      */
-    fun setCancelTextColor(@ColorInt color: Int) = this.apply { bottomBtnConfig.textColor = color }
+    fun setCancelTextColor(@ColorInt color: Int) = this.apply { bottomBtnConfigs.textColor = color }
 
     /**
      * 设置取消按钮文字颜色Id
@@ -124,7 +126,7 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
     /**
      * 设置取消按钮文字大小，单位为sp
      */
-    fun setCancelTextSize(textSize: Float) = this.apply { bottomBtnConfig.textSize = textSize }
+    fun setCancelTextSize(textSize: Float) = this.apply { bottomBtnConfigs.textSize = textSize }
 
     /**
      * 设置取消按钮文字大小
@@ -135,11 +137,11 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
     /**
      * 设置取消按钮的样式和点击事件
      */
-    fun setCancelButton(text: String = bottomBtnConfig.text,
-                        textColor: Int = bottomBtnConfig.textColor,
-                        textSize: Float = bottomBtnConfig.textSize,
+    fun setCancelButton(text: String = bottomBtnConfigs.text,
+                        textColor: Int = bottomBtnConfigs.textColor,
+                        textSize: Float = bottomBtnConfigs.textSize,
                         listener: (dialog: DialogInterface) -> Unit) = this.apply {
-        bottomBtnConfig.let {
+        bottomBtnConfigs.let {
             it.text = text
             it.textColor = textColor
             it.textSize = textSize
@@ -166,7 +168,7 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
     /**
      * 取消按钮点击事件
      */
-    fun setOnCancelClickListener(listener:(dialog:DialogInterface) -> Unit) = this.apply { cancelClickListener = listener }
+    fun setOnCancelClickListener(listener: (dialog: DialogInterface) -> Unit) = this.apply { cancelClickListener = listener }
 
     override fun onDestroy() {
         super.onDestroy()
