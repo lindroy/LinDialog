@@ -83,8 +83,6 @@ object IDialog {
             fun build() = Config()
         }
 
-        fun setAlertWidthScale(widthScale: Float) = this.apply { alertWidthScale = widthScale }
-
         fun setCornerRadius(cornerRadius: Float) = this.apply {
             IDialog.cornerRadius = cornerRadius
         }
@@ -93,6 +91,8 @@ object IDialog {
         fun setAlpha(alpha: Float) = this.apply { IDialog.alpha = alpha }
 
         fun setBackgroudColor(@ColorInt color: Int) = this.apply { bgColor = color }
+
+        fun setAlertWidthScale(widthScale: Float) = this.apply { alertWidthScale = widthScale }
 
         @JvmOverloads
         fun setAlertTitle(textSize: Float = alertTitleConfigs.textSize,

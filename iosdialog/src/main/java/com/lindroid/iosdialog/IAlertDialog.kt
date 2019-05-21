@@ -2,6 +2,8 @@ package com.lindroid.iosdialog
 
 import android.content.DialogInterface
 import android.support.annotation.ColorInt
+import android.support.annotation.ColorRes
+import android.support.annotation.DimenRes
 import android.support.v4.app.FragmentManager
 import android.view.View
 import com.lindroid.iosdialog.base.BaseIOSDialog
@@ -90,7 +92,13 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
 
     fun setPosButtonTextColor(@ColorInt color: Int) = this.apply { posTextColor = color }
 
+    fun setPosButtonTextColorId(@ColorRes colorId: Int) =
+            this.apply { setPosButtonTextColor(IDialog.getResColor(colorId)) }
+
     fun setPosButtonTextSize(textSize: Float) = this.apply { posTextSize = textSize }
+
+    fun setPosButtonTextSizeId(@DimenRes textSizeId: Int) =
+            this.apply { setPosButtonTextSize(IDialog.getSpSize(textSizeId)) }
 
     fun setPosClickListener(listener: (DialogInterface) -> Unit) = this.apply { posListener = listener }
 
@@ -98,7 +106,13 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
 
     fun setNegButtonTextColor(@ColorInt color: Int) = this.apply { negTextColor = color }
 
+    fun setNegButtonTextColorId(@ColorRes colorId: Int) =
+            this.apply { setNegButtonTextColor(IDialog.getResColor(colorId)) }
+
     fun setNegButtonTextSize(textSize: Float) = this.apply { negTextSize = textSize }
+
+    fun setNegButtonTextSizeId(@DimenRes textSizeId: Int) =
+            this.apply { setNegButtonTextSize(IDialog.getSpSize(textSizeId)) }
 
     fun setNegClickListener(listener: (DialogInterface) -> Unit) = this.apply { negListener = listener }
 

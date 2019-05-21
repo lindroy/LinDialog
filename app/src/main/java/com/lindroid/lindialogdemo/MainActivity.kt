@@ -1,16 +1,11 @@
 package com.lindroid.lindialogdemo
 
-import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import com.lindroid.androidutilskt.extension.dp2px
 import com.lindroid.androidutilskt.extension.shortToast
-import com.lindroid.iosdialog.IAlertDialog
-import com.lindroid.iosdialog.IAlertListDialog
-import com.lindroid.iosdialog.IBottomSheetDialog
 import com.lindroid.lindialog.BottomDialog
 import com.lindroid.lindialog.BottomListDialog
 import com.lindroid.lindialog.CustomDialog
@@ -30,9 +25,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btnBottom.setOnClickListener(this)
         btnPay.setOnClickListener(this)
         btnBottomList.setOnClickListener(this)
-        btnIAlertDialog.setOnClickListener(this)
-        btnIAlertListDialog.setOnClickListener(this)
-        btnISheetDialog.setOnClickListener(this)
     }
 
     /**
@@ -49,9 +41,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btnPay -> showPayDialog()
             R.id.btnEdit -> showEditDialog()
             R.id.btnBottomList -> showBottomListDialog()
-            R.id.btnIAlertDialog -> showIAlertDialog()
-            R.id.btnIAlertListDialog -> showIAlertListDialog()
-            R.id.btnISheetDialog -> showIBottomSheetDialog()
         }
     }
 
@@ -165,65 +154,5 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    private fun showIAlertDialog() {
-        IAlertDialog.build(supportFragmentManager)
-            .setTitle("提示")
-            .setMessage("确定要退出登录吗？")
-            .setPosClickListener {
-                shortToast("确定")
-            }
-            .setNegClickListener {
-                shortToast("取消")
-            }
-            .show()
-    }
 
-    private fun showIBottomSheetDialog() {
-        IBottomSheetDialog.build(supportFragmentManager)
-            .setTitle("提示")
-            .setMessage("这是一个底部对话框")
-            .addItem("hello")
-            .addItem("hello", ContextCompat.getColor(this, android.R.color.holo_red_light))
-            .addItem("hello")
-            .addItem("hello")
-            .addItem("hello")
-            .addItem("hello")
-            .addItem("hello")
-            .addItem("hello")
-            .addItem("hello")
-            .addItem("hello")
-            .addItem("hello")
-            .addItem("hello")
-            .setOnItemClickListener { position, text, itemView, dialog ->
-                itemView.text = "你点击了$position"
-            }
-            .show()
-    }
-
-    private fun showIAlertListDialog() {
-        IAlertListDialog.build(supportFragmentManager)
-            .setTitle("多选对话框")
-            .setMessage("请选择你喜欢的颜色")
-            .addItem("红色", Color.RED)
-            .addItem("黄色", Color.YELLOW)
-            .addItem("蓝色", Color.BLUE)
-            .addItem("绿色", Color.GREEN)
-            .addItem("红色", Color.RED)
-            .addItem("黄色", Color.YELLOW)
-            .addItem("蓝色", Color.BLUE)
-            .addItem("绿色", Color.GREEN)
-            .addItem("红色", Color.RED)
-            .addItem("黄色", Color.YELLOW)
-            .addItem("蓝色", Color.BLUE)
-            .addItem("绿色", Color.GREEN)
-            .addItem("红色", Color.RED)
-            .addItem("黄色", Color.YELLOW)
-            .addItem("蓝色", Color.BLUE)
-            .addItem("绿色", Color.GREEN)
-            .setOnItemClickListener { position, text, itemView, dialog ->
-                shortToast("你选择了${itemView.text}")
-            }
-            .show()
-
-    }
 }

@@ -43,21 +43,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/btnIAlertDialog"
-        android:text="IAlertDialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-            android:id="@+id/btnIAlertListDialog"
-            android:text="IAlertListDialog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btnISheetDialog"
-        android:text="IBottomSheetDialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 </LinearLayout>
