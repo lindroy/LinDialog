@@ -81,8 +81,8 @@ class IOSDialogActivity : AppCompatActivity() {
         }
         btnIBottomMore.setOnClickListener {
             IBottomListDialog.build(supportFragmentManager)
-                    .setTitle("底部对话框")
-                    .setMessage("这是一个具有大量选项的底部列表对话框")
+                    .setTitle("底部对话框底部对话框底部对话框底部对话框底部对话框底部对话框底部对话框底部对话框底部对话框")
+                    .setMessage("这是一个具有大量选项的底部列表对话框这是一个具有大量选项的底部列表对话框")
                     .addItem("长文字选项长文字选项长文字选项长文字选项长文字选项长文字选项长文字选项")
                     .addItems((1..30).map { "按钮$it" })
                     .setCancelButton(getString(R.string.ios_dialog_negative_text),Color.BLUE,16F){

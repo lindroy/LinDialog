@@ -43,10 +43,10 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
                     setTextColor(titleConfig.textColor)
                     textSize = titleConfig.textSize
                     gravity = titleConfig.gravity
+                    setPadding(titleConfig.paddingLeft, titleConfig.paddingTop, titleConfig.paddingRight, titleConfig.paddingBottom)
                     View.VISIBLE
                 }
                 false -> View.GONE
-
             }
 
         }

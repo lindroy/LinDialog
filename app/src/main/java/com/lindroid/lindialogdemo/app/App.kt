@@ -1,7 +1,6 @@
 package com.lindroid.lindialogdemo.app
 
 import android.app.Application
-import com.lindroid.androidutilskt.extension.dp2px
 import com.lindroid.iosdialog.IDialog
 import com.squareup.leakcanary.LeakCanary
 
@@ -32,7 +31,6 @@ class App : Application() {
 //        LinDialog.init(instance)
         IDialog.init(instance)
 //                .setCornerRadius(dp2px(12F))
-                .setBottomListItem(paddingSides = dp2px(30))
                 .setAlertPosButton(text = "Ok")
                 .setAlertNegButton(text = "Cancel")
     }

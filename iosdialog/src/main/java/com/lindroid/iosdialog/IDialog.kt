@@ -57,9 +57,12 @@ object IDialog {
 
     internal var bottomAnimStyle: Int = R.style.BottomDialogStyle
 
-
     internal val bottomTitleConfigs by lazy {
-        TextConfigs(getSpSize(R.dimen.ios_bottom_title_size), textColorBlack)
+        TextConfigs(getSpSize(R.dimen.ios_bottom_title_size), textColorBlack,
+                paddingLeft = titleMsgPaddingSides,
+                paddingRight = titleMsgPaddingSides,
+                paddingBottom = 0
+        )
     }
 
     internal val bottomMsgConfigs by lazy {
@@ -87,6 +90,10 @@ object IDialog {
 
     private val textColorBlack by lazy {
         getResColor(R.color.ios_dialog_text_color_black)
+    }
+
+    private val titleMsgPaddingSides by lazy {
+        getPxSize(R.dimen.ios_dialog_title_padding_sides)
     }
 
     fun init(application: Application): Config {
@@ -126,7 +133,7 @@ object IDialog {
                           text: String = "",
                           gravity: Int = alertTitleConfigs.gravity
         ) = this.apply {
-            alertTitleConfigs.let {
+            alertTitleConfigs.also {
                 it.textSize = textSize
                 it.textColor = textColor
                 it.text = text
@@ -138,7 +145,7 @@ object IDialog {
         fun setAlertMsg(textSize: Float = alertMsgConfigs.textSize,
                         @ColorInt textColor: Int = alertMsgConfigs.textColor,
                         gravity: Int = alertMsgConfigs.gravity) = this.apply {
-            alertMsgConfigs.let {
+            alertMsgConfigs.also {
                 it.textSize = textSize
                 it.textColor = textColor
                 it.gravity = gravity
@@ -153,7 +160,7 @@ object IDialog {
                               @ColorInt textColor: Int = alertPosBtnConfigs.textColor,
                               gravity: Int = alertPosBtnConfigs.gravity
         ) = this.apply {
-            alertPosBtnConfigs.let {
+            alertPosBtnConfigs.also {
                 it.text = text
                 it.textSize = textSize
                 it.textColor = textColor
@@ -167,11 +174,12 @@ object IDialog {
                               @ColorInt textColor: Int = alertNegBtnConfigs.textColor,
                               gravity: Int = alertNegBtnConfigs.gravity
         ) = this.apply {
-            alertNegBtnConfigs.let {
+            alertNegBtnConfigs.also {
                 it.text = text
                 it.textSize = textSize
                 it.textColor = textColor
                 it.gravity = gravity
+
             }
         }
 
@@ -194,6 +202,10 @@ object IDialog {
         fun setBottomListTitle(textSize: Float = bottomTitleConfigs.textSize,
                                @ColorInt textColor: Int = bottomTitleConfigs.textColor,
                                text: String = "",
+                               paddingLeft: Int = bottomTitleConfigs.paddingLeft,
+                               paddingTop: Int = bottomTitleConfigs.paddingTop,
+                               paddingRight: Int = bottomTitleConfigs.paddingRight,
+                               paddingBottom: Int = bottomTitleConfigs.paddingBottom,
                                gravity: Int = bottomTitleConfigs.gravity
         ) = this.apply {
             bottomTitleConfigs.also {
@@ -201,6 +213,10 @@ object IDialog {
                 it.textSize = textSize
                 it.textColor = textColor
                 it.gravity = gravity
+                it.paddingLeft = paddingLeft
+                it.paddingTop = paddingTop
+                it.paddingRight = paddingRight
+                it.paddingBottom = paddingBottom
             }
         }
 
