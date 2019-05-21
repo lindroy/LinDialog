@@ -14,6 +14,7 @@ import com.lindroid.iosdialog.adapter.DialogListAdapter
 import com.lindroid.iosdialog.base.BaseIOSDialog
 import com.lindroid.iosdialog.bean.DialogItemBean
 import com.lindroid.iosdialog.bean.TextConfigs
+import com.lindroid.iosdialog.constants.DIALOG_BOTTOM_LIST
 import kotlinx.android.synthetic.main.dialog_bottom_sheet_ios.*
 
 /**
@@ -87,7 +88,7 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
         lvChoices.apply {
             divider = ContextCompat.getDrawable(mContext, R.drawable.dialog_ios_divider)
             dividerHeight = resources.getDimensionPixelSize(R.dimen.ios_dialog_divider_size)
-            adapter = DialogListAdapter(mContext, R.layout.item_dialog_list, items)
+            adapter = DialogListAdapter(mContext, DIALOG_BOTTOM_LIST, R.layout.item_dialog_list, items)
             setOnItemClickListener { parent, view, position, id ->
                 itemClickListener?.invoke(position, items[position].text, view as TextView, dialog)
                 if (itemDismissible) {
@@ -99,7 +100,7 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
 
     fun addItem(text: String, @ColorInt textColor: Int = bottomItemConfigs.textColor, textSize: Float = bottomItemConfigs.textSize) =
             this.apply {
-                items.add(DialogItemBean(text, textColor, textSize, bottomItemConfigs.height))
+                items.add(DialogItemBean(text, textColor, textSize))
             }
 
     fun addItems(items: List<String>) = this.apply {

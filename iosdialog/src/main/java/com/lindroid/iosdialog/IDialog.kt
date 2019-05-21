@@ -3,12 +3,9 @@ package com.lindroid.iosdialog
 import android.app.Application
 import android.content.Context
 import android.graphics.Color
-import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
-import android.support.annotation.StringRes
+import android.support.annotation.*
 import android.support.v4.content.ContextCompat
 import com.lindroid.iosdialog.bean.TextConfigs
-import com.lindroid.iosdialog.util.dp2px
 import com.lindroid.iosdialog.util.px2sp
 import com.lindroid.lindialog.LinDialog
 
@@ -19,7 +16,8 @@ import com.lindroid.lindialog.LinDialog
  * @Description
  */
 object IDialog {
-    val context: Context
+
+    internal val context: Context
         get() = application.applicationContext
 
     internal var alertWidthScale = 0.7F
@@ -40,6 +38,11 @@ object IDialog {
         TextConfigs(getSpSize(R.dimen.ios_alert_message_size), textColorBlack)
     }
 
+    /**
+     * 提示类对话框动画
+     */
+    internal var alertAnimStyle: Int = R.style.AlertDialogStyle
+
     internal val alertPosBtnConfigs by lazy {
         TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), textColorBlue, text = getString(R.string.ios_dialog_positive_text))
     }
@@ -51,6 +54,9 @@ object IDialog {
     internal val alertListItemConfigs by lazy {
         TextConfigs(getSpSize(R.dimen.ios_alert_list_item_text_size), textColorBlue)
     }
+
+    internal var bottomAnimStyle: Int = R.style.BottomDialogStyle
+
 
     internal val bottomTitleConfigs by lazy {
         TextConfigs(getSpSize(R.dimen.ios_bottom_title_size), textColorBlack)
@@ -86,7 +92,7 @@ object IDialog {
     fun init(application: Application): Config {
         this.application = application
         LinDialog.init(application)
-        cornerRadius = dp2px(context.resources.getDimensionPixelSize(R.dimen.ios_dialog_corner_radius).toFloat())
+        cornerRadius = getPxSize(R.dimen.ios_dialog_corner_radius).toFloat()
         return Config.build()
     }
 
@@ -108,8 +114,7 @@ object IDialog {
             IDialog.cornerRadius = cornerRadius
         }
 
-        //        @FloatRange(from = 0.0, to = 1.0)
-        fun setAlpha(alpha: Float) = this.apply { IDialog.alpha = alpha }
+        fun setAlpha(@FloatRange(from = 0.0, to = 1.0) alpha: Float) = this.apply { IDialog.alpha = alpha }
 
         fun setBackgroudColor(@ColorInt color: Int) = this.apply { bgColor = color }
 
@@ -139,6 +144,8 @@ object IDialog {
                 it.gravity = gravity
             }
         }
+
+        fun setAlertAnimStyle(@StyleRes style: Int) = this.apply { alertAnimStyle = style }
 
         @JvmOverloads
         fun setAlertPosButton(text: String = alertPosBtnConfigs.text,
@@ -171,12 +178,15 @@ object IDialog {
         @JvmOverloads
         fun setAlertListItem(textSize: Float = alertListItemConfigs.textSize,
                              @ColorInt textColor: Int = alertListItemConfigs.textColor,
-                             height: Int = alertListItemConfigs.height
+                             height: Int = alertListItemConfigs.height,
+                             paddingSides: Int = 0 //左右的padding值
         ) = this.apply {
-            alertListItemConfigs.let {
+            alertListItemConfigs.also {
                 it.textSize = textSize
                 it.textColor = textColor
                 it.height = height
+                it.paddingLeft = paddingSides
+                it.paddingRight = paddingSides
             }
         }
 
@@ -186,7 +196,7 @@ object IDialog {
                                text: String = "",
                                gravity: Int = bottomTitleConfigs.gravity
         ) = this.apply {
-            bottomTitleConfigs.let {
+            bottomTitleConfigs.also {
                 it.text = text
                 it.textSize = textSize
                 it.textColor = textColor
@@ -199,7 +209,7 @@ object IDialog {
                              @ColorInt textColor: Int = bottomMsgConfigs.textColor,
                              gravity: Int = bottomMsgConfigs.gravity
         ) = this.apply {
-            bottomMsgConfigs.let {
+            bottomMsgConfigs.also {
                 it.textSize = textSize
                 it.textColor = textColor
                 it.gravity = gravity
@@ -212,7 +222,7 @@ object IDialog {
                                 text: String = bottomBtnConfigs.text,
                                 height: Int = bottomBtnConfigs.height
         ) = this.apply {
-            bottomBtnConfigs.let {
+            bottomBtnConfigs.also {
                 it.text = text
                 it.textSize = textSize
                 it.textColor = textColor
@@ -222,14 +232,22 @@ object IDialog {
 
         fun setBottomListItem(textSize: Float = bottomListItemConfigs.textSize,
                               @ColorInt textColor: Int = bottomListItemConfigs.textColor,
-                              height: Int = bottomListItemConfigs.height
+                              height: Int = bottomListItemConfigs.height,
+                              paddingSides: Int = 0 //左右的padding值
         ) = this.apply {
-            bottomListItemConfigs.let {
+            bottomListItemConfigs.also {
                 it.textSize = textSize
                 it.textColor = textColor
                 it.height = height
+                it.paddingLeft = paddingSides
+                it.paddingRight = paddingSides
             }
         }
+
+        /**
+         * 底部对话框的动画样式
+         */
+        fun setBottomAnimStyle(@StyleRes style: Int) = this.apply { bottomAnimStyle = style }
 
 
         fun setBottomWidthScale(widthScale: Float) = this.apply { bottomWidthScale = widthScale }

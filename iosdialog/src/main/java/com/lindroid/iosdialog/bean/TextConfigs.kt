@@ -15,5 +15,9 @@ data class TextConfigs(
         var gravity: Int = Gravity.CENTER,
         var text: String = "",
         var isBold: Boolean = false,
-        var height: Int = 0
+        var height: Int = 0,
+        var paddingLeft: Int = 0,
+        var paddingTop: Int = 0,
+        var paddingRight: Int = 0,
+        var paddingBottom: Int = 0
 )

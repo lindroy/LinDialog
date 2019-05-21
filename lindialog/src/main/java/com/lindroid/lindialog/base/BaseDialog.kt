@@ -8,6 +8,7 @@ import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.support.annotation.FloatRange
 import android.support.annotation.LayoutRes
 import android.support.annotation.StyleRes
 import android.support.v4.app.DialogFragment
@@ -147,7 +148,7 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
      * @param scale : 范围为0~1.0，为1时占满宽度
      *
      */
-    fun setWidthScale(scale: Float) = this.apply { widthScale = scale } as T
+    fun setWidthScale(@FloatRange(from = 0.0, to = 1.0) scale: Float) = this.apply { widthScale = scale } as T
 
     /**
      * 设置对话框中屏幕中的位置

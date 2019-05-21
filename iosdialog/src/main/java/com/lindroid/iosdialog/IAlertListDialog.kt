@@ -12,6 +12,7 @@ import android.widget.TextView
 import com.lindroid.iosdialog.adapter.DialogListAdapter
 import com.lindroid.iosdialog.base.BaseIOSDialog
 import com.lindroid.iosdialog.bean.DialogItemBean
+import com.lindroid.iosdialog.constants.DIALOG_ALERT_LIST
 import kotlinx.android.synthetic.main.dialog_alert_list_ios.*
 
 /**
@@ -50,7 +51,7 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
 
     override fun onHandleView(contentView: View): Boolean {
         super.onHandleView(contentView)
-        setAnimStyle(R.style.ScaleDialogStyle)
+        setAnimStyle(IDialog.alertAnimStyle)
         llRoot.background = initShapeDrawable()
         initListView()
         btnAlertList.apply {
@@ -76,7 +77,7 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
         lvChoices.apply {
             divider = ContextCompat.getDrawable(mContext, R.drawable.dialog_ios_divider)
             dividerHeight = resources.getDimensionPixelSize(R.dimen.ios_dialog_divider_size)
-            adapter = DialogListAdapter(mContext, R.layout.item_dialog_list, items)
+            adapter = DialogListAdapter(mContext, DIALOG_ALERT_LIST, R.layout.item_dialog_list, items)
             setOnItemClickListener { parent, view, position, id ->
                 itemClickListener?.invoke(position, items[position].text, view as TextView, dialog)
                 if (itemDismissible) {
@@ -88,7 +89,7 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
 
     @JvmOverloads
     fun addItem(text: String, @ColorInt textColor: Int = alertListItemConfigs.textColor, textSize: Float = alertListItemConfigs.textSize) = this.apply {
-        items.add(DialogItemBean(text, textColor, textSize, alertListItemConfigs.height))
+        items.add(DialogItemBean(text, textColor, textSize))
     }
 
     fun addItems(items: List<String>) = this.apply {

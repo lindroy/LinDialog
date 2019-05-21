@@ -9,6 +9,8 @@
     android:maxLines="1"
     android:textColor="@color/ios_dialog_text_color_blue"
     android:minHeight="50dp"
+    android:paddingStart="@dimen/ios_alert_list_item_padding_sides"
+    android:paddingEnd="@dimen/ios_alert_list_item_padding_sides"
     android:layout_height="wrap_content">
 
 </TextView>

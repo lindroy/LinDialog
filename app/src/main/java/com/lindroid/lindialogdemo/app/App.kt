@@ -31,7 +31,8 @@ class App : Application() {
         LeakCanary.install(this)
 //        LinDialog.init(instance)
         IDialog.init(instance)
-                .setCornerRadius(dp2px(12F))
+//                .setCornerRadius(dp2px(12F))
+                .setBottomListItem(paddingSides = dp2px(30))
                 .setAlertPosButton(text = "Ok")
                 .setAlertNegButton(text = "Cancel")
     }

@@ -22,7 +22,6 @@ import kotlinx.android.synthetic.main.layout_alert_dialog_title.*
 @Suppress("UNCHECKED_CAST")
 abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
 
-
     private var radius = IDialog.cornerRadius
 
     private var bgColor = IDialog.bgColor
