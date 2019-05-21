@@ -15,7 +15,13 @@
 
     <Button
         android:id="@+id/btnIAlertList"
-        android:text="IAlertListDialog"
+        android:text="IAlertListDialog(少量选项)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnIAlertListMore"
+        android:text="IAlertListDialog(大量选项)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

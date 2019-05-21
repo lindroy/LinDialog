@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
+import android.support.annotation.StringRes
 import android.support.v4.content.ContextCompat
 import android.view.Gravity
 import com.lindroid.iosdialog.bean.TextConfigs
@@ -70,10 +71,11 @@ object IDialog {
         return Config.build()
     }
 
-    private fun getSpSize(dimenId: Int) = px2sp(context.resources.getDimensionPixelSize(dimenId).toFloat())
+    fun getSpSize(dimenId: Int) = px2sp(context.resources.getDimensionPixelSize(dimenId).toFloat())
 
     fun getResColor(@ColorRes colorId: Int) = ContextCompat.getColor(context, colorId)
 
+    fun getString(@StringRes stringId: Int) = context.getString(stringId)
 
     class Config {
         companion object {
@@ -117,6 +119,7 @@ object IDialog {
             }
         }
 
+        @JvmOverloads
         fun setAlertPosButton(text: String = context.getString(R.string.ios_dialog_positive_text),
                               textSize: Float = 16F,
                               @ColorInt textColor: Int = LinDialog.getResColor(R.color.ios_dialog_text_color_blue),
@@ -130,6 +133,7 @@ object IDialog {
             }
         }
 
+        @JvmOverloads
         fun setAlertNegButton(text: String = context.getString(R.string.ios_dialog_negative_text),
                               textSize: Float = px2sp(context.resources.getDimensionPixelSize(R.dimen.ios_alert_button_text_size).toFloat()),
                               @ColorInt textColor: Int = LinDialog.getResColor(R.color.ios_dialog_text_color_red),

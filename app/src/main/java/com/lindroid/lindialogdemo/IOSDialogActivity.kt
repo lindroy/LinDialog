@@ -34,12 +34,30 @@ class IOSDialogActivity : AppCompatActivity() {
         }
         btnIAlertList.setOnClickListener {
             IAlertListDialog.build(supportFragmentManager)
-                    .setTitle("多选对话框")
+                    .setTitle("选项对话框")
                     .setMessage("请选择你喜欢的颜色")
                     .addItem("红色", Color.RED)
                     .addItem("黄色", Color.YELLOW)
                     .addItem("蓝色", Color.BLUE)
                     .addItem("绿色", Color.GREEN)
+                    .setOnItemClickListener { position, text, itemView, dialog ->
+                        shortToast("你选择了${itemView.text}")
+                    }
+                    .show()
+        }
+        btnIAlertListMore.setOnClickListener {
+            IAlertListDialog.build(supportFragmentManager)
+                    .setTitle("选项对话框")
+                    .setMessage("这是一个具有大量选项的列表对话框")
+                    .addItem("红色按钮",Color.RED)
+                    .addItems((1..30).map { "按钮$it" })
+                    .setCancelOutside(false)
+//                    .setCancelText(R.string.ios_dialog_negative_text)
+//                    .setCancelTextColorId(R.color.ios_dialog_text_color_blue)
+//                    .setCancelTextSize(16F)
+                    .setCancelButton (getString(R.string.ios_dialog_negative_text),Color.BLUE,16F){
+                        shortToast("关闭对话框")
+                    }
                     .setOnItemClickListener { position, text, itemView, dialog ->
                         shortToast("你选择了${itemView.text}")
                     }
