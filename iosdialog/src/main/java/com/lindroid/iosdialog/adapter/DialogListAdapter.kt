@@ -13,7 +13,7 @@ import com.lindroid.iosdialog.bean.DialogItemBean
 /**
  * @author Lin
  * @date 2019/5/18
- * @function
+ * @function iOS对话框中的列表适配器
  * @Description
  */
 class DialogListAdapter(private val mContext: Context, @LayoutRes val layoutId: Int, private val items: List<DialogItemBean>) : ArrayAdapter<DialogItemBean>(mContext, layoutId) {
@@ -38,7 +38,11 @@ class DialogListAdapter(private val mContext: Context, @LayoutRes val layoutId: 
         val item = items[position]
         vh.textView.apply {
             text = item.text
+            textSize = item.textSize
             setTextColor(item.textColor)
+            if (item.height > 0) {
+                height = item.height
+            }
         }
 
         return itemView!!

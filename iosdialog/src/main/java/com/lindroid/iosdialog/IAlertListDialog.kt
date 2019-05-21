@@ -28,6 +28,8 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
 
     private val alertListBtnConfigs = IDialog.alertNegBtnConfigs
 
+    private val alertListItemConfigs = IDialog.alertListItemConfigs
+
     override var customViewId: Int = R.layout.dialog_alert_list_ios
 
     private var dismissible = true
@@ -81,15 +83,21 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
         }
     }
 
-    fun addItem(text: String, @ColorInt textColor: Int = IDialog.getResColor(R.color.ios_dialog_text_color_blue)) = this.apply {
-        items.add(DialogItemBean(text, textColor))
+    @JvmOverloads
+    fun addItem(text: String, @ColorInt textColor: Int = alertListItemConfigs.textColor, textSize: Float = alertListItemConfigs.textSize) = this.apply {
+        items.add(DialogItemBean(text, textColor, textSize, alertListItemConfigs.height))
     }
 
     fun addItems(items: List<String>) = this.apply {
-        items.forEach {
-            addItem(it)
-        }
+        items.forEach { addItem(it) }
     }
+
+    /**
+     * 设置列表Item高度
+     */
+    fun setItemHeight(height: Int) = this.apply { alertListItemConfigs.height = height }
+
+    fun setItemHeightId(@DimenRes resId: Int) = this.apply { setItemHeight(IDialog.getPxSize(resId)) }
 
     /**
      * 点击取消按钮是否关闭对话框

@@ -7,7 +7,6 @@ import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.StringRes
 import android.support.v4.content.ContextCompat
-import android.view.Gravity
 import com.lindroid.iosdialog.bean.TextConfigs
 import com.lindroid.iosdialog.util.dp2px
 import com.lindroid.iosdialog.util.px2sp
@@ -20,19 +19,8 @@ import com.lindroid.lindialog.LinDialog
  * @Description
  */
 object IDialog {
-    private lateinit var application: Application
-
-    private val textColorBlue by lazy {
-        getResColor(R.color.ios_dialog_text_color_blue)
-    }
-
-    private val textColorRed by lazy {
-        getResColor(R.color.ios_dialog_text_color_red)
-    }
-
-    private val textColorBlack by lazy {
-        getResColor(R.color.ios_dialog_text_color_black)
-    }
+    val context: Context
+        get() = application.applicationContext
 
     internal var alertWidthScale = 0.7F
 
@@ -53,15 +41,15 @@ object IDialog {
     }
 
     internal val alertPosBtnConfigs by lazy {
-        TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), textColorBlue)
+        TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), textColorBlue, text = getString(R.string.ios_dialog_positive_text))
     }
 
     internal val alertNegBtnConfigs by lazy {
-        TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), textColorRed)
+        TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), textColorRed, text = getString(R.string.ios_dialog_negative_text))
     }
 
     internal val alertListItemConfigs by lazy {
-        TextConfigs(getSpSize(R.dimen.ios_alert_list_item_height), textColorBlue)
+        TextConfigs(getSpSize(R.dimen.ios_alert_list_item_text_size), textColorBlue)
     }
 
     internal val bottomTitleConfigs by lazy {
@@ -77,8 +65,19 @@ object IDialog {
                 text = context.getString(R.string.ios_dialog_negative_text))
     }
 
-    val context: Context
-        get() = application.applicationContext
+    private lateinit var application: Application
+
+    private val textColorBlue by lazy {
+        getResColor(R.color.ios_dialog_text_color_blue)
+    }
+
+    private val textColorRed by lazy {
+        getResColor(R.color.ios_dialog_text_color_red)
+    }
+
+    private val textColorBlack by lazy {
+        getResColor(R.color.ios_dialog_text_color_black)
+    }
 
     fun init(application: Application): Config {
         this.application = application
@@ -88,6 +87,8 @@ object IDialog {
     }
 
     fun getSpSize(dimenId: Int) = px2sp(context.resources.getDimensionPixelSize(dimenId).toFloat())
+
+    fun getPxSize(dimenId:Int) = context.resources.getDimensionPixelSize(dimenId)
 
     fun getResColor(@ColorRes colorId: Int) = ContextCompat.getColor(context, colorId)
 
@@ -136,10 +137,10 @@ object IDialog {
         }
 
         @JvmOverloads
-        fun setAlertPosButton(text: String = context.getString(R.string.ios_dialog_positive_text),
-                              textSize: Float = 16F,
-                              @ColorInt textColor: Int = LinDialog.getResColor(R.color.ios_dialog_text_color_blue),
-                              gravity: Int = Gravity.CENTER
+        fun setAlertPosButton(text: String = alertPosBtnConfigs.text,
+                              textSize: Float = alertPosBtnConfigs.textSize,
+                              @ColorInt textColor: Int = alertPosBtnConfigs.textColor,
+                              gravity: Int = alertPosBtnConfigs.gravity
         ) = this.apply {
             alertPosBtnConfigs.let {
                 it.text = text
@@ -150,10 +151,10 @@ object IDialog {
         }
 
         @JvmOverloads
-        fun setAlertNegButton(text: String = context.getString(R.string.ios_dialog_negative_text),
-                              textSize: Float = px2sp(context.resources.getDimensionPixelSize(R.dimen.ios_alert_button_text_size).toFloat()),
-                              @ColorInt textColor: Int = LinDialog.getResColor(R.color.ios_dialog_text_color_red),
-                              gravity: Int = Gravity.CENTER
+        fun setAlertNegButton(text: String = alertNegBtnConfigs.text,
+                              textSize: Float = alertNegBtnConfigs.textSize,
+                              @ColorInt textColor: Int = alertNegBtnConfigs.textColor,
+                              gravity: Int = alertNegBtnConfigs.gravity
         ) = this.apply {
             alertNegBtnConfigs.let {
                 it.text = text
@@ -163,8 +164,16 @@ object IDialog {
             }
         }
 
-        fun setAlertListItem(textSize: Float, @ColorInt color: Int) = this.apply {
-
+        @JvmOverloads
+        fun setAlertListItem(textSize: Float = alertListItemConfigs.textSize,
+                             @ColorInt textColor: Int = alertListItemConfigs.textColor,
+                             height:Int = alertListItemConfigs.height
+        ) = this.apply {
+            alertListItemConfigs.let {
+                it.textSize = textSize
+                it.textColor = textColor
+                it.height = height
+            }
         }
 
         @JvmOverloads
