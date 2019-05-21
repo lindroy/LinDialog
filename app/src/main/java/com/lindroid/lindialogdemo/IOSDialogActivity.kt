@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import com.lindroid.androidutilskt.extension.shortToast
 import com.lindroid.iosdialog.IAlertDialog
 import com.lindroid.iosdialog.IAlertListDialog
-import com.lindroid.iosdialog.IBottomSheetDialog
+import com.lindroid.iosdialog.IBottomListDialog
 import kotlinx.android.synthetic.main.activity_iosdialog.*
 
 /**
@@ -64,7 +64,7 @@ class IOSDialogActivity : AppCompatActivity() {
                     .show()
         }
         btnIBottom.setOnClickListener {
-            IBottomSheetDialog.build(supportFragmentManager)
+            IBottomListDialog.build(supportFragmentManager)
                     .setTitle("底部对话框")
                     .setMessage("请选择你喜欢的颜色")
                     .addItem("红色", Color.RED)
@@ -77,7 +77,7 @@ class IOSDialogActivity : AppCompatActivity() {
                     .show()
         }
         btnIBottomMore.setOnClickListener {
-            IBottomSheetDialog.build(supportFragmentManager)
+            IBottomListDialog.build(supportFragmentManager)
                     .setTitle("底部对话框")
                     .setMessage("这是一个具有大量选项的底部列表对话框")
                     .addItems((1..30).map { "按钮$it" })

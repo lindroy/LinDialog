@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.dialog_bottom_sheet_ios.*
  * @function iOS风格的底部菜单对话框
  * @Description
  */
-class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
+class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
 
     private val items: MutableList<DialogItemBean> = ArrayList()
 
@@ -39,7 +39,7 @@ class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
     companion object {
         @JvmStatic
         fun build(fm: FragmentManager) =
-                IBottomSheetDialog().apply {
+                IBottomListDialog().apply {
                     this.fm = fm
                     titleConfig = IDialog.bottomTitleConfigs
                     msgConfig = IDialog.bottomMsgConfigs

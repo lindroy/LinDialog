@@ -148,7 +148,7 @@ object IDialog {
         }
 
         @JvmOverloads
-        fun setBottomTitle(textSize: Float = bottomTitleConfigs.textSize,
+        fun setBottomListTitle(textSize: Float = bottomTitleConfigs.textSize,
                            @ColorInt textColor: Int = bottomTitleConfigs.textColor,
                            text: String = "",
                            gravity: Int = bottomTitleConfigs.gravity
@@ -162,7 +162,7 @@ object IDialog {
         }
 
         @JvmOverloads
-        fun setBottomMessage(textSize: Float = bottomMsgConfigs.textSize,
+        fun setBottomListMsg(textSize: Float = bottomMsgConfigs.textSize,
                              @ColorInt textColor: Int = bottomMsgConfigs.textColor,
                              gravity: Int = bottomMsgConfigs.gravity
         ) = this.apply {
@@ -174,7 +174,7 @@ object IDialog {
         }
 
         @JvmOverloads
-        fun setBottomButton(textSize: Float = bottomBtnConfigs.textSize,
+        fun setBottomListButton(textSize: Float = bottomBtnConfigs.textSize,
                             @ColorInt textColor: Int = bottomBtnConfigs.textColor,
                             text: String = bottomBtnConfigs.text
         ) {
