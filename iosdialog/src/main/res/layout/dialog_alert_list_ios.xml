@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:id="@+id/llRoot"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:id="@+id/llRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@drawable/dialog_ios_divider_vertical"
+    android:orientation="vertical"
+    android:showDividers="middle">
 
-    <include layout="@layout/layout_alert_dialog_title"/>
-
-
+    <include layout="@layout/layout_alert_dialog_title" />
 
     <com.lindroid.iosdialog.view.ElasticListView
-            android:id="@+id/lvChoices"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"/>
-
-    <View
-        android:background="@color/ios_dialog_divider_color"
+        android:id="@+id/lvChoices"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/ios_dialog_divider_size"/>
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <Button
-            style="@style/DialogButtonStyle"
-            android:id="@+id/btnAlertList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        android:id="@+id/btnAlertList"
+        style="@style/DialogButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

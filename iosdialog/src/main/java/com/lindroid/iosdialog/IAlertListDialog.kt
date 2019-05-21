@@ -47,6 +47,9 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
                     titleConfig = IDialog.alertTitleConfigs.copy()
                     msgConfig = IDialog.alertMsgConfigs.copy()
                     paddingTitleMsg = IDialog.alertPaddingTitleMsg
+                    paddingTop = IDialog.alertPaddingTop
+                    paddingSides = IDialog.alertPaddingSides
+                    paddingBottom = IDialog.alertPaddingBottom
                 }
     }
 

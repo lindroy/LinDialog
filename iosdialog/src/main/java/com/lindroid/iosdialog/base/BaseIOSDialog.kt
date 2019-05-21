@@ -38,6 +38,12 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
 
     protected var paddingTitleMsg = 0
 
+    protected var paddingSides = 0
+
+    protected var paddingTop = 0
+
+    protected var paddingBottom = 0
+
     override fun onHandleView(contentView: View): Boolean {
         setWidthScale(IDialog.alertWidthScale)
         tvTitle.apply {
@@ -68,7 +74,7 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
         }
 
         llTitleMsg.apply {
-            setPadding(IDialog.alertPaddingSides, IDialog.alertPaddingTop, IDialog.alertPaddingSides, IDialog.alertPaddingBottom)
+            setPadding(paddingSides, this@BaseIOSDialog.paddingTop, paddingSides, this@BaseIOSDialog.paddingBottom)
             //透明分割线，用于设置标题与信息文字的间距
             dividerDrawable = with(ShapeDrawable(RectShape())){
                 intrinsicHeight = paddingTitleMsg

@@ -55,17 +55,11 @@ object IDialog {
         TextConfigs(getSpSize(R.dimen.ios_alert_list_item_text_size), textColorBlue)
     }
 
-    internal val alertPaddingTop by lazy {
-        getPxSize(R.dimen.ios_alert_padding_top)
-    }
+    internal var alertPaddingTop = 0
 
-    internal val alertPaddingBottom by lazy {
-        getPxSize(R.dimen.ios_alert_padding_bottom)
-    }
+    internal var alertPaddingBottom = 0
 
-    internal val alertPaddingSides by lazy {
-        getPxSize(R.dimen.ios_alert_padding_sides)
-    }
+    internal var alertPaddingSides = 0
 
     /**
      * 提示对话框标题与信息文字的间距
@@ -111,6 +105,9 @@ object IDialog {
         this.application = application
         LinDialog.init(application)
         cornerRadius = getPxSize(R.dimen.ios_dialog_corner_radius).toFloat()
+        alertPaddingTop = getPxSize(R.dimen.ios_alert_padding_top)
+        alertPaddingBottom = getPxSize(R.dimen.ios_alert_padding_bottom)
+        alertPaddingSides = getPxSize(R.dimen.ios_alert_padding_sides)
         return Config.build()
     }
 
@@ -137,6 +134,12 @@ object IDialog {
         fun setBackgroudColor(@ColorInt color: Int) = this.apply { bgColor = color }
 
         fun setAlertWidthScale(widthScale: Float) = this.apply { alertWidthScale = widthScale }
+
+        fun setAlertPaddingTop(top: Int) = this.apply { alertPaddingTop = top }
+
+        fun setAlertPadddingBottom(bottom:Int) = this.apply { alertPaddingBottom = bottom }
+
+        fun setAlertPaddingSides(sides:Int) = this.apply { alertPaddingSides = sides }
 
         @JvmOverloads
         fun setAlertTitle(textSize: Float = alertTitleConfigs.textSize,
