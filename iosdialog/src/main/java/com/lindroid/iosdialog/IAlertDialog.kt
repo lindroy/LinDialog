@@ -19,21 +19,13 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
 
     private var dismissible = true
 
-    private var posText = IDialog.alertPosBtnConfigs.text
-
-    private var posTextSize = IDialog.alertPosBtnConfigs.textSize
-
-    private var posTextColor = IDialog.alertPosBtnConfigs.textColor
-
     private var posListener: ((DialogInterface) -> Unit)? = null
 
-    private var negText = IDialog.alertNegBtnConfigs.text
-
-    private var negTextSize = IDialog.alertPosBtnConfigs.textSize
-
-    private var negTextColor = IDialog.alertNegBtnConfigs.textColor
-
     private var negListener: ((DialogInterface) -> Unit)? = null
+
+    private var posBtnConfig = IDialog.alertPosBtnConfigs
+
+    private var negBtnConfig = IDialog.alertNegBtnConfigs
 
     /**
      * 子类继承BaseBottomDialog后需要创建的布局Id
@@ -56,9 +48,11 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
         super.onHandleView(contentView)
         setAnimStyle(R.style.ScaleDialogStyle)
         btnPos.apply {
-            text = posText
-            setTextColor(posTextColor)
-            textSize = posTextSize
+            posBtnConfig.let {
+                text = it.text
+                setTextColor(it.textColor)
+                textSize = it.textSize
+            }
             setOnClickListener {
                 posListener?.invoke(dialog)
                 if (dismissible) {
@@ -69,9 +63,11 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
         btnNeg.apply {
             visibility = when (isShowNegButton) {
                 true -> {
-                    text = negText
-                    setTextColor(negTextColor)
-                    textSize = negTextSize
+                    negBtnConfig.let {
+                        text = it.text
+                        setTextColor(it.textColor)
+                        textSize = it.textSize
+                    }
                     setOnClickListener {
                         negListener?.invoke(dialog)
                         if (dismissible) {
@@ -88,28 +84,28 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
         return false
     }
 
-    fun setPosButtonText(text: String) = this.apply { posText = text }
+    fun setPosButtonText(text: String) = this.apply { posBtnConfig.text = text }
 
-    fun setPosButtonTextColor(@ColorInt color: Int) = this.apply { posTextColor = color }
+    fun setPosButtonTextColor(@ColorInt color: Int) = this.apply { posBtnConfig.textColor = color }
 
     fun setPosButtonTextColorId(@ColorRes colorId: Int) =
             this.apply { setPosButtonTextColor(IDialog.getResColor(colorId)) }
 
-    fun setPosButtonTextSize(textSize: Float) = this.apply { posTextSize = textSize }
+    fun setPosButtonTextSize(textSize: Float) = this.apply { posBtnConfig.textSize = textSize }
 
     fun setPosButtonTextSizeId(@DimenRes textSizeId: Int) =
             this.apply { setPosButtonTextSize(IDialog.getSpSize(textSizeId)) }
 
     fun setPosClickListener(listener: (DialogInterface) -> Unit) = this.apply { posListener = listener }
 
-    fun setNegButtonText(text: String) = this.apply { negText = text }
+    fun setNegButtonText(text: String) = this.apply { negBtnConfig.text = text }
 
-    fun setNegButtonTextColor(@ColorInt color: Int) = this.apply { negTextColor = color }
+    fun setNegButtonTextColor(@ColorInt color: Int) = this.apply { negBtnConfig.textColor = color }
 
     fun setNegButtonTextColorId(@ColorRes colorId: Int) =
             this.apply { setNegButtonTextColor(IDialog.getResColor(colorId)) }
 
-    fun setNegButtonTextSize(textSize: Float) = this.apply { negTextSize = textSize }
+    fun setNegButtonTextSize(textSize: Float) = this.apply { negBtnConfig.textSize = textSize }
 
     fun setNegButtonTextSizeId(@DimenRes textSizeId: Int) =
             this.apply { setNegButtonTextSize(IDialog.getSpSize(textSizeId)) }
