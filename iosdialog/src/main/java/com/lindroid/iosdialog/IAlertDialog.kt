@@ -1,6 +1,9 @@
 package com.lindroid.iosdialog
 
 import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.RectShape
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.DimenRes
@@ -8,6 +11,7 @@ import android.support.v4.app.FragmentManager
 import android.view.View
 import com.lindroid.iosdialog.base.BaseIOSDialog
 import kotlinx.android.synthetic.main.dialog_alert_ios.*
+import kotlinx.android.synthetic.main.layout_alert_dialog_title.*
 
 /**
  * @author Lin
@@ -27,6 +31,8 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
 
     private var negBtnConfig = IDialog.alertNegBtnConfigs.copy()
 
+
+
     /**
      * 子类继承BaseBottomDialog后需要创建的布局Id
      */
@@ -38,6 +44,7 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
             this.fm = fm
             titleConfig = IDialog.alertTitleConfigs.copy()
             msgConfig = IDialog.alertMsgConfigs.copy()
+            paddingTitleMsg = IDialog.alertPaddingTitleMsg
         }
     }
 
@@ -78,9 +85,9 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
                 }
                 false -> View.GONE
             }
-
         }
         llRoot.background = initShapeDrawable()
+
         return false
     }
 

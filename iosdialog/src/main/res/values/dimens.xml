@@ -7,12 +7,17 @@
     <dimen name="ios_dialog_padding_top">20dp</dimen>
 
     <!--提示对话框-->
+    <dimen name="ios_alert_padding_top">20dp</dimen>
+    <dimen name="ios_alert_padding_bottom">20dp</dimen>
+    <dimen name="ios_alert_padding_sides">15dp</dimen>
+    <dimen name="ios_alert_padding_title_msg">10dp</dimen>
     <dimen name="ios_alert_title_size">16sp</dimen>
     <dimen name="ios_alert_message_size">14sp</dimen>
     <dimen name="ios_alert_button_text_size">14sp</dimen>
     <dimen name="ios_alert_list_item_height">50dp</dimen>
     <dimen name="ios_alert_list_item_text_size">14sp</dimen>
     <dimen name="ios_alert_list_item_padding_sides">15dp</dimen>
+
     <dimen name="ios_dialog_bottom_button_text_size">14sp</dimen>
     <!--底部对话框-->
     <dimen name="ios_bottom_title_size">16sp</dimen>

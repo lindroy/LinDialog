@@ -1,7 +1,9 @@
 package com.lindroid.iosdialog.base
 
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.RectShape
 import android.graphics.drawable.shapes.RoundRectShape
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
@@ -34,6 +36,8 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
 
     protected lateinit var msgConfig: TextConfigs
 
+    protected var paddingTitleMsg = 0
+
     override fun onHandleView(contentView: View): Boolean {
         setWidthScale(IDialog.alertWidthScale)
         tvTitle.apply {
@@ -62,8 +66,16 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
                 false -> View.GONE
             }
         }
-        //标题下方的分割线
-        viewDivider.visibility = if (titleConfig.text.isEmpty() && msgConfig.text.isEmpty()) View.GONE else View.VISIBLE
+
+        llTitleMsg.apply {
+            setPadding(IDialog.alertPaddingSides, IDialog.alertPaddingTop, IDialog.alertPaddingSides, IDialog.alertPaddingBottom)
+            //透明分割线，用于设置标题与信息文字的间距
+            dividerDrawable = with(ShapeDrawable(RectShape())){
+                intrinsicHeight = paddingTitleMsg
+                paint.color = Color.TRANSPARENT
+                this
+            }
+        }
         return false
     }
 

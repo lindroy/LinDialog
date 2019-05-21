@@ -55,14 +55,29 @@ object IDialog {
         TextConfigs(getSpSize(R.dimen.ios_alert_list_item_text_size), textColorBlue)
     }
 
+    internal val alertPaddingTop by lazy {
+        getPxSize(R.dimen.ios_alert_padding_top)
+    }
+
+    internal val alertPaddingBottom by lazy {
+        getPxSize(R.dimen.ios_alert_padding_bottom)
+    }
+
+    internal val alertPaddingSides by lazy {
+        getPxSize(R.dimen.ios_alert_padding_sides)
+    }
+
+    /**
+     * 提示对话框标题与信息文字的间距
+     */
+    internal val alertPaddingTitleMsg by lazy {
+        getPxSize(R.dimen.ios_alert_padding_title_msg)
+    }
+
     internal var bottomAnimStyle: Int = R.style.BottomDialogStyle
 
     internal val bottomTitleConfigs by lazy {
-        TextConfigs(getSpSize(R.dimen.ios_bottom_title_size), textColorBlack,
-                paddingLeft = titleMsgPaddingSides,
-                paddingRight = titleMsgPaddingSides,
-                paddingBottom = 0
-        )
+        TextConfigs(getSpSize(R.dimen.ios_bottom_title_size), textColorBlack)
     }
 
     internal val bottomMsgConfigs by lazy {
@@ -90,10 +105,6 @@ object IDialog {
 
     private val textColorBlack by lazy {
         getResColor(R.color.ios_dialog_text_color_black)
-    }
-
-    private val titleMsgPaddingSides by lazy {
-        getPxSize(R.dimen.ios_dialog_title_padding_sides)
     }
 
     fun init(application: Application): Config {
