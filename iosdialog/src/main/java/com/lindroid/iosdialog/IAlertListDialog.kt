@@ -27,6 +27,12 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
 
     override var customViewId: Int = R.layout.dialog_alert_list_ios
 
+    private var dismissible = true
+
+    private var itemDismissible = true
+
+    private var cancelClickListener:((DialogInterface) -> Unit)? = null
+
     companion object {
         @JvmStatic
         fun build(fm: FragmentManager) =
@@ -60,6 +66,9 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
             adapter = DialogListAdapter(mContext, R.layout.item_dialog_list, items)
             setOnItemClickListener { parent, view, position, id ->
                 itemClickListener?.invoke(position, items[position].text, view as TextView, dialog)
+                if (itemDismissible) {
+                    dismiss()
+                }
             }
         }
     }
@@ -75,10 +84,25 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
     }
 
     /**
+     * 点击取消按钮是否关闭对话框
+     */
+    fun setCanCelClickedDismissible(dismissible: Boolean) = this.apply { this.dismissible = dismissible }
+
+    /**
+     * 点击列表选项后是否关闭对话框
+     */
+    fun setItemClickedDismissible(itemDismissible: Boolean) = this.apply { this.itemDismissible = itemDismissible }
+
+    /**
      * item的点击事件
      */
     fun setOnItemClickListener(listener: (position: Int, text: String, itemView: TextView, dialog: DialogInterface) -> Unit) =
         this.apply { itemClickListener = listener }
+
+    /**
+     * 取消按钮点击事件
+     */
+    fun setOnCancelClickListener(listener:(dialog:DialogInterface) -> Unit) = this.apply { cancelClickListener = listener }
 
     override fun onDestroy() {
         super.onDestroy()

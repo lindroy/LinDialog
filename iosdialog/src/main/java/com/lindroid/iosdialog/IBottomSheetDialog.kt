@@ -27,6 +27,8 @@ class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
 
     private var itemClickListener: ((Int, String, TextView, DialogInterface) -> Unit)? = null
 
+    private var cancelClickListener:((DialogInterface) -> Unit)? = null
+
     private var dismissible = true
 
     private var itemDismissible = true
@@ -63,7 +65,10 @@ class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
             setTextColor(bottomBtnConfig.textColor)
             background = initShapeDrawable()
             setOnClickListener {
-                dismiss()
+                cancelClickListener?.invoke(dialog)
+                if (dismissible) {
+                    dismiss()
+                }
             }
         }
         initListView()
@@ -109,6 +114,11 @@ class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
      */
     fun setOnItemClickListener(listener: (position: Int, text: String, itemView: TextView, dialog: DialogInterface) -> Unit) =
             this.apply { itemClickListener = listener }
+
+    /**
+     * 取消按钮点击事件
+     */
+    fun setOnCancelClickListener(listener:(dialog:DialogInterface) -> Unit) = this.apply { cancelClickListener = listener }
 
     override fun onDestroy() {
         super.onDestroy()

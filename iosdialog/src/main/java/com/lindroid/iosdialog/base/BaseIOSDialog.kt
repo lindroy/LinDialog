@@ -22,35 +22,18 @@ import kotlinx.android.synthetic.main.layout_alert_dialog_title.*
 @Suppress("UNCHECKED_CAST")
 abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
 
-//    protected var title: String = ""
 
-//    protected var titleSize = IDialog.alertTitleConfigs.textSize
+    private var radius = IDialog.cornerRadius
 
-//    protected var titleColor = IDialog.alertTitleConfigs.textColor
+    private var bgColor = IDialog.bgColor
 
-//    private var titleGravity: Int = Gravity.CENTER
-
-//    protected var message: String = ""
-
-//    protected var msgSize = IDialog.alertMsgConfigs.textSize
-
-//    protected var msgColor = IDialog.alertMsgConfigs.textColor
-
-//    private var msgGravity: Int = Gravity.CENTER
-
-    protected var radius = IDialog.cornerRadius
-
-    protected var bgColor = IDialog.bgColor
-
-    protected var bgAlpha = IDialog.alpha
+    private var bgAlpha = IDialog.alpha
 
     protected var isShowNegButton = true
 
     protected lateinit var titleConfig: TextConfigs
 
     protected lateinit var msgConfig: TextConfigs
-
-
 
     override fun onHandleView(contentView: View): Boolean {
         setWidthScale(IDialog.alertWidthScale)
