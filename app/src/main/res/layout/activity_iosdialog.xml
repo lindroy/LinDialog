@@ -27,7 +27,13 @@
 
     <Button
         android:id="@+id/btnIBottom"
-        android:text="IBottomSheetDialog"
+        android:text="IBottomSheetDialog(少量选项)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnIBottomMore"
+        android:text="IBottomSheetDialog(大量选项)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

@@ -76,6 +76,19 @@ class IOSDialogActivity : AppCompatActivity() {
                     }
                     .show()
         }
+        btnIBottomMore.setOnClickListener {
+            IBottomSheetDialog.build(supportFragmentManager)
+                    .setTitle("底部对话框")
+                    .setMessage("这是一个具有大量选项的底部列表对话框")
+                    .addItems((1..30).map { "按钮$it" })
+                    .setCancelButton(getString(R.string.ios_dialog_negative_text),Color.BLUE,16F){
+                        shortToast("关闭对话框")
+                    }
+                    .setOnItemClickListener { position, text, itemView, dialog ->
+                        shortToast("你选择了${itemView.text}")
+                    }
+                    .show()
+        }
 
     }
 }

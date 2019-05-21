@@ -2,6 +2,9 @@ package com.lindroid.iosdialog
 
 import android.content.DialogInterface
 import android.support.annotation.ColorInt
+import android.support.annotation.ColorRes
+import android.support.annotation.DimenRes
+import android.support.annotation.StringRes
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
 import android.view.Gravity
@@ -93,10 +96,55 @@ class IBottomSheetDialog : BaseIOSDialog<IBottomSheetDialog>() {
         items.add(DialogItemBean(text, textColor))
     }
 
-    fun addItems(items: Array<String>) = this.apply {
+    fun addItems(items: List<String>) = this.apply {
         items.forEach {
             addItem(it)
         }
+    }
+    /**
+     * 设置取消按钮文字
+     */
+    fun setCancelText(text: String) = this.apply { bottomBtnConfig.text = text }
+
+    /**
+     * 设置取消按钮文字Id
+     */
+    fun setCancelText(@StringRes stringId: Int) = this.apply { setCancelText(IDialog.getString(stringId)) }
+
+    /**
+     * 设置取消按钮文字颜色
+     */
+    fun setCancelTextColor(@ColorInt color: Int) = this.apply { bottomBtnConfig.textColor = color }
+
+    /**
+     * 设置取消按钮文字颜色Id
+     */
+    fun setCancelTextColorId(@ColorRes colorId: Int) = this.apply { setCancelTextColor(IDialog.getResColor(colorId)) }
+
+    /**
+     * 设置取消按钮文字大小，单位为sp
+     */
+    fun setCancelTextSize(textSize: Float) = this.apply { bottomBtnConfig.textSize = textSize }
+
+    /**
+     * 设置取消按钮文字大小
+     * @param dimens资源
+     */
+    fun setCancelTextSizeId(@DimenRes textSizeId: Int) = this.apply { setCancelTextSize(IDialog.getSpSize(textSizeId)) }
+
+    /**
+     * 设置取消按钮的样式和点击事件
+     */
+    fun setCancelButton(text: String = bottomBtnConfig.text,
+                        textColor: Int = bottomBtnConfig.textColor,
+                        textSize: Float = bottomBtnConfig.textSize,
+                        listener: (dialog: DialogInterface) -> Unit) = this.apply {
+        bottomBtnConfig.let {
+            it.text = text
+            it.textColor = textColor
+            it.textSize = textSize
+        }
+        cancelClickListener = listener
     }
 
     /**
