@@ -58,6 +58,9 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
                 text = it.text
                 textSize = it.textSize
                 setTextColor(it.textColor)
+                if (it.height > 0) {
+                    height = it.height
+                }
             }
             setOnClickListener {
                 cancelClickListener?.invoke(dialog)
@@ -135,17 +138,23 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
      */
     fun setCancelTextSizeId(@DimenRes textSizeId: Int) = this.apply { setCancelTextSize(IDialog.getSpSize(textSizeId)) }
 
+    fun setCancelButtonHeight(height: Int) = this.apply { alertListBtnConfigs.height = height }
+
+    fun setCancelButtonHeightId(@DimenRes resId: Int) = this.apply { setCancelButtonHeight(IDialog.getPxSize(resId)) }
+
     /**
      * 设置取消按钮的样式和点击事件
      */
     fun setCancelButton(text: String = alertListBtnConfigs.text,
                         textColor: Int = alertListBtnConfigs.textColor,
                         textSize: Float = alertListBtnConfigs.textSize,
+                        height: Int = alertListBtnConfigs.height,
                         listener: (dialog: DialogInterface) -> Unit) = this.apply {
         alertListBtnConfigs.let {
             it.text = text
             it.textColor = textColor
             it.textSize = textSize
+            it.height = height
         }
         cancelClickListener = listener
     }

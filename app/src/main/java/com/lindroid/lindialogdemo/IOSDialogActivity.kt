@@ -71,6 +71,7 @@ class IOSDialogActivity : AppCompatActivity() {
                     .addItem("黄色", Color.YELLOW)
                     .addItem("蓝色", Color.BLUE)
                     .addItem("绿色", Color.GREEN)
+//                    .setCancelButtonHeight(dp2px(100))
                     .setOnItemClickListener { position, text, itemView, dialog ->
                         shortToast("你选择了${itemView.text}")
                     }

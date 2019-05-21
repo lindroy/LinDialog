@@ -4,10 +4,11 @@
     android:layout_width="match_parent"
     android:gravity="center"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:text="Item"
     android:textSize="16sp"
+    android:ellipsize="end"
+    android:maxLines="1"
     android:textColor="@color/ios_dialog_text_color_blue"
     android:minHeight="50dp"
-    android:layout_height="50dp">
+    android:layout_height="wrap_content">
 
 </TextView>

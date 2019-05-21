@@ -68,6 +68,9 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
             text = bottomBtnConfigs.text
             textSize = bottomBtnConfigs.textSize
             setTextColor(bottomBtnConfigs.textColor)
+            if (bottomBtnConfigs.height > 0) {
+                height = bottomBtnConfigs.height
+            }
             background = initShapeDrawable()
             setOnClickListener {
                 cancelClickListener?.invoke(dialog)
@@ -134,17 +137,21 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
      */
     fun setCancelTextSizeId(@DimenRes textSizeId: Int) = this.apply { setCancelTextSize(IDialog.getSpSize(textSizeId)) }
 
+    fun setCancelButtonHeight(height: Int) = this.apply { bottomBtnConfigs.height = height }
+
     /**
      * 设置取消按钮的样式和点击事件
      */
     fun setCancelButton(text: String = bottomBtnConfigs.text,
                         textColor: Int = bottomBtnConfigs.textColor,
                         textSize: Float = bottomBtnConfigs.textSize,
+                        height: Int = bottomBtnConfigs.height,
                         listener: (dialog: DialogInterface) -> Unit) = this.apply {
         bottomBtnConfigs.let {
             it.text = text
             it.textColor = textColor
             it.textSize = textSize
+            it.height = height
         }
         cancelClickListener = listener
     }

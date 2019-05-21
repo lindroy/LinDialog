@@ -90,13 +90,13 @@ object IDialog {
         return Config.build()
     }
 
-    fun getSpSize(dimenId: Int) = px2sp(context.resources.getDimensionPixelSize(dimenId).toFloat())
+    internal fun getSpSize(dimenId: Int) = px2sp(context.resources.getDimensionPixelSize(dimenId).toFloat())
 
-    fun getPxSize(dimenId: Int) = context.resources.getDimensionPixelSize(dimenId)
+    internal fun getPxSize(dimenId: Int) = context.resources.getDimensionPixelSize(dimenId)
 
-    fun getResColor(@ColorRes colorId: Int) = ContextCompat.getColor(context, colorId)
+    internal fun getResColor(@ColorRes colorId: Int) = ContextCompat.getColor(context, colorId)
 
-    fun getString(@StringRes stringId: Int) = context.getString(stringId)
+    internal fun getString(@StringRes stringId: Int) = context.getString(stringId)
 
     class Config {
         companion object {
@@ -209,12 +209,14 @@ object IDialog {
         @JvmOverloads
         fun setBottomListButton(textSize: Float = bottomBtnConfigs.textSize,
                                 @ColorInt textColor: Int = bottomBtnConfigs.textColor,
-                                text: String = bottomBtnConfigs.text
+                                text: String = bottomBtnConfigs.text,
+                                height: Int = bottomBtnConfigs.height
         ) = this.apply {
             bottomBtnConfigs.let {
                 it.text = text
                 it.textSize = textSize
                 it.textColor = textColor
+                it.height = height
             }
         }
 
