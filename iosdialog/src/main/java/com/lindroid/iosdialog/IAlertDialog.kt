@@ -5,6 +5,7 @@ import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.DimenRes
 import android.support.v4.app.FragmentManager
+import android.util.Log
 import android.view.View
 import com.lindroid.iosdialog.base.BaseIOSDialog
 import kotlinx.android.synthetic.main.dialog_alert_ios.*
@@ -36,14 +37,11 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
         @JvmStatic
         fun build(fm: FragmentManager) = IAlertDialog().apply {
             this.fm = fm
-            titleConfig = IDialog.alertTitleConfigs.copy()
-            msgConfig = IDialog.alertMsgConfigs.copy()
-            paddingTitleMsg = IDialog.alertPaddingTitleMsg
-            paddingTop = IDialog.alertPaddingTop
-            paddingSides = IDialog.alertPaddingSides
-            paddingBottom = IDialog.alertPaddingBottom
+            Log.e("Tag","build")
         }
     }
+
+
 
     /**
      * 返回true表示子类自己处理布局，setViewHandler方法无效

@@ -79,7 +79,7 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
 
     private fun initListView() {
         lvChoices.apply {
-            divider = ContextCompat.getDrawable(mContext, R.drawable.dialog_ios_divider)
+            divider = ContextCompat.getDrawable(mContext, R.drawable.dialog_ios_divider_vertical)
             dividerHeight = resources.getDimensionPixelSize(R.dimen.ios_dialog_divider_size)
             adapter = DialogListAdapter(mContext, DIALOG_ALERT_LIST, R.layout.item_dialog_list, items)
             setOnItemClickListener { parent, view, position, id ->

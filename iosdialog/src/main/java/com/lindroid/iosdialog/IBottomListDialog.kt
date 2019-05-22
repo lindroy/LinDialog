@@ -46,6 +46,10 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
                     this.fm = fm
                     titleConfig = IDialog.bottomTitleConfigs.copy()
                     msgConfig = IDialog.bottomMsgConfigs.copy()
+                    paddingTitleMsg = IDialog.bottomPaddingTitleMsg
+                    paddingTop = IDialog.bottomPaddingTop
+                    paddingSides = IDialog.bottomPaddingSides
+                    paddingBottom = IDialog.bottomPaddingBottom
                 }
     }
 
@@ -86,7 +90,7 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
 
     private fun initListView() {
         lvChoices.apply {
-            divider = ContextCompat.getDrawable(mContext, R.drawable.dialog_ios_divider)
+            divider = ContextCompat.getDrawable(mContext, R.drawable.dialog_ios_divider_vertical)
             dividerHeight = resources.getDimensionPixelSize(R.dimen.ios_dialog_divider_size)
             adapter = DialogListAdapter(mContext, DIALOG_BOTTOM_LIST, R.layout.item_dialog_list, items)
             setOnItemClickListener { parent, view, position, id ->

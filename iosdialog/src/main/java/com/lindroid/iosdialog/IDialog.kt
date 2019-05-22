@@ -64,9 +64,15 @@ object IDialog {
     /**
      * 提示对话框标题与信息文字的间距
      */
-    internal val alertPaddingTitleMsg by lazy {
-        getPxSize(R.dimen.ios_alert_padding_title_msg)
-    }
+    internal var alertPaddingTitleMsg = 0
+
+    internal var bottomPaddingTop = 0
+
+    internal var bottomPaddingBottom = 0
+
+    internal var bottomPaddingSides = 0
+
+    internal var bottomPaddingTitleMsg = 0
 
     internal var bottomAnimStyle: Int = R.style.BottomDialogStyle
 
@@ -108,6 +114,11 @@ object IDialog {
         alertPaddingTop = getPxSize(R.dimen.ios_alert_padding_top)
         alertPaddingBottom = getPxSize(R.dimen.ios_alert_padding_bottom)
         alertPaddingSides = getPxSize(R.dimen.ios_alert_padding_sides)
+        alertPaddingTitleMsg = getPxSize(R.dimen.ios_alert_padding_title_msg)
+        bottomPaddingTop = getPxSize(R.dimen.ios_bottom_padding_top)
+        bottomPaddingBottom = getPxSize(R.dimen.ios_bottom_padding_bottom)
+        bottomPaddingSides  = getPxSize(R.dimen.ios_bottom_padding_sides)
+        bottomPaddingTitleMsg  = getPxSize(R.dimen.ios_bottom_padding_title_msg)
         return Config.build()
     }
 
@@ -137,9 +148,11 @@ object IDialog {
 
         fun setAlertPaddingTop(top: Int) = this.apply { alertPaddingTop = top }
 
-        fun setAlertPadddingBottom(bottom:Int) = this.apply { alertPaddingBottom = bottom }
+        fun setAlertPadddingBottom(bottom: Int) = this.apply { alertPaddingBottom = bottom }
 
-        fun setAlertPaddingSides(sides:Int) = this.apply { alertPaddingSides = sides }
+        fun setAlertPaddingSides(sides: Int) = this.apply { alertPaddingSides = sides }
+
+        fun setAlertPaddingTitleMsg(padding: Int) = this.apply { alertPaddingTitleMsg = padding }
 
         @JvmOverloads
         fun setAlertTitle(textSize: Float = alertTitleConfigs.textSize,
@@ -274,11 +287,18 @@ object IDialog {
             }
         }
 
+        fun setBottomPaddingTop(top: Int) = this.apply { bottomPaddingTop = top }
+
+        fun setBottomPaddingBottom(bottom: Int) = this.apply { bottomPaddingBottom = bottom }
+
+        fun setBottomPaddingSides(sides:Int) = this.apply { bottomPaddingSides = sides }
+
+        fun setBottomPaddingTitleMsg(padding:Int) = this.apply { bottomPaddingTitleMsg = padding }
+
         /**
          * 底部对话框的动画样式
          */
         fun setBottomAnimStyle(@StyleRes style: Int) = this.apply { bottomAnimStyle = style }
-
 
         fun setBottomWidthScale(widthScale: Float) = this.apply { bottomWidthScale = widthScale }
 
