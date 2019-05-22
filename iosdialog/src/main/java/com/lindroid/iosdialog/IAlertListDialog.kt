@@ -54,7 +54,7 @@ class IAlertListDialog : BaseIAlertDialog<IAlertListDialog>() {
     override fun onHandleView(contentView: View): Boolean {
         super.onHandleView(contentView)
         setAnimStyle(IDialog.alertAnimStyle)
-        llRoot.background = initShapeDrawable()
+        llRoot.background = initBackgroundDrawable()
         initListView()
         btnAlertList.apply {
             alertListBtnConfigs.let {

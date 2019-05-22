@@ -70,7 +70,7 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
         setWidthScale(IDialog.bottomWidthScale)
         setAnimStyle(R.style.BottomDialogStyle)
 //        ShapeDrawable的宽高会跟随第一个设置background的View
-        llContent.background = initShapeDrawable()
+        llContent.background = initBackgroundDrawable()
 
         btnCancel.apply {
             text = bottomBtnConfigs.text
@@ -79,7 +79,7 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
             if (bottomBtnConfigs.height > 0) {
                 height = bottomBtnConfigs.height
             }
-            background = initShapeDrawable()
+            background = initBackgroundDrawable()
             setOnClickListener {
                 cancelClickListener?.invoke(dialog)
                 if (dismissible) {

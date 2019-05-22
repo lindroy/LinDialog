@@ -79,7 +79,7 @@ class IAlertDialog : BaseIAlertDialog<IAlertDialog>() {
                 false -> View.GONE
             }
         }
-        llRoot.background = initShapeDrawable()
+        llRoot.background = initBackgroundDrawable()
         if (IDialog.alertBtnHeight > 0) {
             val params = llButton.layoutParams
             params.height = IDialog.alertBtnHeight

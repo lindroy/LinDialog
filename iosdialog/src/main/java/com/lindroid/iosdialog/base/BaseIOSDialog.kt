@@ -7,6 +7,7 @@ import android.graphics.drawable.shapes.RectShape
 import android.graphics.drawable.shapes.RoundRectShape
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
+import android.support.annotation.FloatRange
 import android.support.annotation.StringRes
 import android.view.View
 import com.lindroid.iosdialog.IDialog
@@ -85,7 +86,7 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
         return false
     }
 
-    protected fun initShapeDrawable(): ShapeDrawable {
+    protected fun initBackgroundDrawable(): ShapeDrawable {
         val roundRectShape =
                 RoundRectShape(floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius), null, null)
         return with(ShapeDrawable(roundRectShape)) {
@@ -96,29 +97,60 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
         }
     }
 
+    /**
+     * 设置背景颜色
+     */
     fun setBackgroundColor(@ColorInt color: Int) = this.apply { bgColor = color }
-    //    @android.support.annotation.FloatRange(from = 0.0, to = 1.0)
-    fun setAlpha(alpha: Float) = this.apply { bgAlpha = alpha }
+
+    /**
+     * 设置透明度
+     */
+    fun setAlpha(@FloatRange(from = 0.0, to = 1.0) alpha: Float) = this.apply { bgAlpha = alpha }
 
     /**
      * 设置背景圆角矩形的圆角半径，单位为px
      */
     fun setCornerRadius(radius: Int) = this.apply { this.radius = radius.toFloat() } as T
 
+    /**
+     * 设置标题文字
+     */
     fun setTitle(title: String) = this.apply { titleConfig.text = title } as T
 
+    /**
+     * @see setTitle
+     */
     fun setTitle(@StringRes stringId: Int) = this.apply { setTitle(LinDialog.context.getString(stringId)) } as T
 
+    /**
+     * 设置标题文字大小
+     */
     fun setTitleSize(titleSize: Float) = this.apply { titleConfig.textSize = titleSize } as T
 
+    /**
+     * 设置标题文字颜色
+     */
     fun setTitleColor(@ColorInt color: Int) = this.apply { titleConfig.textColor = color } as T
 
+    /**
+     * 设置标题文字颜色
+     * @param colorId：颜色资源Id
+     */
     fun setTitleColorId(@ColorRes colorId: Int) = this.apply { setTitleColor(LinDialog.getResColor(colorId)) } as T
 
+    /**
+     * 设置消息文字
+     */
     fun setMessage(message: String) = this.apply { msgConfig.text = message } as T
 
+    /**
+     * @see setMessage
+     */
     fun setMessage(@StringRes stringId: Int) = this.apply { setMessage(LinDialog.context.getString(stringId)) } as T
 
+    /**
+     * 设置消息文字大小
+     */
     fun setMessageSize(messageSize: Float) = this.apply { msgConfig.textSize = messageSize } as T
 
     fun setMessageColor(@ColorInt color: Int) = this.apply { msgConfig.textColor = color } as T

@@ -68,7 +68,7 @@ object IDialog {
     internal var alertPaddingSides = 0
 
     /**
-     * 提示对话框标题与信息文字的间距
+     * 提示对话框标题与消息文字文字的间距
      */
     internal var alertPaddingTitleMsg = 0
 
@@ -139,6 +139,12 @@ object IDialog {
         }
 
         /**
+         * 设置背景颜色
+         * 默认为纯白色（Color.WHITE）
+         */
+        fun setBackgroudColor(@ColorInt color: Int) = this.apply { bgColor = color }
+
+        /**
          * 设置背景圆角半径
          * 单位为px；默认为12dp（R.dimen.ios_dialog_corner_radius）
          */
@@ -153,16 +159,15 @@ object IDialog {
         fun setAlpha(@FloatRange(from = 0.0, to = 1.0) alpha: Float) = this.apply { IDialog.alpha = alpha }
 
         /**
-         * 设置背景颜色
-         * 默认为纯白色（Color.WHITE）
-         */
-        fun setBackgroudColor(@ColorInt color: Int) = this.apply { bgColor = color }
-
-        /**
          * 设置提示对话框与屏幕宽度比
          * 默认为0.7
          */
         fun setAlertWidthScale(widthScale: Float) = this.apply { alertWidthScale = widthScale }
+
+        /**
+         * 设置提示对话框动画
+         */
+        fun setAlertAnimStyle(@StyleRes style: Int) = this.apply { alertAnimStyle = style }
 
         /**
          * 设置提示对话框顶部内边距
@@ -171,19 +176,19 @@ object IDialog {
         fun setAlertPaddingTop(top: Int) = this.apply { alertPaddingTop = top }
 
         /**
-         * 设置提示对话框标题与信息部分的底部内边距
+         * 设置提示对话框标题与消息文字布局的底部内边距
          * 单位为px；默认为R.dimen.ios_alert_padding_bottom
          */
-        fun setAlertPadddingBottom(bottom: Int) = this.apply { alertPaddingBottom = bottom }
+        fun setAlertPaddingBottom(bottom: Int) = this.apply { alertPaddingBottom = bottom }
 
         /**
-         * 设置提示对话框标题与信息部分的两侧内边距
+         * 设置提示对话框标题与消息文字布局的两侧内边距
          * 单位为px；默认为R.dimen.ios_alert_padding_sides
          */
         fun setAlertPaddingSides(sides: Int) = this.apply { alertPaddingSides = sides }
 
         /**
-         * 设置提示对话框标题与信息之间的间距
+         * 设置提示对话框标题与消息文字之间的间距
          * 单位为px，默认为R.dimen.ios_alert_padding_title_msg
          */
         fun setAlertPaddingTitleMsg(padding: Int) = this.apply { alertPaddingTitleMsg = padding }
@@ -206,7 +211,7 @@ object IDialog {
         }
 
         /**
-         * 设置提示对话框信息文字样式
+         * 设置提示对话框消息文字样式
          */
         @JvmOverloads
         fun setAlertMsgView(textSize: Float = alertMsgConfigs.textSize,
@@ -224,11 +229,6 @@ object IDialog {
          * 单位为px，默认为R.dimen.ios_alert_bottom_height
          */
         fun setAlertButtonHeight(height: Int) = this.apply { alertBtnHeight = height }
-
-        /**
-         * 设置提示对话框动画
-         */
-        fun setAlertAnimStyle(@StyleRes style: Int) = this.apply { alertAnimStyle = style }
 
         /**
          * 设置提示对话框确认按钮样式
@@ -266,6 +266,7 @@ object IDialog {
 
         /**
          * 设置IAlertListDialog的选项样式
+         * @param textSize:字体大小，单位sp
          * @param paddingSides:左右的padding值
          */
         @JvmOverloads
@@ -301,23 +302,22 @@ object IDialog {
         fun setBottomPaddingTop(top: Int) = this.apply { bottomPaddingTop = top }
 
         /**
-         * 设置底部对话框标题与信息部分的底部内边距
+         * 设置底部对话框标题与消息文字部分的底部内边距
          * 单位为px；默认为R.dimen.ios_bottom_padding_bottom
          */
         fun setBottomPaddingBottom(bottom: Int) = this.apply { bottomPaddingBottom = bottom }
 
         /**
-         * 设置提示对话框标题与信息部分的两侧内边距
+         * 设置提示对话框标题与消息文字部分的两侧内边距
          * 单位为px；默认为R.dimen.ios_bottom_padding_sides
          */
         fun setBottomPaddingSides(sides: Int) = this.apply { bottomPaddingSides = sides }
 
         /**
-         * 设置底部对话框标题与信息部分的两侧内边距
-         * 单位为px；默认为R.dimen.ios_bottom_padding_sides
+         * 设置底部对话框标题与消息文字部分的两侧内边距
+         * 单位为px；默认为R.dimen.ios_bottom_padding_title_msg
          */
         fun setBottomPaddingTitleMsg(padding: Int) = this.apply { bottomPaddingTitleMsg = padding }
-
 
         /**
          * 设置IBottomListDialog的标题样式
@@ -337,7 +337,7 @@ object IDialog {
         }
 
         /**
-         * 设置IBottomListDialog的信息文字样式
+         * 设置IBottomListDialog的消息文字文字样式
          */
         @JvmOverloads
         fun setBottomListMsgView(textSize: Float = bottomMsgConfigs.textSize,
