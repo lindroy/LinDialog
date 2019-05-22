@@ -113,6 +113,9 @@ object IDialog {
         getResColor(R.color.ios_dialog_text_color_black)
     }
 
+    /**
+     * 初始化方法，调起所有
+     */
     fun init(application: Application): Config {
         this.application = application
         LinDialog.init(application)
@@ -123,11 +126,10 @@ object IDialog {
         alertPaddingTitleMsg = getPxSize(R.dimen.ios_alert_padding_title_msg)
         bottomPaddingTop = getPxSize(R.dimen.ios_bottom_padding_top)
         bottomPaddingBottom = getPxSize(R.dimen.ios_bottom_padding_bottom)
-        bottomPaddingSides  = getPxSize(R.dimen.ios_bottom_padding_sides)
-        bottomPaddingTitleMsg  = getPxSize(R.dimen.ios_bottom_padding_title_msg)
+        bottomPaddingSides = getPxSize(R.dimen.ios_bottom_padding_sides)
+        bottomPaddingTitleMsg = getPxSize(R.dimen.ios_bottom_padding_title_msg)
         return Config.build()
     }
-
 
 
     class Config {
@@ -136,29 +138,64 @@ object IDialog {
             fun build() = Config()
         }
 
+        /**
+         * 设置背景圆角半径
+         * 单位为px；默认为12dp（R.dimen.ios_dialog_corner_radius）
+         */
         fun setCornerRadius(cornerRadius: Float) = this.apply {
             IDialog.cornerRadius = cornerRadius
         }
 
+        /**
+         * 设置背景透明度
+         * 范围为0~1.0,0为全透明，1为全不透明；默认为0.85
+         */
         fun setAlpha(@FloatRange(from = 0.0, to = 1.0) alpha: Float) = this.apply { IDialog.alpha = alpha }
 
+        /**
+         * 设置背景颜色
+         * 默认为纯白色（Color.WHITE）
+         */
         fun setBackgroudColor(@ColorInt color: Int) = this.apply { bgColor = color }
 
+        /**
+         * 设置提示对话框与屏幕宽度比
+         * 默认为0.7
+         */
         fun setAlertWidthScale(widthScale: Float) = this.apply { alertWidthScale = widthScale }
 
+        /**
+         * 设置提示对话框顶部内边距
+         * 单位为px；默认为R.dimen.ios_alert_padding_top
+         */
         fun setAlertPaddingTop(top: Int) = this.apply { alertPaddingTop = top }
 
+        /**
+         * 设置提示对话框标题与信息部分的底部内边距
+         * 单位为px；默认为R.dimen.ios_alert_padding_bottom
+         */
         fun setAlertPadddingBottom(bottom: Int) = this.apply { alertPaddingBottom = bottom }
 
+        /**
+         * 设置提示对话框标题与信息部分的两侧内边距
+         * 单位为px；默认为R.dimen.ios_alert_padding_sides
+         */
         fun setAlertPaddingSides(sides: Int) = this.apply { alertPaddingSides = sides }
 
+        /**
+         * 设置提示对话框标题与信息之间的间距
+         * 单位为px，默认为R.dimen.ios_alert_padding_title_msg
+         */
         fun setAlertPaddingTitleMsg(padding: Int) = this.apply { alertPaddingTitleMsg = padding }
 
+        /**
+         * 设置提示对话框标题样式
+         */
         @JvmOverloads
-        fun setAlertTitle(textSize: Float = alertTitleConfigs.textSize,
-                          @ColorInt textColor: Int = alertTitleConfigs.textColor,
-                          text: String = "",
-                          gravity: Int = alertTitleConfigs.gravity
+        fun setAlertTitleView(textSize: Float = alertTitleConfigs.textSize,
+                              @ColorInt textColor: Int = alertTitleConfigs.textColor,
+                              text: String = "",
+                              gravity: Int = alertTitleConfigs.gravity
         ) = this.apply {
             alertTitleConfigs.also {
                 it.textSize = textSize
@@ -168,10 +205,13 @@ object IDialog {
             }
         }
 
+        /**
+         * 设置提示对话框信息文字样式
+         */
         @JvmOverloads
-        fun setAlertMsg(textSize: Float = alertMsgConfigs.textSize,
-                        @ColorInt textColor: Int = alertMsgConfigs.textColor,
-                        gravity: Int = alertMsgConfigs.gravity) = this.apply {
+        fun setAlertMsgView(textSize: Float = alertMsgConfigs.textSize,
+                            @ColorInt textColor: Int = alertMsgConfigs.textColor,
+                            gravity: Int = alertMsgConfigs.gravity) = this.apply {
             alertMsgConfigs.also {
                 it.textSize = textSize
                 it.textColor = textColor
@@ -179,10 +219,20 @@ object IDialog {
             }
         }
 
+        /**
+         * 设置提示对话框按钮高度
+         * 单位为px，默认为R.dimen.ios_alert_bottom_height
+         */
         fun setAlertButtonHeight(height: Int) = this.apply { alertBtnHeight = height }
 
+        /**
+         * 设置提示对话框动画
+         */
         fun setAlertAnimStyle(@StyleRes style: Int) = this.apply { alertAnimStyle = style }
 
+        /**
+         * 设置提示对话框确认按钮样式
+         */
         @JvmOverloads
         fun setAlertPosButton(text: String = alertPosBtnConfigs.text,
                               textSize: Float = alertPosBtnConfigs.textSize,
@@ -197,6 +247,9 @@ object IDialog {
             }
         }
 
+        /**
+         * 设置提示对话框取消按钮样式
+         */
         @JvmOverloads
         fun setAlertNegButton(text: String = alertNegBtnConfigs.text,
                               textSize: Float = alertNegBtnConfigs.textSize,
@@ -211,11 +264,15 @@ object IDialog {
             }
         }
 
+        /**
+         * 设置IAlertListDialog的选项样式
+         * @param paddingSides:左右的padding值
+         */
         @JvmOverloads
         fun setAlertListItem(textSize: Float = alertListItemConfigs.textSize,
                              @ColorInt textColor: Int = alertListItemConfigs.textColor,
                              height: Int = alertListItemConfigs.height,
-                             paddingSides: Int = 0 //左右的padding值
+                             paddingSides: Int = 0
         ) = this.apply {
             alertListItemConfigs.also {
                 it.textSize = textSize
@@ -226,32 +283,66 @@ object IDialog {
             }
         }
 
+        /**
+         * 设置底部对话框与屏幕宽度之比
+         * 默认为0.95
+         */
+        fun setBottomWidthScale(widthScale: Float) = this.apply { bottomWidthScale = widthScale }
+
+        /**
+         * 底部对话框的动画样式
+         */
+        fun setBottomAnimStyle(@StyleRes style: Int) = this.apply { bottomAnimStyle = style }
+
+        /**
+         * 设置底部对话框顶部内边距
+         * 单位为px；默认为R.dimen.ios_bottom_padding_top
+         */
+        fun setBottomPaddingTop(top: Int) = this.apply { bottomPaddingTop = top }
+
+        /**
+         * 设置底部对话框标题与信息部分的底部内边距
+         * 单位为px；默认为R.dimen.ios_bottom_padding_bottom
+         */
+        fun setBottomPaddingBottom(bottom: Int) = this.apply { bottomPaddingBottom = bottom }
+
+        /**
+         * 设置提示对话框标题与信息部分的两侧内边距
+         * 单位为px；默认为R.dimen.ios_bottom_padding_sides
+         */
+        fun setBottomPaddingSides(sides: Int) = this.apply { bottomPaddingSides = sides }
+
+        /**
+         * 设置底部对话框标题与信息部分的两侧内边距
+         * 单位为px；默认为R.dimen.ios_bottom_padding_sides
+         */
+        fun setBottomPaddingTitleMsg(padding: Int) = this.apply { bottomPaddingTitleMsg = padding }
+
+
+        /**
+         * 设置IBottomListDialog的标题样式
+         */
         @JvmOverloads
-        fun setBottomListTitle(textSize: Float = bottomTitleConfigs.textSize,
-                               @ColorInt textColor: Int = bottomTitleConfigs.textColor,
-                               text: String = "",
-                               paddingLeft: Int = bottomTitleConfigs.paddingLeft,
-                               paddingTop: Int = bottomTitleConfigs.paddingTop,
-                               paddingRight: Int = bottomTitleConfigs.paddingRight,
-                               paddingBottom: Int = bottomTitleConfigs.paddingBottom,
-                               gravity: Int = bottomTitleConfigs.gravity
+        fun setBottomListTitleView(textSize: Float = bottomTitleConfigs.textSize,
+                                   @ColorInt textColor: Int = bottomTitleConfigs.textColor,
+                                   text: String = "",
+                                   gravity: Int = bottomTitleConfigs.gravity
         ) = this.apply {
             bottomTitleConfigs.also {
                 it.text = text
                 it.textSize = textSize
                 it.textColor = textColor
                 it.gravity = gravity
-                it.paddingLeft = paddingLeft
-                it.paddingTop = paddingTop
-                it.paddingRight = paddingRight
-                it.paddingBottom = paddingBottom
             }
         }
 
+        /**
+         * 设置IBottomListDialog的信息文字样式
+         */
         @JvmOverloads
-        fun setBottomListMsg(textSize: Float = bottomMsgConfigs.textSize,
-                             @ColorInt textColor: Int = bottomMsgConfigs.textColor,
-                             gravity: Int = bottomMsgConfigs.gravity
+        fun setBottomListMsgView(textSize: Float = bottomMsgConfigs.textSize,
+                                 @ColorInt textColor: Int = bottomMsgConfigs.textColor,
+                                 gravity: Int = bottomMsgConfigs.gravity
         ) = this.apply {
             bottomMsgConfigs.also {
                 it.textSize = textSize
@@ -260,6 +351,9 @@ object IDialog {
             }
         }
 
+        /**
+         * 设置IBottomListDialog的取消按钮样式
+         */
         @JvmOverloads
         fun setBottomListButton(textSize: Float = bottomBtnConfigs.textSize,
                                 @ColorInt textColor: Int = bottomBtnConfigs.textColor,
@@ -274,10 +368,14 @@ object IDialog {
             }
         }
 
+        /**
+         * 设置IBottomListDialog的选项样式
+         * @param paddingSides:左右的padding值
+         */
         fun setBottomListItem(textSize: Float = bottomListItemConfigs.textSize,
                               @ColorInt textColor: Int = bottomListItemConfigs.textColor,
                               height: Int = bottomListItemConfigs.height,
-                              paddingSides: Int = 0 //左右的padding值
+                              paddingSides: Int = 0
         ) = this.apply {
             bottomListItemConfigs.also {
                 it.textSize = textSize
@@ -287,21 +385,6 @@ object IDialog {
                 it.paddingRight = paddingSides
             }
         }
-
-        fun setBottomPaddingTop(top: Int) = this.apply { bottomPaddingTop = top }
-
-        fun setBottomPaddingBottom(bottom: Int) = this.apply { bottomPaddingBottom = bottom }
-
-        fun setBottomPaddingSides(sides:Int) = this.apply { bottomPaddingSides = sides }
-
-        fun setBottomPaddingTitleMsg(padding:Int) = this.apply { bottomPaddingTitleMsg = padding }
-
-        /**
-         * 底部对话框的动画样式
-         */
-        fun setBottomAnimStyle(@StyleRes style: Int) = this.apply { bottomAnimStyle = style }
-
-        fun setBottomWidthScale(widthScale: Float) = this.apply { bottomWidthScale = widthScale }
 
     }
 }

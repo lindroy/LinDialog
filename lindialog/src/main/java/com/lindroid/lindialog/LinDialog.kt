@@ -21,7 +21,7 @@ object LinDialog {
     val context: Context
         get() = application.applicationContext
 
-     fun getResColor(@ColorRes colorId:Int) = ContextCompat.getColor(context,colorId)
+    fun getResColor(@ColorRes colorId: Int) = ContextCompat.getColor(context, colorId)
 
 
 }
