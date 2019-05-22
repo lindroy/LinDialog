@@ -15,6 +15,9 @@ import com.lindroid.iosdialog.base.BaseIOSDialog
 import com.lindroid.iosdialog.bean.DialogItemBean
 import com.lindroid.iosdialog.bean.TextConfigs
 import com.lindroid.iosdialog.constants.DIALOG_BOTTOM_LIST
+import com.lindroid.iosdialog.util.getResColor
+import com.lindroid.iosdialog.util.getResString
+import com.lindroid.iosdialog.util.getSpSize
 import kotlinx.android.synthetic.main.dialog_bottom_sheet_ios.*
 
 /**
@@ -66,7 +69,7 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
         setGravity(Gravity.BOTTOM)
         setWidthScale(IDialog.bottomWidthScale)
         setAnimStyle(R.style.BottomDialogStyle)
-//        TODO(ShapeDrawable的宽高会跟随第一个设置background的View)
+//        ShapeDrawable的宽高会跟随第一个设置background的View
         llContent.background = initShapeDrawable()
 
         btnCancel.apply {
@@ -119,7 +122,7 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
     /**
      * 设置取消按钮文字Id
      */
-    fun setCancelText(@StringRes stringId: Int) = this.apply { setCancelText(IDialog.getString(stringId)) }
+    fun setCancelText(@StringRes stringId: Int) = this.apply { setCancelText(getResString(stringId)) }
 
     /**
      * 设置取消按钮文字颜色
@@ -129,7 +132,7 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
     /**
      * 设置取消按钮文字颜色Id
      */
-    fun setCancelTextColorId(@ColorRes colorId: Int) = this.apply { setCancelTextColor(IDialog.getResColor(colorId)) }
+    fun setCancelTextColorId(@ColorRes colorId: Int) = this.apply { setCancelTextColor(getResColor(colorId)) }
 
     /**
      * 设置取消按钮文字大小，单位为sp
@@ -140,7 +143,7 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
      * 设置取消按钮文字大小
      * @param dimens资源
      */
-    fun setCancelTextSizeId(@DimenRes textSizeId: Int) = this.apply { setCancelTextSize(IDialog.getSpSize(textSizeId)) }
+    fun setCancelTextSizeId(@DimenRes textSizeId: Int) = this.apply { setCancelTextSize(getSpSize(textSizeId)) }
 
     fun setCancelButtonHeight(height: Int) = this.apply { bottomBtnConfigs.height = height }
 

@@ -10,9 +10,13 @@ import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.TextView
 import com.lindroid.iosdialog.adapter.DialogListAdapter
-import com.lindroid.iosdialog.base.BaseIOSDialog
+import com.lindroid.iosdialog.base.BaseIAlertDialog
 import com.lindroid.iosdialog.bean.DialogItemBean
 import com.lindroid.iosdialog.constants.DIALOG_ALERT_LIST
+import com.lindroid.iosdialog.util.getPxSize
+import com.lindroid.iosdialog.util.getResColor
+import com.lindroid.iosdialog.util.getResString
+import com.lindroid.iosdialog.util.getSpSize
 import kotlinx.android.synthetic.main.dialog_alert_list_ios.*
 
 /**
@@ -21,7 +25,7 @@ import kotlinx.android.synthetic.main.dialog_alert_list_ios.*
  * @function 多选项的iOS风格提示对话框
  * @description
  */
-class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
+class IAlertListDialog : BaseIAlertDialog<IAlertListDialog>() {
 
     private val items: MutableList<DialogItemBean> = ArrayList()
 
@@ -44,12 +48,6 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
         fun build(fm: FragmentManager) =
                 IAlertListDialog().apply {
                     this.fm = fm
-                    titleConfig = IDialog.alertTitleConfigs.copy()
-                    msgConfig = IDialog.alertMsgConfigs.copy()
-                    paddingTitleMsg = IDialog.alertPaddingTitleMsg
-                    paddingTop = IDialog.alertPaddingTop
-                    paddingSides = IDialog.alertPaddingSides
-                    paddingBottom = IDialog.alertPaddingBottom
                 }
     }
 
@@ -63,9 +61,9 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
                 text = it.text
                 textSize = it.textSize
                 setTextColor(it.textColor)
-                if (it.height > 0) {
-                    height = it.height
-                }
+            }
+            if (IDialog.alertBtnHeight > 0) {
+                height = IDialog.alertBtnHeight
             }
             setOnClickListener {
                 cancelClickListener?.invoke(dialog)
@@ -105,7 +103,7 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
      */
     fun setItemHeight(height: Int) = this.apply { alertListItemConfigs.height = height }
 
-    fun setItemHeightId(@DimenRes resId: Int) = this.apply { setItemHeight(IDialog.getPxSize(resId)) }
+    fun setItemHeightId(@DimenRes resId: Int) = this.apply { setItemHeight(getPxSize(resId)) }
 
     /**
      * 点击取消按钮是否关闭对话框
@@ -120,7 +118,7 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
     /**
      * 设置取消按钮文字Id
      */
-    fun setCancelText(@StringRes stringId: Int) = this.apply { setCancelText(IDialog.getString(stringId)) }
+    fun setCancelText(@StringRes stringId: Int) = this.apply { setCancelText(getResString(stringId)) }
 
     /**
      * 设置取消按钮文字颜色
@@ -130,7 +128,7 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
     /**
      * 设置取消按钮文字颜色Id
      */
-    fun setCancelTextColorId(@ColorRes colorId: Int) = this.apply { setCancelTextColor(IDialog.getResColor(colorId)) }
+    fun setCancelTextColorId(@ColorRes colorId: Int) = this.apply { setCancelTextColor(getResColor(colorId)) }
 
     /**
      * 设置取消按钮文字大小，单位为sp
@@ -141,11 +139,11 @@ class IAlertListDialog : BaseIOSDialog<IAlertListDialog>() {
      * 设置取消按钮文字大小
      * @param dimens资源
      */
-    fun setCancelTextSizeId(@DimenRes textSizeId: Int) = this.apply { setCancelTextSize(IDialog.getSpSize(textSizeId)) }
+    fun setCancelTextSizeId(@DimenRes textSizeId: Int) = this.apply { setCancelTextSize(getSpSize(textSizeId)) }
 
     fun setCancelButtonHeight(height: Int) = this.apply { alertListBtnConfigs.height = height }
 
-    fun setCancelButtonHeightId(@DimenRes resId: Int) = this.apply { setCancelButtonHeight(IDialog.getPxSize(resId)) }
+    fun setCancelButtonHeightId(@DimenRes resId: Int) = this.apply { setCancelButtonHeight(getPxSize(resId)) }
 
     /**
      * 设置取消按钮的样式和点击事件

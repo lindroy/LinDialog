@@ -3,10 +3,14 @@ package com.lindroid.iosdialog
 import android.app.Application
 import android.content.Context
 import android.graphics.Color
-import android.support.annotation.*
-import android.support.v4.content.ContextCompat
+import android.support.annotation.ColorInt
+import android.support.annotation.FloatRange
+import android.support.annotation.StyleRes
 import com.lindroid.iosdialog.bean.TextConfigs
-import com.lindroid.iosdialog.util.px2sp
+import com.lindroid.iosdialog.util.getPxSize
+import com.lindroid.iosdialog.util.getResColor
+import com.lindroid.iosdialog.util.getResString
+import com.lindroid.iosdialog.util.getSpSize
 import com.lindroid.lindialog.LinDialog
 
 /**
@@ -30,6 +34,8 @@ object IDialog {
 
     internal var bgColor = Color.WHITE
 
+    internal var alertBtnHeight = 0
+
     internal val alertTitleConfigs by lazy {
         TextConfigs(getSpSize(R.dimen.ios_alert_title_size), textColorBlack)
     }
@@ -44,11 +50,11 @@ object IDialog {
     internal var alertAnimStyle: Int = R.style.AlertDialogStyle
 
     internal val alertPosBtnConfigs by lazy {
-        TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), textColorBlue, text = getString(R.string.ios_dialog_positive_text))
+        TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), textColorBlue, text = getResString(R.string.ios_dialog_positive_text))
     }
 
     internal val alertNegBtnConfigs by lazy {
-        TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), textColorRed, text = getString(R.string.ios_dialog_negative_text))
+        TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), textColorRed, text = getResString(R.string.ios_dialog_negative_text))
     }
 
     internal val alertListItemConfigs by lazy {
@@ -122,13 +128,7 @@ object IDialog {
         return Config.build()
     }
 
-    internal fun getSpSize(dimenId: Int) = px2sp(context.resources.getDimensionPixelSize(dimenId).toFloat())
 
-    internal fun getPxSize(dimenId: Int) = context.resources.getDimensionPixelSize(dimenId)
-
-    internal fun getResColor(@ColorRes colorId: Int) = ContextCompat.getColor(context, colorId)
-
-    internal fun getString(@StringRes stringId: Int) = context.getString(stringId)
 
     class Config {
         companion object {
@@ -179,6 +179,8 @@ object IDialog {
             }
         }
 
+        fun setAlertButtonHeight(height: Int) = this.apply { alertBtnHeight = height }
+
         fun setAlertAnimStyle(@StyleRes style: Int) = this.apply { alertAnimStyle = style }
 
         @JvmOverloads
@@ -206,7 +208,6 @@ object IDialog {
                 it.textSize = textSize
                 it.textColor = textColor
                 it.gravity = gravity
-
             }
         }
 

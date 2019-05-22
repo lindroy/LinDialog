@@ -4,13 +4,12 @@
     android:layout_width="match_parent"
     android:gravity="center"
     xmlns:tools="http://schemas.android.com/tools"
-    android:textSize="16sp"
     android:ellipsize="end"
     android:maxLines="1"
     android:textColor="@color/ios_dialog_text_color_blue"
-    android:minHeight="50dp"
-    android:paddingStart="@dimen/ios_alert_list_item_padding_sides"
-    android:paddingEnd="@dimen/ios_alert_list_item_padding_sides"
+    android:minHeight="@dimen/ios_dialog_list_item_height"
+    android:paddingStart="@dimen/ios_dialog_list_item_padding_sides"
+    android:paddingEnd="@dimen/ios_dialog_list_item_padding_sides"
     android:layout_height="wrap_content">
 
 </TextView>

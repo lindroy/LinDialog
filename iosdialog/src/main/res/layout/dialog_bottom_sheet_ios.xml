@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:paddingBottom="8dp"
+    android:paddingBottom="@dimen/ios_bottom_button_screen_margin"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -23,12 +23,11 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
 
-
     <Button
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/ios_bottom_button_list_margin"
         style="@style/DialogButtonStyle"
         android:id="@+id/btnCancel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="@dimen/ios_bottom_button_height" />
 
 </LinearLayout>

@@ -5,9 +5,10 @@ import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.DimenRes
 import android.support.v4.app.FragmentManager
-import android.util.Log
 import android.view.View
-import com.lindroid.iosdialog.base.BaseIOSDialog
+import com.lindroid.iosdialog.base.BaseIAlertDialog
+import com.lindroid.iosdialog.util.getResColor
+import com.lindroid.iosdialog.util.getSpSize
 import kotlinx.android.synthetic.main.dialog_alert_ios.*
 
 /**
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.dialog_alert_ios.*
  * @function iOS风格的提示对话框
  * @Description
  */
-class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
+class IAlertDialog : BaseIAlertDialog<IAlertDialog>() {
 
     private var dismissible = true
 
@@ -37,11 +38,8 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
         @JvmStatic
         fun build(fm: FragmentManager) = IAlertDialog().apply {
             this.fm = fm
-            Log.e("Tag","build")
         }
     }
-
-
 
     /**
      * 返回true表示子类自己处理布局，setViewHandler方法无效
@@ -82,7 +80,11 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
             }
         }
         llRoot.background = initShapeDrawable()
-
+        if (IDialog.alertBtnHeight > 0) {
+            val params = llButton.layoutParams
+            params.height = IDialog.alertBtnHeight
+            llButton.layoutParams = params
+        }
         return false
     }
 
@@ -91,12 +93,12 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
     fun setPosButtonTextColor(@ColorInt color: Int) = this.apply { posBtnConfig.textColor = color }
 
     fun setPosButtonTextColorId(@ColorRes colorId: Int) =
-            this.apply { setPosButtonTextColor(IDialog.getResColor(colorId)) }
+            this.apply { setPosButtonTextColor(getResColor(colorId)) }
 
     fun setPosButtonTextSize(textSize: Float) = this.apply { posBtnConfig.textSize = textSize }
 
     fun setPosButtonTextSizeId(@DimenRes textSizeId: Int) =
-            this.apply { setPosButtonTextSize(IDialog.getSpSize(textSizeId)) }
+            this.apply { setPosButtonTextSize(getSpSize(textSizeId)) }
 
     fun setPosClickListener(listener: (DialogInterface) -> Unit) = this.apply { posListener = listener }
 
@@ -105,12 +107,12 @@ class IAlertDialog : BaseIOSDialog<IAlertDialog>() {
     fun setNegButtonTextColor(@ColorInt color: Int) = this.apply { negBtnConfig.textColor = color }
 
     fun setNegButtonTextColorId(@ColorRes colorId: Int) =
-            this.apply { setNegButtonTextColor(IDialog.getResColor(colorId)) }
+            this.apply { setNegButtonTextColor(getResColor(colorId)) }
 
     fun setNegButtonTextSize(textSize: Float) = this.apply { negBtnConfig.textSize = textSize }
 
     fun setNegButtonTextSizeId(@DimenRes textSizeId: Int) =
-            this.apply { setNegButtonTextSize(IDialog.getSpSize(textSizeId)) }
+            this.apply { setNegButtonTextSize(getSpSize(textSizeId)) }
 
     fun setNegClickListener(listener: (DialogInterface) -> Unit) = this.apply { negListener = listener }
 

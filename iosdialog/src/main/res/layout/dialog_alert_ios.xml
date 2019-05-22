@@ -12,10 +12,11 @@
 
 
     <LinearLayout
+        android:id="@+id/llButton"
         android:divider="@drawable/dialog_ios_divider"
         android:showDividers="middle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/ios_alert_bottom_height"
         android:orientation="horizontal">
 
         <Button
