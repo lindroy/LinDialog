@@ -15,6 +15,7 @@ import com.lindroid.iosdialog.base.BaseIOSDialog
 import com.lindroid.iosdialog.bean.DialogItemBean
 import com.lindroid.iosdialog.bean.TextConfigs
 import com.lindroid.iosdialog.constants.DIALOG_BOTTOM_LIST
+import com.lindroid.iosdialog.util.getPxSize
 import com.lindroid.iosdialog.util.getResColor
 import com.lindroid.iosdialog.util.getResString
 import com.lindroid.iosdialog.util.getSpSize
@@ -104,15 +105,33 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
             }
         }
     }
-
+    /**
+     * 添加一个选项
+     */
+    @JvmOverloads
     fun addItem(text: String, @ColorInt textColor: Int = bottomItemConfigs.textColor, textSize: Float = bottomItemConfigs.textSize) =
             this.apply {
                 items.add(DialogItemBean(text, textColor, textSize))
             }
 
+    /**
+     * 添加一组选项
+     * @param items:字符集合
+     */
     fun addItems(items: List<String>) = this.apply {
         items.forEach { addItem(it) }
     }
+
+    /**
+     * 设置列表Item高度
+     */
+    fun setItemHeight(height: Int) = this.apply { bottomBtnConfigs.height = height }
+
+    /**
+     * 设置列表Item高度
+     * @param dimen资源Id
+     */
+    fun setItemHeightRes(@DimenRes resId: Int) = this.apply { setItemHeight(getPxSize(resId)) }
 
     /**
      * 设置取消按钮文字
@@ -132,7 +151,7 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
     /**
      * 设置取消按钮文字颜色Id
      */
-    fun setCancelTextColorId(@ColorRes colorId: Int) = this.apply { setCancelTextColor(getResColor(colorId)) }
+    fun setCancelTextColorRes(@ColorRes colorId: Int) = this.apply { setCancelTextColor(getResColor(colorId)) }
 
     /**
      * 设置取消按钮文字大小，单位为sp
@@ -143,9 +162,19 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
      * 设置取消按钮文字大小
      * @param dimens资源
      */
-    fun setCancelTextSizeId(@DimenRes textSizeId: Int) = this.apply { setCancelTextSize(getSpSize(textSizeId)) }
+    fun setCancelTextSizeRes(@DimenRes textSizeId: Int) = this.apply { setCancelTextSize(getSpSize(textSizeId)) }
 
+    /**
+     * 设置取消按钮高度
+     */
     fun setCancelButtonHeight(height: Int) = this.apply { bottomBtnConfigs.height = height }
+
+    /**
+     * 设置取消按钮高度
+     * @param resId:dimens资源Id
+     * @see setCancelButtonHeight
+     */
+    fun setCancelButtonHeightRes(@DimenRes resId: Int) = this.apply { setCancelButtonHeight(getPxSize(resId)) }
 
     /**
      * 设置取消按钮的样式和点击事件

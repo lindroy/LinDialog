@@ -89,11 +89,20 @@ class IAlertListDialog : BaseIAlertDialog<IAlertListDialog>() {
         }
     }
 
+    /**
+     * 添加一个选项
+     */
     @JvmOverloads
-    fun addItem(text: String, @ColorInt textColor: Int = alertListItemConfigs.textColor, textSize: Float = alertListItemConfigs.textSize) = this.apply {
+    fun addItem(text: String,
+                @ColorInt textColor: Int = alertListItemConfigs.textColor,
+                textSize: Float = alertListItemConfigs.textSize) = this.apply {
         items.add(DialogItemBean(text, textColor, textSize))
     }
 
+    /**
+     * 添加一组选项
+     * @param items:字符集合
+     */
     fun addItems(items: List<String>) = this.apply {
         items.forEach { addItem(it) }
     }
