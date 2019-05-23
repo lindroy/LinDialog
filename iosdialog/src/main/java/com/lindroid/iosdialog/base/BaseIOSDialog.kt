@@ -86,6 +86,9 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
         return false
     }
 
+    /**
+     * 设置对话框背景
+     */
     protected fun initBackgroundDrawable(): ShapeDrawable {
         val roundRectShape =
                 RoundRectShape(floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius), null, null)
@@ -136,7 +139,7 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
      * 设置标题文字颜色
      * @param colorId：颜色资源Id
      */
-    fun setTitleColorId(@ColorRes colorId: Int) = this.apply { setTitleColor(LinDialog.getResColor(colorId)) } as T
+    fun setTitleColorRes(@ColorRes colorId: Int) = this.apply { setTitleColor(LinDialog.getResColor(colorId)) } as T
 
     /**
      * 设置消息文字
@@ -153,10 +156,20 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
      */
     fun setMessageSize(messageSize: Float) = this.apply { msgConfig.textSize = messageSize } as T
 
+    /**
+     * 设置消息文字颜色
+     */
     fun setMessageColor(@ColorInt color: Int) = this.apply { msgConfig.textColor = color } as T
 
-    fun setMessageColorId(@ColorRes colorId: Int) = this.apply { setMessageColor(LinDialog.getResColor(colorId)) } as T
+    /**
+     * 设置消息文字颜色
+     * @param colorId:颜色资源Id
+     */
+    fun setMessageColorRes(@ColorRes colorId: Int) = this.apply { setMessageColor(LinDialog.getResColor(colorId)) } as T
 
+    /**
+     * 是否显示取消按钮
+     */
     fun setShowNegButton(isShowNegButton: Boolean) = this.apply { this.isShowNegButton = isShowNegButton } as T
 
 }
