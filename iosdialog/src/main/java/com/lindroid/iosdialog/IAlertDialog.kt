@@ -8,6 +8,7 @@ import android.support.annotation.StringRes
 import android.support.v4.app.FragmentManager
 import android.view.View
 import com.lindroid.iosdialog.base.BaseIAlertDialog
+import com.lindroid.iosdialog.util.getPxSize
 import com.lindroid.iosdialog.util.getResColor
 import com.lindroid.iosdialog.util.getResString
 import com.lindroid.iosdialog.util.getSpSize
@@ -30,6 +31,8 @@ class IAlertDialog : BaseIAlertDialog<IAlertDialog>() {
     private var posBtnConfig = IDialog.alertPosBtnConfigs.copy()
 
     private var negBtnConfig = IDialog.alertNegBtnConfigs.copy()
+
+    private var buttonHeight = IDialog.alertBtnHeight
 
     /**
      * 子类继承BaseBottomDialog后需要创建的布局Id
@@ -82,9 +85,9 @@ class IAlertDialog : BaseIAlertDialog<IAlertDialog>() {
             }
         }
         llRoot.background = initBackgroundDrawable()
-        if (IDialog.alertBtnHeight > 0) {
+        if (buttonHeight > 0) {
             val params = llButton.layoutParams
-            params.height = IDialog.alertBtnHeight
+            params.height = buttonHeight
             llButton.layoutParams = params
         }
         return false
@@ -206,6 +209,19 @@ class IAlertDialog : BaseIAlertDialog<IAlertDialog>() {
         }
         negListener = listener
     }
+
+    /**
+     * 设置“确定”按钮和“取消”按钮的高度
+     * @param height:按钮高度，单位为px
+     */
+    fun setButtonHeight(height: Int) = this.apply { buttonHeight = height }
+
+    /**
+     * 设置“确定”按钮和“取消”按钮的高度
+     * @param resId:dimens资源Id
+     * @see setButtonHeight
+     */
+    fun setButtonHeightRes(@DimenRes resId: Int) = this.apply { setButtonHeight(getPxSize(resId)) }
 
     /**
      * 点击对话框上的按钮是否可以关闭对话框，默认为true

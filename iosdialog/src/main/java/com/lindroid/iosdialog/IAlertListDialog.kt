@@ -103,10 +103,15 @@ class IAlertListDialog : BaseIAlertDialog<IAlertListDialog>() {
      */
     fun setItemHeight(height: Int) = this.apply { alertListItemConfigs.height = height }
 
-    fun setItemHeightId(@DimenRes resId: Int) = this.apply { setItemHeight(getPxSize(resId)) }
+    /**
+     * 设置列表Item高度
+     * @param dimen资源Id
+     */
+    fun setItemHeightRes(@DimenRes resId: Int) = this.apply { setItemHeight(getPxSize(resId)) }
 
     /**
-     * 点击取消按钮是否关闭对话框
+     * 点击取消按钮后是否自动关闭对话框
+     * @return 默认为true
      */
     fun setCanCelClickedDismissible(dismissible: Boolean) = this.apply { this.dismissible = dismissible }
 
@@ -117,6 +122,7 @@ class IAlertListDialog : BaseIAlertDialog<IAlertListDialog>() {
 
     /**
      * 设置取消按钮文字Id
+     * @param stringId:文字资源Id
      */
     fun setCancelText(@StringRes stringId: Int) = this.apply { setCancelText(getResString(stringId)) }
 
@@ -127,8 +133,9 @@ class IAlertListDialog : BaseIAlertDialog<IAlertListDialog>() {
 
     /**
      * 设置取消按钮文字颜色Id
+     * @param colorId:颜色资源Id
      */
-    fun setCancelTextColorId(@ColorRes colorId: Int) = this.apply { setCancelTextColor(getResColor(colorId)) }
+    fun setCancelTextColorRes(@ColorRes colorId: Int) = this.apply { setCancelTextColor(getResColor(colorId)) }
 
     /**
      * 设置取消按钮文字大小，单位为sp
@@ -139,11 +146,19 @@ class IAlertListDialog : BaseIAlertDialog<IAlertListDialog>() {
      * 设置取消按钮文字大小
      * @param dimens资源
      */
-    fun setCancelTextSizeId(@DimenRes textSizeId: Int) = this.apply { setCancelTextSize(getSpSize(textSizeId)) }
+    fun setCancelTextSizeRes(@DimenRes textSizeId: Int) = this.apply { setCancelTextSize(getSpSize(textSizeId)) }
 
+    /**
+     * 设置取消按钮高度
+     */
     fun setCancelButtonHeight(height: Int) = this.apply { alertListBtnConfigs.height = height }
 
-    fun setCancelButtonHeightId(@DimenRes resId: Int) = this.apply { setCancelButtonHeight(getPxSize(resId)) }
+    /**
+     * 设置取消按钮高度
+     * @param resId:dimens资源Id
+     * @see setCancelButtonHeight
+     */
+    fun setCancelButtonHeightRes(@DimenRes resId: Int) = this.apply { setCancelButtonHeight(getPxSize(resId)) }
 
     /**
      * 设置取消按钮的样式和点击事件
