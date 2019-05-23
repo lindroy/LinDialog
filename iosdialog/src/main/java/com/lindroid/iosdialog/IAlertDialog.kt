@@ -4,10 +4,12 @@ import android.content.DialogInterface
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.DimenRes
+import android.support.annotation.StringRes
 import android.support.v4.app.FragmentManager
 import android.view.View
 import com.lindroid.iosdialog.base.BaseIAlertDialog
 import com.lindroid.iosdialog.util.getResColor
+import com.lindroid.iosdialog.util.getResString
 import com.lindroid.iosdialog.util.getSpSize
 import kotlinx.android.synthetic.main.dialog_alert_ios.*
 
@@ -88,33 +90,122 @@ class IAlertDialog : BaseIAlertDialog<IAlertDialog>() {
         return false
     }
 
+    /**
+     * 设置“确认”按钮文字
+     */
     fun setPosButtonText(text: String) = this.apply { posBtnConfig.text = text }
 
+    /**
+     * 设置“确认”按钮文字
+     * @param stringId:文字资源Id
+     * @see setPosButtonText
+     */
+    fun setPosButtonTextRes(@StringRes stringId: Int) = this.apply { setPosButtonText(getResString(stringId)) }
+
+    /**
+     * 设置“确认”按钮颜色
+     */
     fun setPosButtonTextColor(@ColorInt color: Int) = this.apply { posBtnConfig.textColor = color }
 
-    fun setPosButtonTextColorId(@ColorRes colorId: Int) =
+    /**
+     * 设置“确认”按钮颜色
+     * @param colorId:颜色资源Id
+     */
+    fun setPosButtonTextColorRes(@ColorRes colorId: Int) =
             this.apply { setPosButtonTextColor(getResColor(colorId)) }
 
+    /**
+     * 设置“确认”按钮文字大小
+     */
     fun setPosButtonTextSize(textSize: Float) = this.apply { posBtnConfig.textSize = textSize }
 
-    fun setPosButtonTextSizeId(@DimenRes textSizeId: Int) =
+    /**
+     * 设置“确认”按钮文字大小
+     * @param textSizeId:文字大小Id
+     */
+    fun setPosButtonTextSizeRes(@DimenRes textSizeId: Int) =
             this.apply { setPosButtonTextSize(getSpSize(textSizeId)) }
 
+    /**
+     * “确认”按钮点击事件
+     */
     fun setPosClickListener(listener: (DialogInterface) -> Unit) = this.apply { posListener = listener }
 
+    /**
+     * 设置“确认”按钮信息和点击事件
+     */
+    @JvmOverloads
+    fun setPosButton(
+            text: String = posBtnConfig.text,
+            @ColorInt textColor: Int = posBtnConfig.textColor,
+            textSize: Float = posBtnConfig.textSize,
+            listener: (DialogInterface) -> Unit
+    ) = this.apply {
+        posBtnConfig.also {
+            it.text = text
+            it.textColor = textColor
+            it.textSize = textSize
+        }
+        posListener = listener
+    }
+
+    /**
+     * 设置“取消”按钮文字
+     */
     fun setNegButtonText(text: String) = this.apply { negBtnConfig.text = text }
 
+    /**
+     * 设置“取消”按钮文字
+     * @param stringId:文字资源Id
+     * @see setNegButtonText
+     */
+    fun setNegButtonTextRes(@StringRes stringId: Int) = this.apply { setNegButtonText(getResString(stringId)) }
+
+    /**
+     * 设置“取消”按钮文字颜色
+     */
     fun setNegButtonTextColor(@ColorInt color: Int) = this.apply { negBtnConfig.textColor = color }
 
-    fun setNegButtonTextColorId(@ColorRes colorId: Int) =
+    /**
+     * 设置“取消”按钮文字颜色
+     * @param colorId:颜色资源Id
+     */
+    fun setNegButtonTextColorRes(@ColorRes colorId: Int) =
             this.apply { setNegButtonTextColor(getResColor(colorId)) }
 
+    /**
+     * 设置“取消”按钮文字大小
+     */
     fun setNegButtonTextSize(textSize: Float) = this.apply { negBtnConfig.textSize = textSize }
 
-    fun setNegButtonTextSizeId(@DimenRes textSizeId: Int) =
+    /**
+     * 设置“取消”按钮文字大小
+     * @param textSizeId:文字大小Id
+     */
+    fun setNegButtonTextSizeRes(@DimenRes textSizeId: Int) =
             this.apply { setNegButtonTextSize(getSpSize(textSizeId)) }
 
+    /**
+     * 设置“取消”按钮点击事件
+     */
     fun setNegClickListener(listener: (DialogInterface) -> Unit) = this.apply { negListener = listener }
+
+    /**
+     * 设置“取消”按钮信息和点击事件
+     */
+    fun setNegButton(
+            text: String = negBtnConfig.text,
+            @ColorInt textColor: Int = negBtnConfig.textColor,
+            textSize: Float = negBtnConfig.textSize,
+            listener: (DialogInterface) -> Unit
+    ) = this.apply {
+        negBtnConfig.also {
+            it.text = text
+            it.textColor = textColor
+            it.textSize = textSize
+        }
+        negListener = listener
+    }
 
     /**
      * 点击对话框上的按钮是否可以关闭对话框，默认为true
