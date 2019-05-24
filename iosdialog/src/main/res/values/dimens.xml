@@ -3,15 +3,13 @@
     <!--以下用于全部对话框-->
     <dimen name="ios_dialog_corner_radius">12dp</dimen>
     <dimen name="ios_dialog_divider_size">0.5dp</dimen>
-    <dimen name="ios_dialog_title_padding_sides">15dp</dimen>
-    <dimen name="ios_dialog_padding_top">20dp</dimen>
     <dimen name="ios_dialog_list_item_padding_sides">15dp</dimen>
     <dimen name="ios_dialog_list_item_height">44dp</dimen>
     <!--以上用于全部对话框-->
 
     <!--以下为提示对话框资源-->
-    <dimen name="ios_alert_padding_top">20dp</dimen>
-    <dimen name="ios_alert_padding_bottom">20dp</dimen>
+    <dimen name="ios_alert_padding_top">15dp</dimen>
+    <dimen name="ios_alert_padding_bottom">15dp</dimen>
     <dimen name="ios_alert_padding_sides">15dp</dimen>
     <dimen name="ios_alert_padding_title_msg">5dp</dimen>
     <dimen name="ios_alert_title_size">16sp</dimen>
@@ -22,8 +20,8 @@
     <!--以上为提示对话框资源-->
 
     <!--以下为底部对话框资源-->
-    <dimen name="ios_bottom_padding_top">20dp</dimen>
-    <dimen name="ios_bottom_padding_bottom">20dp</dimen>
+    <dimen name="ios_bottom_padding_top">15dp</dimen>
+    <dimen name="ios_bottom_padding_bottom">15dp</dimen>
     <dimen name="ios_bottom_padding_sides">15dp</dimen>
     <dimen name="ios_bottom_padding_title_msg">5dp</dimen>
     <dimen name="ios_bottom_title_size">16sp</dimen>

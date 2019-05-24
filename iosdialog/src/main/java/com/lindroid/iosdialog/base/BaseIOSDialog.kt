@@ -12,7 +12,8 @@ import android.support.annotation.StringRes
 import android.view.View
 import com.lindroid.iosdialog.IDialog
 import com.lindroid.iosdialog.bean.TextConfigs
-import com.lindroid.lindialog.LinDialog
+import com.lindroid.iosdialog.util.getResColor
+import com.lindroid.iosdialog.util.getResString
 import com.lindroid.lindialog.base.BaseDialog
 import kotlinx.android.synthetic.main.layout_alert_dialog_title.*
 
@@ -123,7 +124,7 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
     /**
      * @see setTitle
      */
-    fun setTitle(@StringRes stringId: Int) = this.apply { setTitle(LinDialog.context.getString(stringId)) } as T
+    fun setTitle(@StringRes stringId: Int) = this.apply { setTitle(getResString(stringId)) } as T
 
     /**
      * 设置标题文字大小
@@ -139,7 +140,7 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
      * 设置标题文字颜色
      * @param colorId：颜色资源Id
      */
-    fun setTitleColorRes(@ColorRes colorId: Int) = this.apply { setTitleColor(LinDialog.getResColor(colorId)) } as T
+    fun setTitleColorRes(@ColorRes colorId: Int) = this.apply { setTitleColor(getResColor(colorId)) } as T
 
     /**
      * 设置消息文字
@@ -149,7 +150,7 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
     /**
      * @see setMessage
      */
-    fun setMessage(@StringRes stringId: Int) = this.apply { setMessage(LinDialog.context.getString(stringId)) } as T
+    fun setMessage(@StringRes stringId: Int) = this.apply { setMessage(getResString(stringId)) } as T
 
     /**
      * 设置消息文字大小
@@ -165,7 +166,7 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
      * 设置消息文字颜色
      * @param colorId:颜色资源Id
      */
-    fun setMessageColorRes(@ColorRes colorId: Int) = this.apply { setMessageColor(LinDialog.getResColor(colorId)) } as T
+    fun setMessageColorRes(@ColorRes colorId: Int) = this.apply { setMessageColor(getResColor(colorId)) } as T
 
     /**
      * 是否显示取消按钮

@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".app.ListViewActivity">
 
-    <com.lindroid.iosdialog.view.ElasticListView
+    <com.lindroid.iosdialog.widget.ElasticListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </com.lindroid.iosdialog.view.ElasticListView>
+    </com.lindroid.iosdialog.widget.ElasticListView>
 
 </FrameLayout>

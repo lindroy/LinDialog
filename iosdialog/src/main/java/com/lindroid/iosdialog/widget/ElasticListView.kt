@@ -1,4 +1,4 @@
-package com.lindroid.iosdialog.view
+package com.lindroid.iosdialog.widget
 
 import android.content.Context
 import android.util.AttributeSet

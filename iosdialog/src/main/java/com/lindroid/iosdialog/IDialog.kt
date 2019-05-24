@@ -91,7 +91,7 @@ object IDialog {
     }
 
     internal val bottomBtnConfigs by lazy {
-        TextConfigs(getSpSize(R.dimen.ios_bottom_message_size), textColorBlue,
+        TextConfigs(getSpSize(R.dimen.ios_bottom_button_text_size), textColorBlue,
                 text = context.getString(R.string.ios_dialog_negative_text))
     }
 

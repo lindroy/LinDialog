@@ -23,7 +23,9 @@ class IOSDialogActivity : AppCompatActivity() {
         btnIAlert.setOnClickListener {
             IAlertDialog.build(supportFragmentManager)
                     .setTitle("提示")
-                    .setMessage("这是一段很长的说明文字这是一段很长的说明文字这是一段很长的说明文字这是一段很长的说明文字这是一段很长的说明文字")
+                    .setMessage("确定要退出登录吗？")
+                    .setPosButtonText(R.string.ios_dialog_positive_text)
+                    .setNegButtonText(R.string.ios_dialog_negative_text)
                     .setPosClickListener {
                         shortToast("确定")
                     }
@@ -79,8 +81,8 @@ class IOSDialogActivity : AppCompatActivity() {
         }
         btnIBottomMore.setOnClickListener {
             IBottomListDialog.build(supportFragmentManager)
-                    .setTitle("底部对话框底部对话框底部对话框底部对话框底部对话框底部对话框底部对话框底部对话框底部对话框")
-                    .setMessage("这是一个具有大量选项的底部列表对话框这是一个具有大量选项的底部列表对话框")
+                    .setTitle("底部对话框")
+                    .setMessage("这是一个具有大量选项的底部列表对话框")
                     .addItem("长文字选项长文字选项长文字选项长文字选项长文字选项长文字选项长文字选项")
                     .addItems((1..30).map { "按钮$it" })
                     .setCancelButton(textColor = Color.BLUE){

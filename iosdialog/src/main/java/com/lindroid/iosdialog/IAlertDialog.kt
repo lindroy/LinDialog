@@ -103,7 +103,7 @@ class IAlertDialog : BaseIAlertDialog<IAlertDialog>() {
      * @param stringId:文字资源Id
      * @see setPosButtonText
      */
-    fun setPosButtonTextRes(@StringRes stringId: Int) = this.apply { setPosButtonText(getResString(stringId)) }
+    fun setPosButtonText(@StringRes stringId: Int) = this.apply { setPosButtonText(getResString(stringId)) }
 
     /**
      * 设置“确认”按钮颜色
@@ -162,7 +162,7 @@ class IAlertDialog : BaseIAlertDialog<IAlertDialog>() {
      * @param stringId:文字资源Id
      * @see setNegButtonText
      */
-    fun setNegButtonTextRes(@StringRes stringId: Int) = this.apply { setNegButtonText(getResString(stringId)) }
+    fun setNegButtonText(@StringRes stringId: Int) = this.apply { setNegButtonText(getResString(stringId)) }
 
     /**
      * 设置“取消”按钮文字颜色

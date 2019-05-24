@@ -17,7 +17,7 @@
 
         <include layout="@layout/layout_alert_dialog_title"/>
 
-        <com.lindroid.iosdialog.view.ElasticListView
+        <com.lindroid.iosdialog.widget.ElasticListView
             android:id="@+id/lvChoices"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
