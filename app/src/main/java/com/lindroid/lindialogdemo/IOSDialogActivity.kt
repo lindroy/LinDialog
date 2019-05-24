@@ -21,7 +21,8 @@ class IOSDialogActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_iosdialog)
         btnIAlert.setOnClickListener {
-            IAlertDialog.build(supportFragmentManager)
+            IAlertDialog
+                    .build(supportFragmentManager) //创建和配置对话框的入口
                     .setTitle("提示")
                     .setMessage("确定要退出登录吗？")
                     .setPosButtonText(R.string.ios_dialog_positive_text)
@@ -32,7 +33,7 @@ class IOSDialogActivity : AppCompatActivity() {
                     .setNegClickListener {
                         shortToast("取消")
                     }
-                    .show()
+                    .show() //显示对话框
         }
         btnIAlertList.setOnClickListener {
             IAlertListDialog.build(supportFragmentManager)

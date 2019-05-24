@@ -216,6 +216,7 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
 
     override fun onDestroy() {
         super.onDestroy()
+        cancelClickListener = null
         itemClickListener = null
     }
 

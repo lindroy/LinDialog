@@ -78,7 +78,7 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
         llTitleMsg.apply {
             setPadding(paddingSides, this@BaseIOSDialog.paddingTop, paddingSides, this@BaseIOSDialog.paddingBottom)
             //透明分割线，用于设置标题与信息文字的间距
-            dividerDrawable = with(ShapeDrawable(RectShape())){
+            dividerDrawable = with(ShapeDrawable(RectShape())) {
                 intrinsicHeight = paddingTitleMsg
                 paint.color = Color.TRANSPARENT
                 this
@@ -105,6 +105,12 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
      * 设置背景颜色
      */
     fun setBackgroundColor(@ColorInt color: Int) = this.apply { bgColor = color }
+
+    /**
+     * 设置背景颜色
+     * @param colorId:颜色资源Id
+     */
+    fun setBackgroundColorRes(@ColorRes colorId: Int) = this.apply { setBackgroundColor(getResColor(colorId)) }
 
     /**
      * 设置透明度
