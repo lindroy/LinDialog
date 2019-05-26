@@ -20,7 +20,10 @@ import com.lindroid.iosdialog.constants.DialogType
  * @function iOS对话框中的列表适配器
  * @Description
  */
-class DialogListAdapter(private val mContext: Context, @DialogType val dialogType: Int, @LayoutRes val layoutId: Int, private val items: List<DialogItemBean>) : ArrayAdapter<DialogItemBean>(mContext, layoutId) {
+class DialogListAdapter(private val mContext: Context,
+                        @DialogType val dialogType: Int,
+                        @LayoutRes val layoutId: Int,
+                        private val items: List<DialogItemBean>) : ArrayAdapter<DialogItemBean>(mContext, layoutId) {
     override fun getCount() = items.size
 
     override fun getItemId(position: Int) = position.toLong()

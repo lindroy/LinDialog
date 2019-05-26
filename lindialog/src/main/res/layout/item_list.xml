@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/tvChoice"
+          android:layout_width="match_parent"
+          android:gravity="center"
+          xmlns:tools="http://schemas.android.com/tools"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:textColor="@color/list_dialog_item_text_color_black"
+          android:minHeight="@dimen/list_dialog_item_height"
+          android:paddingStart="@dimen/list_dialog_item_padding_sides"
+          android:paddingEnd="@dimen/list_dialog_item_padding_sides"
+          android:layout_height="wrap_content">
+
+</TextView>

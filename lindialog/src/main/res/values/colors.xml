@@ -3,5 +3,5 @@
     <color name="material_dialog_positive_text_color">@android:color/holo_blue_dark</color>
     <color name="material_dialog_negative_text_color">@android:color/holo_red_light</color>
     <color name="material_dialog_neutral_text_color">@android:color/darker_gray</color>
-
+    <color name="list_dialog_item_text_color_black">#303030</color>
 </resources>

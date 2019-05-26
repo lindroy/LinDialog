@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:id="@+id/llRoot"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:id="@+id/llRoot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
     </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+    <ListView
+            android:id="@+id/lvChoice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    </ListView>
+
+</LinearLayout>
