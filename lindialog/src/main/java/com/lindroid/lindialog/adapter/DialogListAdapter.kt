@@ -15,7 +15,7 @@ import com.lindroid.lindialog.bean.ListItemBean
  * @function
  * @description
  */
-class ListAdapter(private val mContext: Context, private val items: List<ListItemBean> ):
+class DailogListAdapter(private val mContext: Context, private val items: List<ListItemBean> ):
     ArrayAdapter<ListItemBean>(mContext, R.layout.item_list) {
 
     override fun getCount() = items.size

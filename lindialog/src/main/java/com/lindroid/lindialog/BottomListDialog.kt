@@ -2,17 +2,20 @@ package com.lindroid.lindialog
 
 import android.content.DialogInterface
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.RectShape
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
-import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.lindroid.lindialog.adapter.DailogListAdapter
 import com.lindroid.lindialog.base.BaseBottomDialog
+import com.lindroid.lindialog.bean.ListItemBean
 import kotlinx.android.synthetic.main.dialog_bottom_list.*
 
 /**
@@ -20,6 +23,7 @@ import kotlinx.android.synthetic.main.dialog_bottom_list.*
  * @date 2019/2/14
  * @function 底部列表对话框
  * @Description
+ * https://www.cnblogs.com/carbs/p/5302908.html
  */
 class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
     /**
@@ -45,16 +49,16 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
 
     private var dividerPadding: Int = 0
 
-    private var items = ArrayList<String>()
+    private val items: MutableList<ListItemBean> = ArrayList()
 
     private var itemClickListener: ((Int, String, TextView, DialogInterface) -> Unit)? = null
 
     companion object {
         @JvmStatic
         fun build(fm: FragmentManager) =
-                BottomListDialog().apply {
-                    this.fm = fm
-                }
+            BottomListDialog().apply {
+                this.fm = fm
+            }
     }
 
     /**
@@ -71,26 +75,32 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
             backgroundColorId != 0 -> llRoot.setBackgroundColor(ContextCompat.getColor(mContext, backgroundColorId))
             else -> llRoot.setBackgroundColor(ContextCompat.getColor(mContext, android.R.color.white))
         }
-        items.forEachIndexed { i, item ->
-            val textView = with(TextView(context)) {
-                text = item
-                height = itemHeight
-                gravity = itemTextGravity
-                textSize = itemTextSize
-                setTextColor(itemTextColor)
-                setPadding(itemPadding[0], itemPadding[1], itemPadding[2], itemPadding[3])
-                setOnClickListener {
-                    itemClickListener?.invoke(i, item, this, dialog)
-                }
-                isClickable = true
-                val attributes = intArrayOf(android.R.attr.selectableItemBackground)
-                val typeValue = context.theme.obtainStyledAttributes(TypedValue().resourceId, attributes)
-                background = typeValue.getDrawable(0)
+        /*  items.forEachIndexed { i, item ->
+              val textView = with(TextView(context)) {
+                  text = item
+                  height = itemHeight
+                  gravity = itemTextGravity
+                  textSize = itemTextSize
+                  setTextColor(itemTextColor)
+                  setPadding(itemPadding[0], itemPadding[1], itemPadding[2], itemPadding[3])
+                  setOnClickListener {
+                      itemClickListener?.invoke(i, item, this, dialog)
+                  }
+                  isClickable = true
+                  val attributes = intArrayOf(android.R.attr.selectableItemBackground)
+                  val typeValue = context.theme.obtainStyledAttributes(TypedValue().resourceId, attributes)
+                  background = typeValue.getDrawable(0)
+                  this
+              }
+              llRoot.addView(textView)
+          }*/
+        lvChoice.apply {
+            adapter = DailogListAdapter(mContext, items)
+            divider = with(ShapeDrawable(RectShape())) {
+//                paint.color = divi
                 this
             }
-            llRoot.addView(textView)
-        }
-        lvChoice.apply {
+            this.dividerHeight = resources.getDimensionPixelSize(R.dimen.list_dialog_divider_height)
 
         }
         return true
@@ -100,13 +110,17 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
      * 在对话框中添加Item
      * @param name : item的文字
      */
-    fun addItem(name: String) = this.apply { items.add(name) }
+    fun addItem(name: String) = this.apply {
+        //        items.add(name)
+    }
 
     /**
      * 在对话框中添加一组Item
      * @param items : item的文字数组
      */
-    fun addItems(items: Array<String>) = this.apply { this.items.addAll(items.toList()) }
+    fun addItems(items: Array<String>) = this.apply {
+        //        this.items.addAll(items.toList())
+    }
 
     /**
      * 设置对话框背景
@@ -145,7 +159,8 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
     /**
      * item的字体颜色Id
      */
-    fun setItemTextColorId(@ColorRes colorId: Int) = this.apply { setItemTextColor(ContextCompat.getColor(mContext, colorId)) }
+    fun setItemTextColorId(@ColorRes colorId: Int) =
+        this.apply { setItemTextColor(ContextCompat.getColor(mContext, colorId)) }
 
     /**
      * item文字的位置
@@ -161,7 +176,7 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
      * 设置Item的padding值
      */
     fun setItemPadding(left: Int = 0, top: Int = 0, right: Int = 0, bottom: Int = 0) =
-            this.apply { itemPadding = kotlin.arrayOf(left, top, right, bottom) }
+        this.apply { itemPadding = kotlin.arrayOf(left, top, right, bottom) }
 
     /**
      * 设置分割线
@@ -186,7 +201,7 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
      * item的点击监听事件
      */
     fun setOnItemClickListener(listener: (position: Int, name: String, itemView: TextView, dialog: DialogInterface) -> Unit) =
-            this.apply { itemClickListener = listener }
+        this.apply { itemClickListener = listener }
 
     override fun onDestroy() {
         super.onDestroy()
