@@ -1,7 +1,10 @@
 package com.lindroid.lindialog
 
 import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
 import android.support.annotation.ColorInt
@@ -11,11 +14,11 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
 import android.view.Gravity
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
 import com.lindroid.lindialog.adapter.DailogListAdapter
 import com.lindroid.lindialog.base.BaseBottomDialog
 import com.lindroid.lindialog.bean.ListItemBean
+import com.lindroid.lindialog.util.getSpSize
 import kotlinx.android.synthetic.main.dialog_bottom_list.*
 
 /**
@@ -33,9 +36,9 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
 
     private var itemHeight = 200
 
-    private var itemTextSize = 0F
+    private var itemTextSize = getSpSize(R.dimen.list_dialog_item_text_size)
 
-    private var itemTextColor = 0
+    private var itemTextColor = LinDialog.getResColor(R.color.list_dialog_item_text_color_black)
 
     private var itemPadding = arrayOf(0, 0, 0, 0)
 
@@ -56,24 +59,24 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
     companion object {
         @JvmStatic
         fun build(fm: FragmentManager) =
-            BottomListDialog().apply {
-                this.fm = fm
-            }
+                BottomListDialog().apply {
+                    this.fm = fm
+                }
     }
 
     /**
      * 返回true表示子类自己处理布局，setViewHandler方法无效
      */
     override fun onHandleView(contentView: View): Boolean {
-        if (divider != null) {
+        /*if (divider != null) {
             llRoot.showDividers = LinearLayout.SHOW_DIVIDER_MIDDLE
             llRoot.dividerDrawable = divider
             llRoot.dividerPadding = dividerPadding
-        }
+        }*/
         when {
-            background != null -> llRoot.background = background
-            backgroundColorId != 0 -> llRoot.setBackgroundColor(ContextCompat.getColor(mContext, backgroundColorId))
-            else -> llRoot.setBackgroundColor(ContextCompat.getColor(mContext, android.R.color.white))
+            background != null -> lvChoice.background = background
+            backgroundColorId != 0 -> lvChoice.setBackgroundColor(ContextCompat.getColor(mContext, backgroundColorId))
+            else -> lvChoice.setBackgroundColor(ContextCompat.getColor(mContext, android.R.color.white))
         }
         /*  items.forEachIndexed { i, item ->
               val textView = with(TextView(context)) {
@@ -96,11 +99,25 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
           }*/
         lvChoice.apply {
             adapter = DailogListAdapter(mContext, items)
-            divider = with(ShapeDrawable(RectShape())) {
-//                paint.color = divi
-                this
-            }
             this.dividerHeight = resources.getDimensionPixelSize(R.dimen.list_dialog_divider_height)
+            if (this@BottomListDialog.divider == null) {
+                val shapeDrawableBg = with(ShapeDrawable(RectShape())) {
+                    paint.color = Color.TRANSPARENT
+                    paint.style = Paint.Style.FILL
+                    intrinsicHeight = resources.getDimensionPixelSize(R.dimen.list_dialog_divider_height)
+                    this
+                }
+                val shapeDrawableFg = with(ShapeDrawable(RectShape())) {
+                    setPadding(dividerPadding, 0, dividerPadding, 0)
+                    paint.color = LinDialog.getResColor(R.color.list_dialog_divider_color)
+                    paint.style = Paint.Style.FILL
+                    intrinsicHeight = resources.getDimensionPixelSize(R.dimen.list_dialog_divider_height)
+                    this
+                }
+                divider = LayerDrawable(arrayOf(shapeDrawableBg, shapeDrawableFg))
+            } else {
+                divider = this@BottomListDialog.divider
+            }
 
         }
         return true
@@ -110,8 +127,11 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
      * 在对话框中添加Item
      * @param name : item的文字
      */
-    fun addItem(name: String) = this.apply {
-        //        items.add(name)
+    fun addItem(text: String,
+                @ColorInt textColor: Int = itemTextColor,
+                textSize: Float = itemTextSize
+    ) = this.apply {
+        items.add(ListItemBean(text, textColor, textSize))
     }
 
     /**
@@ -119,7 +139,15 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
      * @param items : item的文字数组
      */
     fun addItems(items: Array<String>) = this.apply {
-        //        this.items.addAll(items.toList())
+        items.forEach { addItem(it) }
+    }
+
+    /**
+     * 在对话框中添加一组Item
+     * @param items : item的文字集合
+     */
+    fun addItems(items: List<String>) = this.apply {
+        items.forEach { addItem(it) }
     }
 
     /**
@@ -160,7 +188,7 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
      * item的字体颜色Id
      */
     fun setItemTextColorId(@ColorRes colorId: Int) =
-        this.apply { setItemTextColor(ContextCompat.getColor(mContext, colorId)) }
+            this.apply { setItemTextColor(ContextCompat.getColor(mContext, colorId)) }
 
     /**
      * item文字的位置
@@ -176,7 +204,7 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
      * 设置Item的padding值
      */
     fun setItemPadding(left: Int = 0, top: Int = 0, right: Int = 0, bottom: Int = 0) =
-        this.apply { itemPadding = kotlin.arrayOf(left, top, right, bottom) }
+            this.apply { itemPadding = arrayOf(left, top, right, bottom) }
 
     /**
      * 设置分割线
@@ -194,6 +222,7 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
 
     /**
      * 设置分割线左右的padding
+     * 单位为px
      */
     fun setDividerPadding(padding: Int) = this.apply { dividerPadding = padding }
 
@@ -201,7 +230,7 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
      * item的点击监听事件
      */
     fun setOnItemClickListener(listener: (position: Int, name: String, itemView: TextView, dialog: DialogInterface) -> Unit) =
-        this.apply { itemClickListener = listener }
+            this.apply { itemClickListener = listener }
 
     override fun onDestroy() {
         super.onDestroy()

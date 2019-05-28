@@ -105,11 +105,14 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
             }
         }
     }
+
     /**
      * 添加一个选项
      */
     @JvmOverloads
-    fun addItem(text: String, @ColorInt textColor: Int = bottomItemConfigs.textColor, textSize: Float = bottomItemConfigs.textSize) =
+    fun addItem(text: String,
+                @ColorInt textColor: Int = bottomItemConfigs.textColor,
+                textSize: Float = bottomItemConfigs.textSize) =
             this.apply {
                 items.add(DialogItemBean(text, textColor, textSize))
             }
@@ -129,7 +132,7 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
 
     /**
      * 设置列表Item高度
-     * @param dimen资源Id
+     * @param resId: dimen资源Id
      */
     fun setItemHeightRes(@DimenRes resId: Int) = this.apply { setItemHeight(getPxSize(resId)) }
 

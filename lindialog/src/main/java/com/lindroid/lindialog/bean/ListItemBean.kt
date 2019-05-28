@@ -13,6 +13,5 @@ data class ListItemBean(
         val text: String,
         @ColorInt val textColor: Int,
         val textSize: Float = 0F
-
 )
 
