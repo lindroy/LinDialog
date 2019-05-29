@@ -15,7 +15,7 @@ import android.support.v4.content.ContextCompat
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
-import com.lindroid.lindialog.adapter.DailogListAdapter
+import com.lindroid.lindialog.adapter.DialogListAdapter
 import com.lindroid.lindialog.base.BaseBottomDialog
 import com.lindroid.lindialog.bean.ListItemBean
 import com.lindroid.lindialog.util.getSpSize
@@ -98,7 +98,7 @@ class BottomListDialog : BaseBottomDialog<BottomListDialog>() {
               llRoot.addView(textView)
           }*/
         lvChoice.apply {
-            adapter = DailogListAdapter(mContext, items)
+            adapter = DialogListAdapter(mContext, items)
             this.dividerHeight = resources.getDimensionPixelSize(R.dimen.list_dialog_divider_height)
             if (this@BottomListDialog.divider == null) {
                 val shapeDrawableBg = with(ShapeDrawable(RectShape())) {

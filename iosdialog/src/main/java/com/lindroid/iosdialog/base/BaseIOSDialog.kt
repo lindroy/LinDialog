@@ -75,13 +75,17 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
             }
         }
 
-        llTitleMsg.apply {
-            setPadding(paddingSides, this@BaseIOSDialog.paddingTop, paddingSides, this@BaseIOSDialog.paddingBottom)
-            //透明分割线，用于设置标题与信息文字的间距
-            dividerDrawable = with(ShapeDrawable(RectShape())) {
-                intrinsicHeight = paddingTitleMsg
-                paint.color = Color.TRANSPARENT
-                this
+        llTitleMsg.visibility = when (tvTitle.visibility == View.GONE && tvMessage.visibility == View.GONE) {
+            true -> View.GONE
+            false -> {
+                llTitleMsg.setPadding(paddingSides, this@BaseIOSDialog.paddingTop, paddingSides, this@BaseIOSDialog.paddingBottom)
+                //透明分割线，用于设置标题与信息文字的间距
+                llTitleMsg.dividerDrawable = with(ShapeDrawable(RectShape())) {
+                    intrinsicHeight = paddingTitleMsg
+                    paint.color = Color.TRANSPARENT
+                    this
+                }
+                View.VISIBLE
             }
         }
         return false
@@ -104,18 +108,18 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
     /**
      * 设置背景颜色
      */
-    fun setBackgroundColor(@ColorInt color: Int) = this.apply { bgColor = color }
+    fun setBackgroundColor(@ColorInt color: Int) = this.apply { bgColor = color } as T
 
     /**
      * 设置背景颜色
      * @param colorId:颜色资源Id
      */
-    fun setBackgroundColorRes(@ColorRes colorId: Int) = this.apply { setBackgroundColor(getResColor(colorId)) }
+    fun setBackgroundColorRes(@ColorRes colorId: Int) = this.apply { setBackgroundColor(getResColor(colorId)) } as T
 
     /**
      * 设置透明度
      */
-    fun setAlpha(@FloatRange(from = 0.0, to = 1.0) alpha: Float) = this.apply { bgAlpha = alpha }
+    fun setAlpha(@FloatRange(from = 0.0, to = 1.0) alpha: Float) = this.apply { bgAlpha = alpha } as T
 
     /**
      * 设置背景圆角矩形的圆角半径，单位为px
