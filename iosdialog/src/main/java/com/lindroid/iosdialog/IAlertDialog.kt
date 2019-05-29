@@ -51,7 +51,7 @@ class IAlertDialog : BaseIAlertDialog<IAlertDialog>() {
      */
     override fun onHandleView(contentView: View): Boolean {
         super.onHandleView(contentView)
-        setAnimStyle(R.style.AlertDialogStyle)
+        setAnimStyle(R.style.IOSAlertDialogStyle)
         btnPos.apply {
             posBtnConfig.let {
                 text = it.text

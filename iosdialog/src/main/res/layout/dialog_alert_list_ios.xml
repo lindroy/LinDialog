@@ -17,7 +17,7 @@
 
     <Button
         android:id="@+id/btnAlertList"
-        style="@style/DialogButtonStyle"
+        style="@style/IOSDialogButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

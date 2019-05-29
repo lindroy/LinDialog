@@ -1,18 +1,18 @@
 <resources>
 
     <!--缩放动画 parent="android:Animation"-->
-    <style name="AlertDialogStyle" >
+    <style name="IOSAlertDialogStyle" >
         <item name="android:windowEnterAnimation">@anim/dialog_in_anim</item>
         <item name="android:windowExitAnimation">@anim/dialog_out_anim</item>
     </style>
 
     <!--底部对话框动画-->
-    <style name="BottomDialogStyle" parent="Animation.Design.BottomSheetDialog">
+    <style name="IOSBottomDialogStyle" parent="Animation.Design.BottomSheetDialog">
 
     </style>
 
     <!--对话框标题样式-->
-    <style name="DialogTitleStyle">
+    <style name="IOSDialogTitleStyle">
         <item name="android:gravity">center</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -21,13 +21,13 @@
     </style>
 
     <!--对话框信息样式-->
-    <style name="DialogMessageStyle">
+    <style name="IOSDialogMessageStyle">
         <item name="android:gravity">center</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="DialogButtonStyle">
+    <style name="IOSDialogButtonStyle">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:fontFamily">@string/title_font_type</item>
         <item name="android:textStyle">bold</item>

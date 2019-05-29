@@ -69,7 +69,7 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
         super.onHandleView(contentView)
         setGravity(Gravity.BOTTOM)
         setWidthScale(IDialog.bottomWidthScale)
-        setAnimStyle(R.style.BottomDialogStyle)
+        setAnimStyle(R.style.IOSBottomDialogStyle)
 //        ShapeDrawable的宽高会跟随第一个设置background的View
         llContent.background = initBackgroundDrawable()
 

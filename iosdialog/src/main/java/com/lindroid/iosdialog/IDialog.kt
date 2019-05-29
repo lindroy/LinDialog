@@ -47,7 +47,7 @@ object IDialog {
     /**
      * 提示类对话框动画
      */
-    internal var alertAnimStyle: Int = R.style.AlertDialogStyle
+    internal var alertAnimStyle: Int = R.style.IOSAlertDialogStyle
 
     internal val alertPosBtnConfigs by lazy {
         TextConfigs(getSpSize(R.dimen.ios_alert_button_text_size), textColorBlue, text = getResString(R.string.ios_dialog_positive_text))
@@ -80,7 +80,7 @@ object IDialog {
 
     internal var bottomPaddingTitleMsg = 0
 
-    internal var bottomAnimStyle: Int = R.style.BottomDialogStyle
+    internal var bottomAnimStyle: Int = R.style.IOSBottomDialogStyle
 
     internal val bottomTitleConfigs by lazy {
         TextConfigs(getSpSize(R.dimen.ios_bottom_title_size), textColorBlack)

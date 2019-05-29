@@ -25,7 +25,7 @@
 
     <Button
         android:layout_marginTop="@dimen/ios_bottom_button_list_margin"
-        style="@style/DialogButtonStyle"
+        style="@style/IOSDialogButtonStyle"
         android:id="@+id/btnCancel"
         android:layout_width="match_parent"
         android:layout_height="@dimen/ios_bottom_button_height" />

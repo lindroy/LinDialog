@@ -9,12 +9,12 @@
 
     <TextView
         android:id="@+id/tvTitle"
-        style="@style/DialogTitleStyle"
+        style="@style/IOSDialogTitleStyle"
         tools:text="Prompt" />
 
     <TextView
         android:id="@+id/tvMessage"
-        style="@style/DialogMessageStyle"
+        style="@style/IOSDialogMessageStyle"
         tools:text="这是一段很长的说明文字这是一段很长的说明文字这是一段很长的说明文字这是一段很长的说明文字这是一段很长的说明文字" />
 
 
