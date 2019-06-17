@@ -9,6 +9,7 @@ import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.FloatRange
 import android.support.annotation.StringRes
+import android.view.Gravity
 import android.view.View
 import com.lindroid.iosdialog.IDialog
 import com.lindroid.iosdialog.bean.TextConfigs
@@ -153,6 +154,11 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
     fun setTitleColorRes(@ColorRes colorId: Int) = this.apply { setTitleColor(getResColor(colorId)) } as T
 
     /**
+     * 设置标题文字位置，默认为居中
+     */
+    fun setTitleGravity(gravity: Int) = this.apply { titleConfig.gravity = gravity } as T
+
+    /**
      * 设置消息文字
      */
     fun setMessage(message: String) = this.apply { msgConfig.text = message } as T
@@ -177,6 +183,11 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
      * @param colorId:颜色资源Id
      */
     fun setMessageColorRes(@ColorRes colorId: Int) = this.apply { setMessageColor(getResColor(colorId)) } as T
+
+    /**
+     * 设置消息文字的位置，默认居中
+     */
+    fun setMessageGravity(gravity: Int = Gravity.CENTER) = this.apply { msgConfig.gravity = gravity } as T
 
     /**
      * 是否显示取消按钮
