@@ -118,5 +118,32 @@ class IOSDialogActivity : AppCompatActivity() {
                     .show() //显示对话框
         }
 
+        btnIAlertListCus.setOnClickListener {
+            IAlertListDialog.build(supportFragmentManager)
+                    .setTitle("选项对话框")
+                    .setMessage("请选择你喜欢的图书")
+                    .setCustomView(R.layout.custom_view)
+                    .addItem("红楼梦")
+                    .addItem("西游记")
+                    .addItem("水浒传")
+                    .addItem("三国演义")
+                    .setOnItemClickListener { position, text, itemView, dialog ->
+                        shortToast("你选择了${itemView.text}")
+                    }
+                    .show()
+        }
+        btnIBottomCus.setOnClickListener {
+            IBottomListDialog.build(supportFragmentManager)
+                    .setCustomView(customView)
+                    .addItem("红楼梦")
+                    .addItem("西游记")
+                    .addItem("水浒传")
+                    .addItem("三国演义")
+                    .setOnItemClickListener { position, text, itemView, dialog ->
+                        shortToast("你选择了${itemView.text}")
+                    }
+                    .show()
+        }
+
     }
 }

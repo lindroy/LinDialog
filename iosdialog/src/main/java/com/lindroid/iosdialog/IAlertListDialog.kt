@@ -28,28 +28,13 @@ import kotlinx.android.synthetic.main.dialog_alert_list_ios.*
 class IAlertListDialog : BaseIAlertDialog<IAlertListDialog>() {
 
     private val items: MutableList<DialogItemBean> = ArrayList()
-
     private var itemClickListener: ((Int, String, TextView, DialogInterface) -> Unit)? = null
-
     private val alertListBtnConfigs = IDialog.alertNegBtnConfigs.copy()
-
     private val alertListItemConfigs = IDialog.alertListItemConfigs.copy()
-
     override var customViewId: Int = R.layout.dialog_alert_list_ios
-
     private var dismissible = true
-
     private var itemDismissible = true
-
     private var cancelClickListener: ((DialogInterface) -> Unit)? = null
-
-    companion object {
-        @JvmStatic
-        fun build(fm: FragmentManager) =
-                IAlertListDialog().apply {
-                    this.fm = fm
-                }
-    }
 
     override fun onHandleView(contentView: View): Boolean {
         super.onHandleView(contentView)
@@ -206,5 +191,13 @@ class IAlertListDialog : BaseIAlertDialog<IAlertListDialog>() {
         super.onDestroy()
         itemClickListener = null
         cancelClickListener = null
+    }
+
+    companion object {
+        @JvmStatic
+        fun build(fm: FragmentManager) =
+                IAlertListDialog().apply {
+                    this.fm = fm
+                }
     }
 }

@@ -6,10 +6,7 @@ import android.graphics.Paint
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
 import android.graphics.drawable.shapes.RoundRectShape
-import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
-import android.support.annotation.FloatRange
-import android.support.annotation.StringRes
+import android.support.annotation.*
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -18,9 +15,9 @@ import com.lindroid.iosdialog.bean.TextConfigs
 import com.lindroid.iosdialog.util.getResColor
 import com.lindroid.iosdialog.util.getResString
 import com.lindroid.lindialog.base.BaseDialog
-import kotlinx.android.synthetic.main.dialog_alert_ios.*
 import kotlinx.android.synthetic.main.layout_alert_dialog_title.*
 import kotlinx.android.synthetic.main.layout_custom_view_container.*
+import kotlinx.android.synthetic.main.layout_dialog_top_panel.*
 
 /**
  * @author Lin
@@ -206,12 +203,23 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
      */
     fun setShowNegButton(isShowNegButton: Boolean) = this.apply { this.isShowNegButton = isShowNegButton } as T
 
-    fun setCustomView(customView: View) = this.apply { this.customView = customView } as T
+    /**
+     * 设置自定义布局
+     */
+     fun setCustomView(customView: View) = this.apply { this.customView = customView } as T
+
+    /**
+     * 设置自定义布局
+     */
+    fun setCustomView(@LayoutRes layoutId: Int) = this.apply {
+        customView = View.inflate(mContext, layoutId, null)
+    } as T
 
     override fun onDismiss(dialog: DialogInterface?) {
         super.onDismiss(dialog)
         if (customView != null) {
             flCustom.removeAllViews()
+            customView = null
         }
     }
 
