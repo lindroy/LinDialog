@@ -23,28 +23,16 @@ import kotlinx.android.synthetic.main.dialog_alert_ios.*
 class IAlertDialog : BaseIAlertDialog<IAlertDialog>() {
 
     private var dismissible = true
-
     private var posListener: ((DialogInterface) -> Unit)? = null
-
     private var negListener: ((DialogInterface) -> Unit)? = null
-
     private var posBtnConfig = IDialog.alertPosBtnConfigs.copy()
-
     private var negBtnConfig = IDialog.alertNegBtnConfigs.copy()
-
     private var buttonHeight = IDialog.alertBtnHeight
 
     /**
      * 子类继承BaseBottomDialog后需要创建的布局Id
      */
     override var customViewId = R.layout.dialog_alert_ios
-
-    companion object {
-        @JvmStatic
-        fun build(fm: FragmentManager) = IAlertDialog().apply {
-            this.fm = fm
-        }
-    }
 
     /**
      * 返回true表示子类自己处理布局，setViewHandler方法无效
@@ -228,9 +216,21 @@ class IAlertDialog : BaseIAlertDialog<IAlertDialog>() {
      */
     fun setCanDismiss(dismissible: Boolean) = this.apply { this.dismissible = dismissible }
 
+
     override fun onDestroy() {
         super.onDestroy()
         negListener = null
         posListener = null
+    }
+
+    override fun onCancel(dialog: DialogInterface?) {
+        super.onCancel(dialog)
+    }
+
+    companion object {
+        @JvmStatic
+        fun build(fm: FragmentManager) = IAlertDialog().apply {
+            this.fm = fm
+        }
     }
 }

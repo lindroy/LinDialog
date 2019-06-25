@@ -1,5 +1,6 @@
 package com.lindroid.iosdialog.base
 
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.ShapeDrawable
@@ -9,6 +10,7 @@ import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.FloatRange
 import android.support.annotation.StringRes
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import com.lindroid.iosdialog.IDialog
@@ -16,7 +18,9 @@ import com.lindroid.iosdialog.bean.TextConfigs
 import com.lindroid.iosdialog.util.getResColor
 import com.lindroid.iosdialog.util.getResString
 import com.lindroid.lindialog.base.BaseDialog
+import kotlinx.android.synthetic.main.dialog_alert_ios.*
 import kotlinx.android.synthetic.main.layout_alert_dialog_title.*
+import kotlinx.android.synthetic.main.layout_custom_view_container.*
 
 /**
  * @author Lin
@@ -47,6 +51,8 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
 
     protected var paddingBottom = 0
 
+    private var customView: View? = null
+
     override fun onHandleView(contentView: View): Boolean {
         setWidthScale(IDialog.alertWidthScale)
         tvTitle.apply {
@@ -61,7 +67,6 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
                 }
                 false -> View.GONE
             }
-
         }
         tvMessage.apply {
             visibility = when (msgConfig.text.isNotEmpty()) {
@@ -87,6 +92,13 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
                     this
                 }
                 View.VISIBLE
+            }
+        }
+        if (customView != null) {
+            vbCustom.visibility = View.VISIBLE
+            Log.e("Tag", "customView!!.parent=" + customView!!.parent)
+            if (customView!!.parent == null) {
+                flCustom.addView(customView)
             }
         }
         return false
@@ -193,5 +205,14 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
      * 是否显示取消按钮
      */
     fun setShowNegButton(isShowNegButton: Boolean) = this.apply { this.isShowNegButton = isShowNegButton } as T
+
+    fun setCustomView(customView: View) = this.apply { this.customView = customView } as T
+
+    override fun onDismiss(dialog: DialogInterface?) {
+        super.onDismiss(dialog)
+        if (customView != null) {
+            flCustom.removeAllViews()
+        }
+    }
 
 }

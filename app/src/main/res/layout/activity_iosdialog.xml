@@ -36,4 +36,10 @@
         android:text="IBottomListDialog(大量选项)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnIAlertCus"
+        android:text="IAlertDialog(自定义布局)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

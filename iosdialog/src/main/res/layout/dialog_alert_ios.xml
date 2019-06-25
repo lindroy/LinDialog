@@ -8,8 +8,15 @@
     android:divider="@drawable/dialog_ios_divider_vertical"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_alert_dialog_title"/>
+    <include
+        layout="@layout/layout_dialog_top_panel"/>
 
+    <ViewStub
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout="@layout/layout_custom_view_container"
+        android:id="@+id/vbCustom"
+        />
 
     <LinearLayout
         android:id="@+id/llButton"

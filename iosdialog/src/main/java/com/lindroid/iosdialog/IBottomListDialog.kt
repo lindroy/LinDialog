@@ -30,33 +30,12 @@ import kotlinx.android.synthetic.main.dialog_bottom_sheet_ios.*
 class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
 
     private val items: MutableList<DialogItemBean> = ArrayList()
-
     private val bottomBtnConfigs: TextConfigs = IDialog.bottomBtnConfigs.copy()
-
     private val bottomItemConfigs: TextConfigs = IDialog.bottomListItemConfigs.copy()
-
     private var itemClickListener: ((Int, String, TextView, DialogInterface) -> Unit)? = null
-
     private var cancelClickListener: ((DialogInterface) -> Unit)? = null
-
     private var dismissible = true
-
     private var itemDismissible = true
-
-    companion object {
-        @JvmStatic
-        fun build(fm: FragmentManager) =
-                IBottomListDialog().apply {
-                    this.fm = fm
-                    titleConfig = IDialog.bottomTitleConfigs.copy()
-                    msgConfig = IDialog.bottomMsgConfigs.copy()
-                    paddingTitleMsg = IDialog.bottomPaddingTitleMsg
-                    paddingTop = IDialog.bottomPaddingTop
-                    paddingSides = IDialog.bottomPaddingSides
-                    paddingBottom = IDialog.bottomPaddingBottom
-                }
-    }
-
     /**
      * 子类继承BaseBottomDialog后需要创建的布局Id
      */
@@ -139,7 +118,8 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
     /**
      * 设置取消按钮文字
      */
-    fun setCancelText(text: String) = this.apply { bottomBtnConfigs.text = text }
+    fun setCancelText(
+            text: String) = this.apply { bottomBtnConfigs.text = text }
 
     /**
      * 设置取消按钮文字Id
@@ -221,6 +201,20 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
         super.onDestroy()
         cancelClickListener = null
         itemClickListener = null
+    }
+
+    companion object {
+        @JvmStatic
+        fun build(fm: FragmentManager) =
+                IBottomListDialog().apply {
+                    this.fm = fm
+                    titleConfig = IDialog.bottomTitleConfigs.copy()
+                    msgConfig = IDialog.bottomMsgConfigs.copy()
+                    paddingTitleMsg = IDialog.bottomPaddingTitleMsg
+                    paddingTop = IDialog.bottomPaddingTop
+                    paddingSides = IDialog.bottomPaddingSides
+                    paddingBottom = IDialog.bottomPaddingBottom
+                }
     }
 
 }
