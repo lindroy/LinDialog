@@ -132,6 +132,7 @@ class IOSDialogActivity : AppCompatActivity() {
                     }
                     .show()
         }
+
         btnIBottomCus.setOnClickListener {
             IBottomListDialog.build(supportFragmentManager)
                     .setCustomView(customView)

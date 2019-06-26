@@ -1,11 +1,10 @@
+apply plugin: 'com.aaron.gradle.bintray-release'//必须写在第一行
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
-
-
 
     defaultConfig {
         minSdkVersion 19
@@ -23,6 +22,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        abortOnError false
+    }
 
 }
 
@@ -33,4 +35,14 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     api project(':lindialog')
+}
+publish {
+    userOrg = 'Lindroy'
+    groupId = 'com.lindroid'
+    artifactId = 'iOSDialog'
+    publishVersion = '1.0.1'
+    desc = '使用Kotlin编写的'
+    website = "https://github.com/Lindroy/${rootProject.name}"
+    archivesPath = '../build/outputs' //指定将要上传的压缩包路径，如果不写则默认上传系统生成的jar和aar
+//    archivesName = 'bintray-release'  //指定将要上传的压缩包所含的关键字，如果不写，默认过滤artifactId
 }
