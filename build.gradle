@@ -10,6 +10,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.3.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1' // Add this line
+        classpath 'com.novoda:bintray-release:0.9.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -36,11 +37,11 @@ task clean(type: Delete) {
 
 //统一声明配置
 ext {
-    userOrg = 'Lindroy'
-    groupId = 'com.lindroid'
-    uploadName = 'android-basiclib-apifactory'
+    userOrg = 'Lindroid'
+//    groupId = 'com.lindroid'
+//    uploadName = 'android-basiclib-apifactory'
     website = 'https://github.com/Lindroy/LinDialog'
     archivesPath = '../build/outputs' //指定将要上传的压缩包路径，如果不写则默认上传系统生成的jar和aar
 //    archivesName = 'bintray-release'  //指定将要上传的压缩包所含的关键字，如果不写，如果不写，默认过滤artifactId
-//    licences = ['Apache-2.0']
+    licences = ['Apache-2.0']
 }

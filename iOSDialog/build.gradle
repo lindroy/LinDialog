@@ -1,9 +1,11 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.github.dcendents.android-maven'
+/*apply plugin: 'com.github.dcendents.android-maven'
 group='com.lindroid.iosdialog'
-version = '1.0.6'
+version = '1.0.6'*/
+apply plugin: 'com.novoda.bintray-release'
+
 
 android {
     compileSdkVersion 28
@@ -36,5 +38,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    api 'com.android.support:design:28.0.0'
 }
 
+publish {
+    userOrg = 'lindroid'
+    groupId = 'com.lindroid'
+    artifactId = 'iOSDialog'
+    publishVersion = '0.0.1'
+    desc = 'Kotlin+DialogFragment编写的iOS风格对话框'
+    website = rootProject.website
+}
