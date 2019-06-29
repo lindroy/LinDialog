@@ -29,10 +29,7 @@ class IAlertDialog : BaseIAlertDialog<IAlertDialog>() {
     private var negBtnConfig = IDialog.alertNegBtnConfigs.copy()
     private var buttonHeight = IDialog.alertBtnHeight
 
-    /**
-     * 子类继承BaseBottomDialog后需要创建的布局Id
-     */
-    override var customViewId = R.layout.dialog_alert_ios
+    override var dialogViewId = R.layout.dialog_alert_ios
 
     /**
      * 返回true表示子类自己处理布局，setViewHandler方法无效

@@ -36,10 +36,8 @@ class IBottomListDialog : BaseIOSDialog<IBottomListDialog>() {
     private var cancelClickListener: ((DialogInterface) -> Unit)? = null
     private var dismissible = true
     private var itemDismissible = true
-    /**
-     * 子类继承BaseBottomDialog后需要创建的布局Id
-     */
-    override var customViewId = R.layout.dialog_bottom_sheet_ios
+
+    override var dialogViewId = R.layout.dialog_bottom_sheet_ios
 
     /**
      * 返回true表示子类自己处理布局，setViewHandler方法无效

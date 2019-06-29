@@ -1,4 +1,4 @@
-package com.lindroid.lindialog.base
+package com.lindroid.iosdialog.base
 
 
 import android.content.Context
@@ -14,22 +14,23 @@ import android.support.annotation.StyleRes
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
 import android.view.*
-import com.lindroid.lindialog.LinDialog
+import com.lindroid.iosdialog.IDialog
+import com.lindroid.iosdialog.viewholder.ViewHolder
 
 /**
  * @author Lin
  * @date 2019/2/2
- * @function 常规对话框基类
+ * @function 对话框基类
  * @Description
  */
 @Suppress("UNCHECKED_CAST")
 abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
     /**
-     * 子类继承BaseBottomDialog后需要创建的布局Id
+     * 子类继承需要创建的对话框布局Id
      */
-    abstract var customViewId: Int
+    abstract var dialogViewId: Int
 
-    protected val mContext = LinDialog.context
+    protected val mContext = IDialog.context
 
     private var layoutId: Int = 0
 
@@ -53,7 +54,7 @@ abstract class BaseDialog<T : BaseDialog<T>> : DialogFragment() {
         //去除4.4以下系统中出现的标题栏
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return when {
-            customViewId > 0 -> inflater.inflate(customViewId, container, false)
+            dialogViewId > 0 -> inflater.inflate(dialogViewId, container, false)
             layoutId > 0 -> inflater.inflate(layoutId, container, false)
             contentView != null -> contentView
             else -> {

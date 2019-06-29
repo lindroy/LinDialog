@@ -11,7 +11,6 @@ import com.lindroid.iosdialog.util.getPxSize
 import com.lindroid.iosdialog.util.getResColor
 import com.lindroid.iosdialog.util.getResString
 import com.lindroid.iosdialog.util.getSpSize
-import com.lindroid.lindialog.LinDialog
 
 /**
  * @author Lin
@@ -118,7 +117,6 @@ object IDialog {
      */
     fun init(application: Application): Config {
         this.application = application
-        LinDialog.init(application)
         cornerRadius = getPxSize(R.dimen.ios_dialog_corner_radius).toFloat()
         alertPaddingTop = getPxSize(R.dimen.ios_alert_padding_top)
         alertPaddingBottom = getPxSize(R.dimen.ios_alert_padding_bottom)

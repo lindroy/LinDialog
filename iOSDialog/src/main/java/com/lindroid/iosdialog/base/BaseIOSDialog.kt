@@ -14,7 +14,6 @@ import com.lindroid.iosdialog.IDialog
 import com.lindroid.iosdialog.bean.TextConfigs
 import com.lindroid.iosdialog.util.getResColor
 import com.lindroid.iosdialog.util.getResString
-import com.lindroid.lindialog.base.BaseDialog
 import kotlinx.android.synthetic.main.layout_alert_dialog_title.*
 import kotlinx.android.synthetic.main.layout_custom_view_container.*
 import kotlinx.android.synthetic.main.layout_dialog_top_panel.*
@@ -222,5 +221,7 @@ abstract class BaseIOSDialog<T : BaseDialog<T>> : BaseDialog<T>() {
             customView = null
         }
     }
+
+
 
 }
