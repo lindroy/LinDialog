@@ -21,27 +21,40 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        maven { url 'https://dl.bintray.com/lindroid/maven' }
+//
     }
-   /* tasks.withType(Javadoc) {
+    tasks.withType(Javadoc) {
         options {
             encoding "UTF-8"
             charSet 'UTF-8'
             links "http://docs.oracle.com/javase/7/docs/api"
+            options.addStringOption('Xdoclint:none', '-quiet')
+            options.addStringOption('encoding', 'UTF-8')
         }
-    }*/
+    }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+// 指定javadoc UTF-8格式
+task javadoc(type: Javadoc) {
+    options.encoding = "utf-8"
+}
+def jp = new Properties()
+file("jcenter.properties").withInputStream { jp.load(it) }
+
 //统一声明配置
 ext {
-    userOrg = 'Lindroid'
+//    userOrg = 'Lindroid'
 //    groupId = 'com.lindroid'
 //    uploadName = 'android-basiclib-apifactory'
     website = 'https://github.com/Lindroy/LinDialog'
     archivesPath = '../build/outputs' //指定将要上传的压缩包路径，如果不写则默认上传系统生成的jar和aar
 //    archivesName = 'bintray-release'  //指定将要上传的压缩包所含的关键字，如果不写，如果不写，默认过滤artifactId
     licences = ['Apache-2.0']
+    bintrayName =jp.getProperty("bintray.user")
+    bintrayKey =jp.getProperty("bintray.key")
 }

@@ -14,7 +14,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
-        versionName version
+        versionName "0.0.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -43,9 +43,11 @@ dependencies {
 
 publish {
     userOrg = 'lindroid'
-    groupId = 'com.lindroid'
+    groupId = 'com.lindroid.iosdialog'
     artifactId = 'iOSDialog'
-    publishVersion = '0.0.1'
+    publishVersion = '0.0.2'
     desc = 'Kotlin+DialogFragment编写的iOS风格对话框'
     website = rootProject.website
+    bintrayUser = rootProject.bintrayName
+    bintrayKey = rootProject.bintrayKey
 }
