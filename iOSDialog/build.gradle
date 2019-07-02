@@ -1,11 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-/*apply plugin: 'com.github.dcendents.android-maven'
-group='com.lindroid.iosdialog'
-version = '1.0.6'*/
-apply plugin: 'com.novoda.bintray-release'
-
+apply plugin: 'org.jetbrains.dokka'
 
 android {
     compileSdkVersion 28
@@ -26,9 +22,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    lintOptions {
+   /* lintOptions {
         abortOnError false
-    }
+    }*/
 
 }
 
@@ -41,13 +37,75 @@ dependencies {
     api 'com.android.support:design:28.0.0'
 }
 
+// 快速发布插件
+apply plugin: "guru.stefma.bintrayrelease"
+// lib version
+version = "0.0.1"
+// 组名，一般同包名
+group = rootProject.groupId
+// 组件信息配置
+androidArtifact {
+    // lib 组件 id
+    artifactId = "iOSDialog"
+}
+
 publish {
-    userOrg = 'lindroid'
-    groupId = 'com.lindroid.iosdialog'
-    artifactId = 'iOSDialog'
-    publishVersion = '0.0.2'
+    userOrg = rootProject.userOrg
+    repoName = rootProject.repoName
+    dryRun = false
     desc = 'Kotlin+DialogFragment编写的iOS风格对话框'
     website = rootProject.website
-    bintrayUser = rootProject.bintrayName
-    bintrayKey = rootProject.bintrayKey
+//    bintrayUser = rootProject.bintrayName
+//    bintrayKey = rootProject.bintrayKey
+}
+
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+//同时添加三个方法 for kotlin
+task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+    outputFormat = 'javadoc'
+    outputDirectory = javadoc.destinationDir
+}
+task generateJavadoc(type: Jar, dependsOn: dokkaJavadoc) {
+    group = 'jar'
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+task generateSourcesJar(type: Jar) {
+    group = 'jar'
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task copyDoc(type: Copy) {
+    from "${buildDir}/docs/"
+    into "docs"
+}
+//for kotlin
+artifacts {
+    archives generateJavadoc //javadocJar
+    archives generateSourcesJar //sourcesJar
+}
+
+javadoc {
+    options {
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        links "http://docs.oracle.com/javase/7/docs/api"
+    }
 }

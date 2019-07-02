@@ -9,8 +9,9 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1' // Add this line
-        classpath 'com.novoda:bintray-release:0.9.1'
+        classpath "guru.stefma.bintrayrelease:bintrayrelease:1.1.2"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.18"
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -24,7 +25,7 @@ allprojects {
         maven { url 'https://dl.bintray.com/lindroid/maven' }
 //
     }
-    tasks.withType(Javadoc) {
+  /*  tasks.withType(Javadoc) {
         options {
             encoding "UTF-8"
             charSet 'UTF-8'
@@ -32,7 +33,7 @@ allprojects {
             options.addStringOption('Xdoclint:none', '-quiet')
             options.addStringOption('encoding', 'UTF-8')
         }
-    }
+    }*/
 }
 
 task clean(type: Delete) {
@@ -40,21 +41,21 @@ task clean(type: Delete) {
 }
 
 // 指定javadoc UTF-8格式
-task javadoc(type: Javadoc) {
+/*task javadoc(type: Javadoc) {
     options.encoding = "utf-8"
-}
-def jp = new Properties()
-file("jcenter.properties").withInputStream { jp.load(it) }
+}*/
+//def jp = new Properties()
+//file("jcenter.properties").withInputStream { jp.load(it) }
 
 //统一声明配置
 ext {
-//    userOrg = 'Lindroid'
-//    groupId = 'com.lindroid'
+    userOrg = 'lindroid'
+    groupId = 'com.lindroid'
+    repoName = 'maven'
 //    uploadName = 'android-basiclib-apifactory'
     website = 'https://github.com/Lindroy/LinDialog'
-    archivesPath = '../build/outputs' //指定将要上传的压缩包路径，如果不写则默认上传系统生成的jar和aar
-//    archivesName = 'bintray-release'  //指定将要上传的压缩包所含的关键字，如果不写，如果不写，默认过滤artifactId
     licences = ['Apache-2.0']
-    bintrayName =jp.getProperty("bintray.user")
-    bintrayKey =jp.getProperty("bintray.key")
+//    bintrayName =jp.getProperty("bintray.user")
+//    bintrayKey =jp.getProperty("bintray.key")
+
 }
