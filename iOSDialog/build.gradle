@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 apply plugin: 'org.jetbrains.dokka'
 
 android {
@@ -22,22 +24,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-   /* lintOptions {
-        abortOnError false
-    }*/
+    /* lintOptions {
+         abortOnError false
+     }*/
 
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    compileOnly 'com.android.support:appcompat-v7:28.0.0'
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     api 'com.android.support:design:28.0.0'
 }
 
-// 快速发布插件
+/*// 快速发布插件
 apply plugin: "guru.stefma.bintrayrelease"
 // lib version
 version = "0.0.1"
@@ -47,9 +50,9 @@ group = rootProject.groupId
 androidArtifact {
     // lib 组件 id
     artifactId = "iOSDialog"
-}
+}*/
 
-publish {
+/*publish {
     userOrg = rootProject.userOrg
     repoName = rootProject.repoName
     dryRun = false
@@ -57,8 +60,12 @@ publish {
     website = rootProject.website
 //    bintrayUser = rootProject.bintrayName
 //    bintrayKey = rootProject.bintrayKey
-}
+}*/
 
+version = "0.0.1"
+group = rootProject.groupId
+
+def gitUrl = 'https://github.com/Lindroy/LinDialog'
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
@@ -70,16 +77,17 @@ task javadoc(type: Javadoc) {
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
+/*task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
-}
+}*/
 //同时添加三个方法 for kotlin
 task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
-    outputFormat = 'javadoc'
-    outputDirectory = javadoc.destinationDir
+    outputFormat = "javadoc"
+    outputDirectory = "$buildDir/dokkaJavadoc"
 }
-task generateJavadoc(type: Jar, dependsOn: dokkaJavadoc) {
+
+task generateJavadoc(type: Jar, dependsOn: dokka) {
     group = 'jar'
     classifier = 'javadoc'
     from javadoc.destinationDir
@@ -99,6 +107,73 @@ artifacts {
     archives generateJavadoc //javadocJar
     archives generateSourcesJar //sourcesJar
 }
+
+//解决kotlin javadoc.options抱错
+dokka {
+//    outputFormat = 'html'
+//    outputDirectory = "${buildDir}/javadoc"
+
+    linkMapping {
+        dir = "src/main/kotlin"
+        url = gitUrl
+        suffix = "#L"
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                name 'Kotlin+DialogFragment编写的iOS风格对话框'
+                url gitUrl
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'lindroid' //用户名
+                        name 'lindroid' //姓名
+                        email 'linyulong2014@163.com' //邮箱
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url gitUrl
+                }
+            }
+        }
+    }
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('jcenter.properties').newDataInputStream())
+
+bintray {
+    //关键信息我们从localProperties文件中读取
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.key")
+    configurations = ['archives']
+    pkg {
+        repo = "maven" // 仓库名
+        name = "iOSDialog"// 包名
+        desc = 'Kotlin+DialogFragment编写的iOS风格对话框'
+        websiteUrl = gitUrl
+        vcsUrl = "https://github.com/Lindroy/LinDialog.git"
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
 
 javadoc {
     options {
